@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\references\tModLoader.targets" />
   <PropertyGroup>
-    <AssemblyName>DoTarria</AssemblyName>
+    <AssemblyName>DoTaria</AssemblyName>
     <TargetFramework>net45</TargetFramework>
     <PlatformTarget>x86</PlatformTarget>
     <LangVersion>latest</LangVersion>
@@ -13,5 +13,6 @@
   <ItemGroup>
     <None Remove=".gitignore" />
     <None Remove="DoTarria.csproj.DotSettings" />
+    <None Remove="LICENSE" />
   </ItemGroup>
 </Project>

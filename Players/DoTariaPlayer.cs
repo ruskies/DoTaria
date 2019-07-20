@@ -22,7 +22,13 @@ namespace DoTaria.Players
 
         public void OnKilledNPC(NPC npc)
         {
-            OnPlayerKilledNPCHeroes(npc);
+            OnKilledNPCHeroes(npc);
+        }
+
+        public override void PreUpdateMovement()
+        {
+            PreUpdateMovementHeroes();
+            PreUpdateMovementAghanims();
         }
 
 

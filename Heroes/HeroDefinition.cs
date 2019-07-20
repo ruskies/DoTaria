@@ -19,28 +19,38 @@ namespace DoTaria.Heroes
         }
 
 
-        public virtual void OnPlayerEnterWorld(DoTariaPlayer dotarriaPlayer)
+        internal void OnPlayerEnterWorldStandard(DoTariaPlayer dotariaPlayer)
         {
-            ApplyInitialBuffs(dotarriaPlayer);
+            VerifyAndApplyBuffs(dotariaPlayer);
+
+            OnPlayerEnterWorld(dotariaPlayer);
+        }
+
+        public virtual void OnPlayerEnterWorld(DoTariaPlayer dotariaPlayer)
+        {
+            VerifyAndApplyBuffs(dotariaPlayer);
         }
 
 
-        public virtual void ApplyInitialBuffs(DoTariaPlayer dotarriaPlayer) { }
+        public virtual void VerifyAndApplyBuffs(DoTariaPlayer dotariaPlayer) { }
 
 
-        public virtual void OnPlayerDeath(DoTariaPlayer dotarriaPlayer, double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) { }
+        public virtual void OnPlayerDeath(DoTariaPlayer dotariaPlayer, double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) { }
 
-        public virtual void OnPlayerKilledNPC(DoTariaPlayer dotarriaPlayer, NPC npc) { }
+        public virtual void OnPlayerKilledNPC(DoTariaPlayer dotariaPlayer, NPC npc) { }
+
+        internal void OnPlayerPreUpdateMovementStandard(DoTariaPlayer dotariaPlayer)
+        {
+            VerifyAndApplyBuffs(dotariaPlayer);
+
+            OnPlayerPreUpdateMovement(dotariaPlayer);
+        }
+
+        public virtual void OnPlayerPreUpdateMovement(DoTariaPlayer dotariaPlayer) { }
 
 
-        public virtual void ModifyWeaponDamage(DoTariaPlayer dotarriaPlayer, Item item, ref float add, ref float mult, ref float flat) { }
+        public virtual void ModifyWeaponDamage(DoTariaPlayer dotariaPlayer, Item item, ref float add, ref float mult, ref float flat) { }
 
-        /**
-         * int extraDamage = dotarriaPlayer.Souls * 2;
-
-            player.meleeDamage += extraDamage;
-            player.rangedDamage += extraDamage;
-         */
 
         public string UnlocalizedName { get; }
 

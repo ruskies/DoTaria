@@ -7,14 +7,14 @@ namespace DoTaria.Abilities
     {
         internal override void DefaultInitialize()
         {
-            Necromastery = Add(new AbilityNecromastery()) as AbilityNecromastery;
+            Necromastery = Add(new NecromasteryAbility()) as NecromasteryAbility;
 
             base.DefaultInitialize();
         }
 
         #region Shadow Fiend
 
-        public AbilityNecromastery Necromastery { get; private set; }
+        public NecromasteryAbility Necromastery { get; private set; }
 
         #endregion
     }

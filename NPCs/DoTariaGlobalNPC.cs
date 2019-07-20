@@ -8,13 +8,13 @@ namespace DoTaria.NPCs
     {
         public override void NPCLoot(NPC npc)
         {
-            DoTariaPlayer dotarriaPlayer = DoTariaPlayer.Get(Main.LocalPlayer);
+            DoTariaPlayer dotariaPlayer = DoTariaPlayer.Get(Main.LocalPlayer);
 
-            if (dotarriaPlayer == null)
+            if (dotariaPlayer == null)
                 return;
 
             if (npc.lastInteraction == Main.LocalPlayer.whoAmI)
-                dotarriaPlayer.OnKilledNPC(npc);
+                dotariaPlayer.OnKilledNPC(npc);
         }
     }
 }

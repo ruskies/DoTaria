@@ -19,14 +19,19 @@ namespace DoTaria.Players
         }
 
 
-        private void OnEnterWorldHeroes(DoTariaPlayer dotarriaPlayer)
+        private void OnEnterWorldHeroes(DoTariaPlayer dotariaPlayer)
         {
-            Hero.OnPlayerEnterWorld(this);
+            Hero.OnPlayerEnterWorldStandard(this);
         }
 
-        private void OnPlayerKilledNPCHeroes(NPC npc)
+        private void OnKilledNPCHeroes(NPC npc)
         {
             Hero.OnPlayerKilledNPC(this, npc);
+        }
+
+        private void PreUpdateMovementHeroes()
+        {
+            Hero.OnPlayerPreUpdateMovementStandard(this);
         }
 
 

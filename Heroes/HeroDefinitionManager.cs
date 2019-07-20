@@ -8,12 +8,12 @@ namespace DoTaria.Heroes
     {
         internal override void DefaultInitialize()
         {
-            ShadowFiend = Add(new HeroShadowFiend()) as HeroShadowFiend;
+            ShadowFiend = Add(new ShadowFiendHero()) as ShadowFiendHero;
 
             base.DefaultInitialize();
         }
 
         
-        public HeroShadowFiend ShadowFiend { get; private set; }
+        public ShadowFiendHero ShadowFiend { get; private set; }
     }
 }
