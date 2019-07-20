@@ -20,7 +20,7 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities
 
             DoTariaPlayer dotariaPlayer = Main.LocalPlayer.GetModPlayer<DoTariaPlayer>();
 
-            tip += $"\n\nYou currently have {dotariaPlayer.Souls} souls, giving you an extra {dotariaPlayer.Souls * 2} melee and ranged damage.";
+            tip += $"\n\nYou currently have {dotariaPlayer.Souls} souls, giving you an extra {dotariaPlayer.Souls * 2} damage to all physical attacks.";
         }
     }
 }

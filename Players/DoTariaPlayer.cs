@@ -1,4 +1,7 @@
-﻿using Terraria;
+﻿using DoTaria.Dusts;
+using DoTaria.Extensions;
+using System.Collections.Generic;
+using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 
@@ -23,6 +26,18 @@ namespace DoTaria.Players
         public void OnKilledNPC(NPC npc)
         {
             OnKilledNPCHeroes(npc);
+        }
+
+
+        public override void PostUpdate()
+        {
+            if (!player.dead)
+            {
+                List<ISpawnDustOnPlayerPostUpdate> sdoppu = player.GetItemsByType<ISpawnDustOnPlayerPostUpdate>(armor: true, armorSocial: true, accessories: true, accessoriesSocial: true);
+
+                for (int i = 0; i < sdoppu.Count; i++)
+                    sdoppu[i].SpawnDustOnPlayerPostUpdate(this);
+            }
         }
 
         public override void PreUpdateMovement()

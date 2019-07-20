@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\references\tModLoader.targets" />
   <PropertyGroup>
@@ -14,5 +14,8 @@
     <None Remove=".gitignore" />
     <None Remove="DoTarria.csproj.DotSettings" />
     <None Remove="LICENSE" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserInterfaces\" />
   </ItemGroup>
 </Project>

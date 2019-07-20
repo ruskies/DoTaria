@@ -21,15 +21,15 @@ namespace DoTaria.Players
 
         private void PreUpdateMovementAghanims()
         {
-            if (HasAghanims() && !player.HasBuff<AghanimsScepterBuff>())
-                player.AddBuff<AghanimsScepterBuff>(int.MaxValue);
+            if (HasAghanims() && !player.HasBuff<AghanimUpgrade>())
+                player.AddBuff<AghanimUpgrade>(int.MaxValue);
                 
         }
 
 
         /// <summary></summary>
         /// <returns>true if the player has anything giving him aghanim's scepter upgrades; otherwise false.</returns>
-        public bool HasAghanims() => AghanimsBlessingConsumed || player.GetItemsByType<IGiveAghanimsBuff>(armor: true, accessories: true).Count > 0;
+        public bool HasAghanims() => AghanimsBlessingConsumed || player.GetItemsByType<IGiveAghanimUpgrade>(armor: true, accessories: true).Count > 0;
 
 
         /// <summary>true if the player has consumed the item <see cref="AghanimsBlessing"/>; otherwise false. Use <see cref="HasAghanims"/> for anything related to Aghanim-related abilities.</summary>
