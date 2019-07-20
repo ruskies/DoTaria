@@ -1,9 +1,9 @@
 ﻿using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace DoTarria.Players
+namespace DoTaria.Players
 {
-    public sealed partial class DoTarriaPlayer : ModPlayer
+    public sealed partial class DoTariaPlayer : ModPlayer
     {
         private void SaveHeroes(TagCompound tag)
         {

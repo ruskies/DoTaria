@@ -1,4 +1,4 @@
-﻿namespace DoTarria.Abilities
+﻿namespace DoTaria.Abilities
 {
     public enum AbilityType
     {

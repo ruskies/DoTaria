@@ -2,11 +2,11 @@ using Microsoft.Xna.Framework.Input;
 using Terraria.ModLoader;
 using Main = Terraria.Main;
 
-namespace DoTarria
+namespace DoTaria
 {
-	public class DoTarria : Mod
+	public class DoTaria : Mod
 	{
-        public DoTarria()
+        public DoTaria()
 		{
             Instance = this;
 		}
@@ -53,7 +53,7 @@ namespace DoTarria
         }
 
 
-        public DoTarria Instance { get; private set; }
+        public DoTaria Instance { get; private set; }
 
 
         #region Hotkeys

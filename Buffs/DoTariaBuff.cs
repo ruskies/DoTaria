@@ -1,12 +1,12 @@
 ﻿using Terraria.ModLoader;
 
-namespace DoTarria.Buffs
+namespace DoTaria.Buffs
 {
-    public abstract class DoTarriaBuff : ModBuff
+    public abstract class DoTariaBuff : ModBuff
     {
         private readonly string _displayName, _tooltip;
 
-        protected DoTarriaBuff(string displayName, string tooltip)
+        protected DoTariaBuff(string displayName, string tooltip)
         {
             _displayName = displayName;
             _tooltip = tooltip;

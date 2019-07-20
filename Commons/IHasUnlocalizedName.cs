@@ -1,4 +1,4 @@
-﻿namespace DoTarria.Commons
+﻿namespace DoTaria.Commons
 {
     public interface IHasUnlocalizedName
     {

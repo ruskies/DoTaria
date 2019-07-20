@@ -1,7 +1,7 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 
-namespace DoTarria.Extensions
+namespace DoTaria.Extensions
 {
     public static class PlayerExtensions
     {

@@ -1,7 +1,7 @@
-﻿using DoTarria.Abilities;
-using DoTarria.Enums;
+﻿using DoTaria.Abilities;
+using DoTaria.Enums;
 
-namespace DoTarria.Heroes.ShadowFiend.Abilities
+namespace DoTaria.Heroes.ShadowFiend.Abilities
 {
     public sealed class AbilityNecromastery : AbilityDefinition
     {

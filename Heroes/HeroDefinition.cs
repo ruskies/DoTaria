@@ -1,11 +1,11 @@
-﻿using DoTarria.Abilities;
-using DoTarria.Commons;
-using DoTarria.Players;
+﻿using DoTaria.Abilities;
+using DoTaria.Commons;
+using DoTaria.Players;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 
-namespace DoTarria.Heroes
+namespace DoTaria.Heroes
 {
     public abstract class HeroDefinition : IHasUnlocalizedName
     {
@@ -19,21 +19,21 @@ namespace DoTarria.Heroes
         }
 
 
-        public virtual void OnPlayerEnterWorld(DoTarriaPlayer dotarriaPlayer)
+        public virtual void OnPlayerEnterWorld(DoTariaPlayer dotarriaPlayer)
         {
             ApplyInitialBuffs(dotarriaPlayer);
         }
 
 
-        public virtual void ApplyInitialBuffs(DoTarriaPlayer dotarriaPlayer) { }
+        public virtual void ApplyInitialBuffs(DoTariaPlayer dotarriaPlayer) { }
 
 
-        public virtual void OnPlayerDeath(DoTarriaPlayer dotarriaPlayer, double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) { }
+        public virtual void OnPlayerDeath(DoTariaPlayer dotarriaPlayer, double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) { }
 
-        public virtual void OnPlayerKilledNPC(DoTarriaPlayer dotarriaPlayer, NPC npc) { }
+        public virtual void OnPlayerKilledNPC(DoTariaPlayer dotarriaPlayer, NPC npc) { }
 
 
-        public virtual void ModifyWeaponDamage(DoTarriaPlayer dotarriaPlayer, Item item, ref float add, ref float mult, ref float flat) { }
+        public virtual void ModifyWeaponDamage(DoTariaPlayer dotarriaPlayer, Item item, ref float add, ref float mult, ref float flat) { }
 
         /**
          * int extraDamage = dotarriaPlayer.Souls * 2;

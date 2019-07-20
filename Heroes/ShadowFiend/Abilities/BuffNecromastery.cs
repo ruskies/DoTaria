@@ -1,10 +1,10 @@
-﻿using DoTarria.Buffs;
-using DoTarria.Players;
+﻿using DoTaria.Buffs;
+using DoTaria.Players;
 using Terraria;
 
-namespace DoTarria.Heroes.ShadowFiend.Abilities
+namespace DoTaria.Heroes.ShadowFiend.Abilities
 {
-    public sealed class BuffNecromastery : DoTarriaBuff
+    public sealed class BuffNecromastery : DoTariaBuff
     {
         public BuffNecromastery() : base("Necromastery", "Gives you bonus damage based on how many souls you've collected.")
         {
@@ -26,7 +26,7 @@ namespace DoTarria.Heroes.ShadowFiend.Abilities
         {
             base.ModifyBuffTip(ref tip, ref rare);
 
-            DoTarriaPlayer dotarriaPlayer = Main.LocalPlayer.GetModPlayer<DoTarriaPlayer>();
+            DoTariaPlayer dotarriaPlayer = Main.LocalPlayer.GetModPlayer<DoTariaPlayer>();
 
             tip += $"\nYou currently have {dotarriaPlayer.Souls} souls, giving you an extra {dotarriaPlayer.Souls * 2} melee and ranged damage.";
         }

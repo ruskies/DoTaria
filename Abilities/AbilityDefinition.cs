@@ -1,7 +1,7 @@
-﻿using DoTarria.Commons;
-using DoTarria.Enums;
+﻿using DoTaria.Commons;
+using DoTaria.Enums;
 
-namespace DoTarria.Abilities
+namespace DoTaria.Abilities
 {
     public abstract class AbilityDefinition : IHasUnlocalizedName
     {

@@ -1,6 +1,6 @@
-﻿using DoTarria.Commons;
+﻿using DoTaria.Commons;
 
-namespace DoTarria.Managers
+namespace DoTaria.Managers
 {
     // Taken from Dragon Ball Terraria by Webmilio.
     public class SingletonManager<TManager, TManagerOf> : Manager<TManagerOf> where TManager : Manager<TManagerOf>, new() where TManagerOf : IHasUnlocalizedName

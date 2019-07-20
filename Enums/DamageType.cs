@@ -1,4 +1,4 @@
-﻿namespace DoTarria.Enums
+﻿namespace DoTaria.Enums
 {
     public enum DamageType
     {

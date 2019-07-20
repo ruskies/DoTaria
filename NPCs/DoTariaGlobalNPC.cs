@@ -1,14 +1,14 @@
-﻿using DoTarria.Players;
+﻿using DoTaria.Players;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace DoTarria.NPCs
+namespace DoTaria.NPCs
 {
-    public sealed class DoTarriaGlobalNPC : GlobalNPC
+    public sealed class DoTariaGlobalNPC : GlobalNPC
     {
         public override void NPCLoot(NPC npc)
         {
-            DoTarriaPlayer dotarriaPlayer = DoTarriaPlayer.Get(Main.LocalPlayer);
+            DoTariaPlayer dotarriaPlayer = DoTariaPlayer.Get(Main.LocalPlayer);
 
             if (dotarriaPlayer == null)
                 return;

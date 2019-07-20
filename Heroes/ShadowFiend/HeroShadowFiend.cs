@@ -1,12 +1,13 @@
-﻿using DoTarria.Heroes.ShadowFiend.Abilities;
-using DoTarria.Players;
-using DoTarria.Extensions;
+﻿using DoTaria.Heroes.ShadowFiend.Abilities;
+using DoTaria.Players;
+using DoTaria.Extensions;
 using System;
 using Terraria;
 using Terraria.DataStructures;
 using System.Collections.Generic;
+using Terraria.ModLoader;
 
-namespace DoTarria.Heroes.ShadowFiend
+namespace DoTaria.Heroes.ShadowFiend
 {
     public sealed class HeroShadowFiend : HeroDefinition
     {
@@ -17,18 +18,18 @@ namespace DoTarria.Heroes.ShadowFiend
         }
 
 
-        public override void ApplyInitialBuffs(DoTarriaPlayer dotarriaPlayer)
+        public override void ApplyInitialBuffs(DoTariaPlayer dotarriaPlayer)
         {
             dotarriaPlayer.player.AddBuff<BuffNecromastery>(int.MaxValue);
         }
 
 
-        public override void OnPlayerDeath(DoTarriaPlayer dotarriaPlayer, double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
+        public override void OnPlayerDeath(DoTariaPlayer dotarriaPlayer, double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
             dotarriaPlayer.Souls = (int)Math.Ceiling(dotarriaPlayer.Souls / 2f);
         }
 
-        public override void OnPlayerKilledNPC(DoTarriaPlayer dotarriaPlayer, NPC npc)
+        public override void OnPlayerKilledNPC(DoTariaPlayer dotarriaPlayer, NPC npc)
         {
             dotarriaPlayer.Souls += 1;
 
@@ -37,11 +38,10 @@ namespace DoTarria.Heroes.ShadowFiend
         }
 
 
-        public override void ModifyWeaponDamage(DoTarriaPlayer dotarriaPlayer, Item item, ref float add, ref float mult, ref float flat)
+        public override void ModifyWeaponDamage(DoTariaPlayer dotarriaPlayer, Item item, ref float add, ref float mult, ref float flat)
         {
-            
-
-            flat += dotarriaPlayer.Souls * 2;
+            if (item.melee || item.ranged)
+                flat += dotarriaPlayer.Souls * 2;
         }
     }
 }

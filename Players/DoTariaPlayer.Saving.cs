@@ -1,8 +1,8 @@
 ﻿using Terraria.ModLoader.IO;
 
-namespace DoTarria.Players
+namespace DoTaria.Players
 {
-    public sealed partial class DoTarriaPlayer
+    public sealed partial class DoTariaPlayer
     {
         public override TagCompound Save()
         {

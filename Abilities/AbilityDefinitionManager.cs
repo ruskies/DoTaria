@@ -1,7 +1,7 @@
-﻿using DoTarria.Heroes.ShadowFiend.Abilities;
-using DoTarria.Managers;
+﻿using DoTaria.Heroes.ShadowFiend.Abilities;
+using DoTaria.Managers;
 
-namespace DoTarria.Abilities
+namespace DoTaria.Abilities
 {
     public sealed class AbilityDefinitionManager : SingletonManager<AbilityDefinitionManager, AbilityDefinition>
     {

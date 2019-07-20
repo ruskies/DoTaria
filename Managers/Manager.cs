@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using DoTarria.Commons;
+using DoTaria.Commons;
 
-namespace DoTarria.Managers
+namespace DoTaria.Managers
 {
     // Taken from Dragon Ball Terraria by Webmilio.
     public abstract class Manager<T> where T : IHasUnlocalizedName

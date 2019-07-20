@@ -2,11 +2,11 @@
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 
-namespace DoTarria.Players
+namespace DoTaria.Players
 {
-    public sealed partial class DoTarriaPlayer : ModPlayer
+    public sealed partial class DoTariaPlayer : ModPlayer
     {
-        public static DoTarriaPlayer Get(Player player) => player.GetModPlayer<DoTarriaPlayer>();
+        public static DoTariaPlayer Get(Player player) => player.GetModPlayer<DoTariaPlayer>();
 
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)

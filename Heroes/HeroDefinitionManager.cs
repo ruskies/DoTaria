@@ -1,8 +1,8 @@
-﻿using DoTarria.Heroes.ShadowFiend;
-using DoTarria.Managers;
+﻿using DoTaria.Heroes.ShadowFiend;
+using DoTaria.Managers;
 using Terraria.DataStructures;
 
-namespace DoTarria.Heroes
+namespace DoTaria.Heroes
 {
     public sealed class HeroDefinitionManager : SingletonManager<HeroDefinitionManager, HeroDefinition>
     {

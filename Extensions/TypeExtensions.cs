@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.ModLoader;
 
-namespace DoTarria.Extensions
+namespace DoTaria.Extensions
 {
     public static class TypeExtensions
     {

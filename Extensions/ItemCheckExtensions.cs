@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Terraria;
 
-namespace DoTarria.Extensions
+namespace DoTaria.Extensions
 {
     public static class ItemCheckExtensions
     {
