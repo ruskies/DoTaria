@@ -7,7 +7,7 @@ namespace DoTaria.Heroes.ShadowFiend.Skins.Default
     [AutoloadEquip(EquipType.Body)]
     public sealed class ShadowFiendBody : SkinBodyItem
     {
-        public ShadowFiendBody() : base("Shadow Fiend Body", "", 42, 34, ItemRarityID.Blue)
+        public ShadowFiendBody() : base("Shadow Fiend Body", "", 42, 34, ItemRarityID.White)
         {
         }
     }
