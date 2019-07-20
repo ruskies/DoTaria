@@ -5,6 +5,8 @@ namespace DoTarria.Players
 {
     public sealed partial class DoTarriaPlayer : ModPlayer
     {
+        private int _souls;
+
         private void SaveShadowFiend(TagCompound tag)
         {
             tag.Add(nameof(Souls), Souls);
@@ -15,6 +17,16 @@ namespace DoTarria.Players
             Souls = tag.GetAsInt(nameof(Souls));
         }
 
-        public int Souls { get; private set; }
+        public int Souls
+        {
+            get => _souls;
+            set
+            {
+                if (value == _souls || value > 36)
+                    return;
+
+                _souls = value;
+            }
+        }
     }
 }
