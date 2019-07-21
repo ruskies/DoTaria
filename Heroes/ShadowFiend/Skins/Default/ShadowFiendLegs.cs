@@ -17,8 +17,7 @@ namespace DoTaria.Heroes.ShadowFiend.Skins.Default
 
         public void SpawnDustOnPlayerPostUpdate(DoTariaPlayer dotariaPlayer)
         {
-            Player player = dotariaPlayer.player;
-            Dust dust = Main.dust[Dust.NewDust(player.position, 18, 4, mod.DustType<ShadowTrail>(), 0f, 0.1f, 0, new Color(255, 255, 255), 2f)];
+            Dust.NewDust(dotariaPlayer.player.position, 18, 4, mod.DustType<ShadowTrail>(), 0f, 0.8f, 0, new Color(255, 255, 255), 2f);
         }
     }
 }

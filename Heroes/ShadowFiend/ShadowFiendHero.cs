@@ -2,18 +2,19 @@
 using DoTaria.Players;
 using DoTaria.Extensions;
 using System;
+using DoTaria.Abilities;
 using Terraria;
 using Terraria.DataStructures;
-using System.Collections.Generic;
-using Terraria.ModLoader;
+using DoTaria.Attribute;
 
 namespace DoTaria.Heroes.ShadowFiend
 {
     public sealed class ShadowFiendHero : HeroDefinition
     {
-        public const string UNLOCALIZED_NAME = "heroes.shadowFiend";
+        public const string UNLOCALIZED_NAME = HeroDefinition.UNLOCALIZED_NAME_PREFIX + "shadowFiend";
 
-        public ShadowFiendHero() : base(UNLOCALIZED_NAME)
+        public ShadowFiendHero() : base(UNLOCALIZED_NAME, new Attributes(19, 20, 18), new Attributes(2.5f, 3.5f, 2.2f), 
+            AbilityDefinitionManager.Instance.Necromastery)
         {
         }
 

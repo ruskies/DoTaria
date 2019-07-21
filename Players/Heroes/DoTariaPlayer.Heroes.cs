@@ -1,13 +1,7 @@
 ﻿using DoTaria.Heroes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 
 namespace DoTaria.Players
 {
@@ -27,6 +21,15 @@ namespace DoTaria.Players
         private void OnKilledNPCHeroes(NPC npc)
         {
             Hero.OnPlayerKilledNPC(this, npc);
+        }
+
+
+        private bool PreHurtHeroes(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        {
+            if (!Hero.OnPlayerPreHurt(this, pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource))
+                return false;
+
+            return true;
         }
 
         private void PreUpdateMovementHeroes()

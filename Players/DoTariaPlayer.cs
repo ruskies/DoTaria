@@ -12,6 +12,12 @@ namespace DoTaria.Players
         public static DoTariaPlayer Get(Player player) => player.GetModPlayer<DoTariaPlayer>();
 
 
+        public override void Initialize()
+        {
+            InitializeAbilities();
+        }
+
+
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
             KillHeroes(damage, hitDirection, pvp, damageSource);
@@ -40,10 +46,24 @@ namespace DoTaria.Players
             }
         }
 
+        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        {
+            if (!PreHurtHeroes(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource))
+                return false;
+
+            return base.PreHurt(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource);
+        }
+
+        public override void PreUpdate()
+        {
+            PreUpdateAttributes();
+        }
+
         public override void PreUpdateMovement()
         {
-            PreUpdateMovementHeroes();
             PreUpdateMovementAghanims();
+            PreUpdateMovementAttributes();
+            PreUpdateMovementHeroes();
         }
 
 

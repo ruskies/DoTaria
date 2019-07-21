@@ -4,7 +4,7 @@ using Main = Terraria.Main;
 
 namespace DoTaria
 {
-	public class DoTaria : Mod
+	public sealed partial class DoTaria : Mod
 	{
         public DoTaria()
 		{
@@ -15,6 +15,8 @@ namespace DoTaria
         {
             if (!Main.dedServ)
             {
+                LoadInterfaces();
+
                 LoadHotKeys();
             }
         }
@@ -23,6 +25,8 @@ namespace DoTaria
         {
             if (!Main.dedServ)
             {
+                UnloadInterfaces();
+
                 UnloadHotKeys();
             }
 

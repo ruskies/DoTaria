@@ -12,10 +12,8 @@
   </Target>
   <ItemGroup>
     <None Remove=".gitignore" />
+    <None Remove="DoTaria.csproj.DotSettings" />
     <None Remove="DoTarria.csproj.DotSettings" />
     <None Remove="LICENSE" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserInterfaces\" />
   </ItemGroup>
 </Project>

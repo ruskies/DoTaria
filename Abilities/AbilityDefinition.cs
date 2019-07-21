@@ -1,5 +1,7 @@
 ﻿using DoTaria.Commons;
 using DoTaria.Enums;
+using DoTaria.Extensions;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace DoTaria.Abilities
 {
@@ -23,5 +25,7 @@ namespace DoTaria.Abilities
 
         public AbilityType AbilityType { get; }
         public DamageType DamageType { get; }
+
+        public Texture2D Icon => this.GetType().GetTexture();
     }
 }

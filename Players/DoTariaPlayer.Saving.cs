@@ -8,16 +8,20 @@ namespace DoTaria.Players
         {
             TagCompound tag = new TagCompound();
 
-            SaveHeroes(tag);
+            SaveAbilities(tag);
             SaveAghanims(tag);
+            SaveHeroes(tag);
+            SaveLevels(tag);
 
             return tag;
         }
 
         public override void Load(TagCompound tag)
         {
-            LoadHeroes(tag);
+            LoadAbilities(tag);
             LoadAghanims(tag);
+            LoadHeroes(tag);
+            LoadLevels(tag);
         }
     }
 }
