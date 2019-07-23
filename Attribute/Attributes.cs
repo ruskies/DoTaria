@@ -5,9 +5,9 @@
         private const float
             HEALTH_PER_STRENGTH = 20,
             HEALTH_REGENERATION_PER_STRENGTH = 0.1f,
-            ARMOR_PER_STRENGTH = 0.16f / 2,
+            MAGIC_RESISTANCE_PER_STRENGTH = 0.0008f,
 
-            ARMOR_PER_AGILITY = 0.16f / 2,
+            ARMOR_PER_AGILITY = 0.16f,
             ATTACK_SPEED_PER_AGILITY = 1,
             MOVEMENT_SPEED_PER_AGILITY = 0.0005f,
 
@@ -26,16 +26,16 @@
         public float StrengthToHealth() => HealthFromStrength(Strength);
         public float StrengthToHealthRegeneration() => HealthRegenerationFromStrength(Strength);
 
-        public float ToArmor() => ArmorFromStrength(Strength) + ArmorFromAgility(Strength);
-        public float StrengthToArmor() => ArmorFromStrength(Strength);
+        public float ToArmor() => MagicRegistanceFromStrength(Strength) + ArmorFromAgility(Strength);
+        public float StrengthToMagicResistance() => MagicRegistanceFromStrength(Strength);
         public float AgilityToArmor() => ArmorFromAgility(Agility);
 
-        public float ToAttackSpeed() => AttackSpeedFromAgility(Agility);
-        public float ToMovementSpeed() => MovementSpeedPerAgility(Agility);
+        public float AgilityToAttackSpeed() => AttackSpeedFromAgility(Agility);
+        public float AgilityToMovementSpeed() => MovementSpeedPerAgility(Agility);
 
-        public float ToMaximumMana() => MaximumManaFromIntelligence(Intelligence);
-        public float ToManaRegeneration() => ManaRegenerationFromIntelligence(Intelligence);
-        public float ToSpellDamage() => SpellDamageFromIntelligence(Intelligence);
+        public float IntelligenceToMaximumMana() => MaximumManaFromIntelligence(Intelligence);
+        public float IntelligenceToManaRegeneration() => ManaRegenerationFromIntelligence(Intelligence);
+        public float IntelligenceToSpellDamage() => SpellDamageFromIntelligence(Intelligence);
 
         public float Strength { get; set; }
         public float Agility { get; set; }
@@ -43,7 +43,7 @@
 
         public static float HealthFromStrength(float strength) => strength * HEALTH_PER_STRENGTH;
         public static float HealthRegenerationFromStrength(float strength) => strength * HEALTH_REGENERATION_PER_STRENGTH;
-        public static float ArmorFromStrength(float strength) => strength * ARMOR_PER_STRENGTH;
+        public static float MagicRegistanceFromStrength(float strength) => strength * MAGIC_RESISTANCE_PER_STRENGTH;
 
         public static float ArmorFromAgility(float agility) => agility * ARMOR_PER_AGILITY;
         public static float AttackSpeedFromAgility(float agility) => agility * ATTACK_SPEED_PER_AGILITY;

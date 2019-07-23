@@ -6,6 +6,7 @@ using DoTaria.Abilities;
 using Terraria;
 using Terraria.DataStructures;
 using DoTaria.Attribute;
+using DoTaria.Statistic;
 
 namespace DoTaria.Heroes.ShadowFiend
 {
@@ -13,15 +14,18 @@ namespace DoTaria.Heroes.ShadowFiend
     {
         public const string UNLOCALIZED_NAME = HeroDefinition.UNLOCALIZED_NAME_PREFIX + "shadowFiend";
 
-        public ShadowFiendHero() : base(UNLOCALIZED_NAME, new Attributes(19, 20, 18), new Attributes(2.5f, 3.5f, 2.2f), 
-            AbilityDefinitionManager.Instance.Necromastery)
+        public ShadowFiendHero() : base(UNLOCALIZED_NAME, "Shadow Fiend", new Attributes(19, 20, 18), new Attributes(2.5f, 3.5f, 2.2f), 
+            new Statistics(200, 0.25f, 0.25f, 0, 0.59f, 0, 75, 0.3f, 0),
+            305,
+            AbilityDefinitionManager.Instance.Necromastery, AbilityDefinitionManager.Instance.PresenceoftheDarkLord, AbilityDefinitionManager.Instance.RequiemofSouls,
+            AbilityDefinitionManager.Instance.ShadowrazeFar, AbilityDefinitionManager.Instance.ShadowrazeMiddle, AbilityDefinitionManager.Instance.ShadowrazeNear)
         {
         }
 
 
         public override void VerifyAndApplyBuffs(DoTariaPlayer dotariaPlayer)
         {
-            if (!dotariaPlayer.player.HasBuff<NecromasteryBuff>())
+            if (dotariaPlayer.HasAbility(AbilityDefinitionManager.Instance.Necromastery) && !dotariaPlayer.player.HasBuff<NecromasteryBuff>())
                 dotariaPlayer.player.AddBuff<NecromasteryBuff>(int.MaxValue);
         }
 

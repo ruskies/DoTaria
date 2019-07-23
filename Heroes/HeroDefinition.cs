@@ -3,6 +3,7 @@ using DoTaria.Commons;
 using DoTaria.Players;
 using System.Collections.Generic;
 using DoTaria.Attribute;
+using DoTaria.Statistic;
 using Terraria;
 using Terraria.DataStructures;
 
@@ -14,18 +15,23 @@ namespace DoTaria.Heroes
 
         private readonly List<AbilityDefinition> _abilities;
 
-        protected HeroDefinition(string unlocalizedName, Attributes baseAttributes, Attributes gainPerLevel, params AbilityDefinition[] abilities)
+        protected HeroDefinition(string unlocalizedName, string displayName, Attributes baseAttributes, Attributes gainPerLevel, Statistics baseStatistics, int baseMovementSpeed, params AbilityDefinition[] abilities)
         {
             UnlocalizedName = unlocalizedName;
+            DisplayName = displayName;
 
             BaseAttributes = baseAttributes;
             GainPerLevel = gainPerLevel;
+
+            BaseStatistics = baseStatistics;
+
+            BaseMovementSpeed = baseMovementSpeed;
 
             _abilities = new List<AbilityDefinition>(abilities);
         }
 
 
-        internal void OnPlayerEnterWorldStandard(DoTariaPlayer dotariaPlayer)
+        internal void InternalOnPlayerEnterWorld(DoTariaPlayer dotariaPlayer)
         {
             VerifyAndApplyBuffs(dotariaPlayer);
 
@@ -46,6 +52,8 @@ namespace DoTaria.Heroes
         public virtual void OnPlayerKilledNPC(DoTariaPlayer dotariaPlayer, NPC npc) { }
 
 
+        public virtual void OnPlayerPostHurt(DoTariaPlayer dotariaPlayer, bool pvp, bool quiet, double damage, int hitDirection, bool crit) { }
+
         /// <summary></summary>
         /// <param name="dotariaPlayer"></param>
         /// <param name="pvp"></param>
@@ -61,7 +69,7 @@ namespace DoTaria.Heroes
         public virtual bool OnPlayerPreHurt(DoTariaPlayer dotariaPlayer, bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource) => true;
 
 
-        internal void OnPlayerPreUpdateMovementStandard(DoTariaPlayer dotariaPlayer)
+        internal void InternalOnPlayerPreUpdateMovement(DoTariaPlayer dotariaPlayer)
         {
             VerifyAndApplyBuffs(dotariaPlayer);
 
@@ -75,9 +83,14 @@ namespace DoTaria.Heroes
 
 
         public string UnlocalizedName { get; }
+        public string DisplayName { get; }
 
         public Attributes BaseAttributes { get; }
         public Attributes GainPerLevel { get; }
+
+        public Statistics BaseStatistics { get; }
+
+        public int BaseMovementSpeed { get; }
 
         public IReadOnlyList<AbilityDefinition> Abilities => _abilities.AsReadOnly();
     }

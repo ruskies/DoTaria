@@ -2,7 +2,7 @@
 
 namespace DoTaria.UserInterfaces
 {
-    public class DoTariaUIState : UIState
+    public class DoTariaUIState : UIState, IHasVisibility
     {
         public bool Visible { get; set; }
     }

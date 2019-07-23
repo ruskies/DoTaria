@@ -1,4 +1,7 @@
-﻿using Terraria.ModLoader;
+﻿using DoTaria.Abilities;
+using DoTaria.Heroes.ShadowFiend;
+using DoTaria.Heroes.ShadowFiend.Abilities;
+using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
 namespace DoTaria.Players
@@ -22,8 +25,21 @@ namespace DoTaria.Players
             get => _souls;
             set
             {
-                if (value == _souls || value > 36)
+                NecromasteryAbility necromastery = AbilityDefinitionManager.Instance.Necromastery;
+
+                if (!(Hero is ShadowFiendHero sf) || !HasAbility(necromastery))
+                {
+                    _souls = 0;
                     return;
+                }
+
+                int maxSouls = necromastery.GetMaxSouls(this, GetPlayerAbility(necromastery));
+
+                if (value == _souls || _souls == maxSouls)
+                    return;
+
+                if (value > maxSouls)
+                    value = maxSouls;
 
                 _souls = value;
             }

@@ -8,9 +8,24 @@ namespace DoTaria.Players
 {
     public sealed partial class DoTariaPlayer : ModPlayer
     {
+        private const float 
+            MAX_VANILLA_HEALTH = 500,
+            MAX_VANILLA_MANA = 200;
+
         private void PreUpdateAttributes()
         {
-            float strength = Hero.BaseAttributes.Strength + Hero.GainPerLevel.Strength * (Level - 1);
+            
+        }
+
+        private void PreUpdateMovementAttributes()
+        {
+            
+        }
+
+
+        private void ResetEffectsAttributes()
+        {
+            float strength = Hero.BaseAttributes.Strength + Hero.GainPerLevel.Strength * Level;
 
             List<IGiveStrength> extraStrength = player.GetItemsByType<IGiveStrength>(armor: true, accessories: true);
 
@@ -37,38 +52,7 @@ namespace DoTaria.Players
             Attributes = new Attributes(strength, agility, intelligence);
         }
 
-        private void PreUpdateMovementAttributes()
-        {
-            player.statLifeMax2 += (int) Math.Ceiling(Attributes.HealthFromStrength(Strength));
-            player.lifeRegen += (int) Attributes.HealthRegenerationFromStrength(Strength);
-
-            player.statDefense += (int) Math.Ceiling(Attributes.ArmorFromStrength(Strength) + Attributes.ArmorFromAgility(Agility));
-            player.maxRunSpeed += (int) Math.Ceiling(Attributes.MovementSpeedPerAgility(Agility));
-
-            player.statManaMax2 += (int) Math.Ceiling(Attributes.MaximumManaFromIntelligence(Intelligence));
-            player.manaRegenBonus += (int) Math.Ceiling(Attributes.ManaRegenerationFromIntelligence(Intelligence));
-            player.magicDamageMult += (int) Attributes.SpellDamageFromIntelligence(Intelligence);
-        }
-
 
         public Attributes Attributes { get; private set; }
-
-        public float Strength
-        {
-            get
-            {
-                
-            }
-        }
-
-        public float Agility
-        {
-            get { return Hero.BaseAttributes.Agility + Hero.GainPerLevel.Agility * (Level - 1); }
-        }
-
-        public float Intelligence
-        {
-            get { return Hero.BaseAttributes.Intelligence + Hero.GainPerLevel.Intelligence * (Level - 1); }
-        }
     }
 }

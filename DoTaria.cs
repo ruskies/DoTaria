@@ -57,7 +57,7 @@ namespace DoTaria
         }
 
 
-        public DoTaria Instance { get; private set; }
+        public static DoTaria Instance { get; private set; }
 
 
         #region Hotkeys

@@ -1,4 +1,5 @@
 ﻿using DoTaria.Heroes;
+using DoTaria.UserInterfaces.HeroSelection;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
@@ -7,15 +8,17 @@ namespace DoTaria.Players
 {
     public sealed partial class DoTariaPlayer : ModPlayer
     {
+        private HeroDefinition _hero = null;
+
         private void KillHeroes(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
             Hero.OnPlayerDeath(this, damage, hitDirection, pvp, damageSource);
         }
 
 
-        private void OnEnterWorldHeroes(DoTariaPlayer dotariaPlayer)
+        private void OnEnterWorldHeroes(Player player)
         {
-            Hero.OnPlayerEnterWorldStandard(this);
+            Hero.InternalOnPlayerEnterWorld(player.GetModPlayer<DoTariaPlayer>());
         }
 
         private void OnKilledNPCHeroes(NPC npc)
@@ -23,6 +26,17 @@ namespace DoTaria.Players
             Hero.OnPlayerKilledNPC(this, npc);
         }
 
+
+        private void ModifyWeaponDamageHeroes(Item item, ref float add, ref float mult, ref float flat)
+        {
+            Hero.ModifyWeaponDamage(this, item, ref add, ref mult, ref flat);
+        }
+
+
+        private void PostHurtHeroes(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
+        {
+            Hero.OnPlayerPostHurt(this, pvp, quiet, damage, hitDirection, crit);
+        }
 
         private bool PreHurtHeroes(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
@@ -34,16 +48,29 @@ namespace DoTaria.Players
 
         private void PreUpdateMovementHeroes()
         {
-            Hero.OnPlayerPreUpdateMovementStandard(this);
+            Hero.InternalOnPlayerPreUpdateMovement(this);
         }
 
 
-        private void ModifyWeaponDamageHeroes(Item item, ref float add, ref float mult, ref float flat)
+        private void ResetEffectsHeroes()
         {
-            Hero.ModifyWeaponDamage(this, item, ref add, ref mult, ref flat);
+            
         }
 
 
-        public HeroDefinition Hero { get; private set; } = HeroDefinitionManager.Instance.ShadowFiend;
+        public HeroDefinition Hero
+        {
+            get
+            {
+                if (_hero == null)
+                    _hero = HeroDefinitionManager.Instance.Abaddon;
+
+                return _hero;
+            }
+
+            set => _hero = value;
+        }
+
+        public bool HeroSelected { get; internal set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DoTaria.Abilities;
+using DoTaria.Heroes;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -9,15 +10,28 @@ namespace DoTaria.Players
     {
         private void SaveAbilities(TagCompound tag)
         {
-            Dictionary<string, int> abilityLevelByNames = new Dictionary<string, int>();
+            List<string> abilitiesInformation = new List<string>();
 
-            foreach (KeyValuePair<AbilityDefinition, int> kvp in _abilityLevels)
+            foreach (KeyValuePair<AbilityDefinition, PlayerAbility> kvp in AcquiredAbilities)
+                abilitiesInformation.Add(kvp.Key.UnlocalizedName + '|' + kvp.Value.Level + ':' + kvp.Value.Cooldown);
 
+            tag.Add(nameof(AcquiredAbilities), abilitiesInformation);
         }
 
         private void LoadAbilities(TagCompound tag)
         {
+            AcquiredAbilities.Clear();
 
+            IList<string> abilitiesInformationUnparsed = tag.GetList<string>(nameof(AcquiredAbilities));
+
+            for (int i = 0; i < abilitiesInformationUnparsed.Count; i++)
+            {
+                string[] splitInformation = abilitiesInformationUnparsed[i].Split('|');
+                string[] splitAbilityInformation = abilitiesInformationUnparsed[1].Split(':');
+
+                AbilityDefinition ability = AbilityDefinitionManager.Instance[splitInformation[0]];
+                AcquiredAbilities.Add(ability, new PlayerAbility(ability, int.Parse(splitAbilityInformation[0]), int.Parse(splitAbilityInformation[1])));
+            }
         }
     }
 }

@@ -11,12 +11,20 @@ namespace DoTaria.Heroes
             Abaddon = Add(new AbaddonHero()) as AbaddonHero;
             ShadowFiend = Add(new ShadowFiendHero()) as ShadowFiendHero;
 
+            for (int i = 0; i < byIndex.Count; i++)
+                AverageBaseMovementSpeed += byIndex[i].BaseMovementSpeed;
+
+            AverageBaseMovementSpeed /= byIndex.Count;
+
             base.DefaultInitialize();
         }
 
 
         public AbaddonHero Abaddon { get; private set; }
-        
+
         public ShadowFiendHero ShadowFiend { get; private set; }
+
+
+        public float AverageBaseMovementSpeed { get; private set; }
     }
 }

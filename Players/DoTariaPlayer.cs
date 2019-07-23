@@ -26,7 +26,9 @@ namespace DoTaria.Players
 
         public override void OnEnterWorld(Player player)
         {
-            OnEnterWorldHeroes(this);
+            OnEnterWorldHeroes(player);
+
+            OnEnterWorldAbilities(player);
         }
 
         public void OnKilledNPC(NPC npc)
@@ -34,6 +36,19 @@ namespace DoTaria.Players
             OnKilledNPCHeroes(npc);
         }
 
+
+        public override void ModifyWeaponDamage(Item item, ref float add, ref float mult, ref float flat)
+        {
+            ModifyWeaponDamageHeroes(item, ref add, ref mult, ref flat);
+        }
+
+
+        public override void PostHurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
+        {
+            PostHurtHeroes(pvp, quiet, damage, hitDirection, crit);
+            
+            base.PostHurt(pvp, quiet, damage, hitDirection, crit);
+        }
 
         public override void PostUpdate()
         {
@@ -61,15 +76,21 @@ namespace DoTaria.Players
 
         public override void PreUpdateMovement()
         {
-            PreUpdateMovementAghanims();
             PreUpdateMovementAttributes();
+            
+            PreUpdateMovementAghanims();
             PreUpdateMovementHeroes();
         }
 
 
-        public override void ModifyWeaponDamage(Item item, ref float add, ref float mult, ref float flat)
+        public override void ResetEffects()
         {
-            ModifyWeaponDamageHeroes(item, ref add, ref mult, ref flat);
+            ResetEffectsHeroes();
+
+            ResetEffectsAttributes();
+            ResetEffectsStatistics();
+
+            ResetEffectsAbilities();
         }
     }
 }
