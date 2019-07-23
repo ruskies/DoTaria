@@ -28,6 +28,7 @@ namespace DoTaria.UserInterfaces.Abilities
         private readonly List<AbilityDefinition> _displayedAbilities = new List<AbilityDefinition>();
         private readonly List<UIImageButton> _abilityButtons = new List<UIImageButton>();
         private readonly Dictionary<UIImageButton, UIImage> _abilityNotLearnedMasks = new Dictionary<UIImageButton, UIImage>();
+        private Dictionary<AbilityDefinition, UIImageButton> _buttonsPerDefinitions = new Dictionary<AbilityDefinition, UIImageButton>();
         private Dictionary<UIImageButton, AbilityDefinition> _definitionsPerButton = new Dictionary<UIImageButton, AbilityDefinition>();
         private Dictionary<UIImageButton, UIImageButton> _upgradeButtonsPerButtons = new Dictionary<UIImageButton, UIImageButton>();
 
@@ -94,6 +95,9 @@ namespace DoTaria.UserInterfaces.Abilities
 
             foreach (UIImageButton imageButton in _abilityButtons)
             {
+                if (_definitionsPerButton[imageButton] == null)
+                    continue;
+
                 UIImageButton upgradeButton = new UIImageButton(_upgradeButton);
                 Vector2 bottomLeft = imageButton.GetDimensions().ToRectangle().BottomLeft();
 
@@ -101,6 +105,7 @@ namespace DoTaria.UserInterfaces.Abilities
                 upgradeButton.Top.Set(bottomLeft.Y + 5, 0);
 
                 _upgradeButtonsPerButtons.Add(imageButton, upgradeButton);
+                imageButton.Append(upgradeButton);
             }
         }
 
@@ -115,16 +120,20 @@ namespace DoTaria.UserInterfaces.Abilities
                 imageButton.SetImage(_emptyAbilitySlot);
             }
 
+            _buttonsPerDefinitions.Clear();
+
             foreach (AbilityDefinition ability in dotariaPlayer.Hero.Abilities)
             {
                 if (ability.AlwaysShowInAbilitiesBar)
                 {
                     _displayedAbilities.Add(ability);
 
-                    UIImageButton imageButton = _abilityButtons[(int) ability.AbilitySlot];
+                    UIImageButton imageButton = _abilityButtons[(int)ability.AbilitySlot];
 
                     _definitionsPerButton[imageButton] = ability;
                     imageButton.SetImage(ability.Icon);
+
+                    _buttonsPerDefinitions.Add(ability, imageButton);
                 }
             }
         }
@@ -142,6 +151,36 @@ namespace DoTaria.UserInterfaces.Abilities
                 else
                     kvp.Value.ImageScale = 1f;
             }
+
+            for (int i = 0; i < _displayedAbilities.Count; i++)
+            {
+                UIImageButton upgradeButton = GetUpgradeButtonForAbility(_displayedAbilities[i]);
+
+                if (upgradeButton == null)
+                    continue;
+
+                bool shouldDisplay = _displayedAbilities[i].InternalCanLevelUp(dotariaPlayer);
+                upgradeButton.SetVisibility(shouldDisplay ? 1f : 0f, shouldDisplay ? 0.80f : 0f);
+            }
+        }
+
+
+        private UIImageButton GetAbilityButtonForAbility(AbilityDefinition ability)
+        {
+            if (!_buttonsPerDefinitions.ContainsKey(ability))
+                return null;
+
+            return _buttonsPerDefinitions[ability];
+        }
+
+        private UIImageButton GetUpgradeButtonForAbility(AbilityDefinition ability)
+        {
+            UIImageButton abilityButton = GetAbilityButtonForAbility(ability);
+
+            if (abilityButton == null || !_upgradeButtonsPerButtons.ContainsKey(abilityButton))
+                return null;
+
+            return _upgradeButtonsPerButtons[abilityButton];
         }
 
 
