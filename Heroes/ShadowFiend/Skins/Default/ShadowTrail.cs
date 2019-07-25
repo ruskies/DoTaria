@@ -10,11 +10,14 @@ namespace DoTaria.Heroes.ShadowFiend.Skins.Default
         {
             dust.noGravity = true;
             dust.noLight = true;
+            dust.alpha = 0;
         }
 
         public override bool Update(Dust dust)
         {
-            dust.velocity *= new Vector2(0f, 0.5f);
+            dust.velocity *= new Vector2(0.85f, 0.85f);
+            dust.rotation = dust.velocity.X / 2;
+            dust.alpha += 10;
 
             return true;
         }
