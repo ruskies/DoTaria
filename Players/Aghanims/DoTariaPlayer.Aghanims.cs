@@ -23,6 +23,8 @@ namespace DoTaria.Players
         {
             if (HasAghanims() && !player.HasBuff<AghanimUpgrade>())
                 player.AddBuff<AghanimUpgrade>(int.MaxValue);
+            else if (!HasAghanims() && player.HasBuff<AghanimUpgrade>())
+                player.ClearBuff<AghanimUpgrade>();
                 
         }
 

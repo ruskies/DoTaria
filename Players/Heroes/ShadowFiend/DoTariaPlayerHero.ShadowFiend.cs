@@ -10,6 +10,7 @@ namespace DoTaria.Players
     {
         private int _souls;
 
+
         private void SaveShadowFiend(TagCompound tag)
         {
             tag.Add(nameof(Souls), Souls);
@@ -33,9 +34,9 @@ namespace DoTaria.Players
                     return;
                 }
 
-                int maxSouls = necromastery.GetMaxSouls(this, GetPlayerAbility(necromastery));
+                int maxSouls = necromastery.GetMaxSouls(this);
 
-                if (value == _souls || _souls == maxSouls)
+                if (_souls > maxSouls || value == _souls || _souls == maxSouls)
                     return;
 
                 if (value > maxSouls)

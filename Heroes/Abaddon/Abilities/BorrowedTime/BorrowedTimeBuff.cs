@@ -1,6 +1,6 @@
 ﻿using DoTaria.Buffs;
 
-namespace DoTaria.Heroes.Abaddon.Abilities
+namespace DoTaria.Heroes.Abaddon.Abilities.BorrowedTime
 {
     public sealed class BorrowedTimeBuff : DoTariaBuff
     {

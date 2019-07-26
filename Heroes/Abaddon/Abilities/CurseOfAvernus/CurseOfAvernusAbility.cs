@@ -2,13 +2,13 @@
 using DoTaria.Enums;
 using DoTaria.Players;
 
-namespace DoTaria.Heroes.Abaddon.Abilities
+namespace DoTaria.Heroes.Abaddon.Abilities.CurseOfAvernus
 {
     public sealed class CurseOfAvernusAbility : AbilityDefinition
     {
         public const string UNLOCALIZED_NAME = AbaddonHero.UNLOCALIZED_NAME + ".curseOfAvernus";
 
-        public CurseOfAvernusAbility() : base(UNLOCALIZED_NAME, "Curse of Avernus", AbilityType.Passive, DamageType.None, AbilitySlot.Third, 4)
+        public CurseOfAvernusAbility() : base(UNLOCALIZED_NAME, "Curse of Avernus", AbilityType.Passive, DamageType.None, AbilitySlot.Third, 1, 4)
         {
         }
 

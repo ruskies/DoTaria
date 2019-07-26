@@ -3,6 +3,7 @@ using DoTaria.Extensions;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameInput;
 using Terraria.ModLoader;
 
 namespace DoTaria.Players
@@ -80,6 +81,12 @@ namespace DoTaria.Players
             
             PreUpdateMovementAghanims();
             PreUpdateMovementHeroes();
+        }
+
+
+        public override void ProcessTriggers(TriggersSet triggersSet)
+        {
+            ProcessTriggersHotkeys(triggersSet);
         }
 
 

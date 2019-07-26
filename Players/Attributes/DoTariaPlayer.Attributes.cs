@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DoTaria.Attribute;
 using DoTaria.Extensions;
 using Terraria.ModLoader;
@@ -49,10 +48,10 @@ namespace DoTaria.Players
                 intelligence += extraIntelligence[i].GetGivenIntelligence(this);
 
 
-            Attributes = new Attributes(strength, agility, intelligence);
+            Attributes = new Attribute.Attributes(strength, agility, intelligence);
         }
 
 
-        public Attributes Attributes { get; private set; }
+        public Attribute.Attributes Attributes { get; private set; }
     }
 }

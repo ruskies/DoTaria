@@ -15,12 +15,10 @@ namespace DoTaria.UserInterfaces.HeroSelection
 {
     public sealed class HeroSelectionUIState : UIState, IDisposable
     {
-        public const int 
-            HERO_SELECTION_MENU_ID = -72,
-            CHARACTER_SELECTION_MENU_ID = 1;
+        public const int CHARACTER_SELECTION_MENU_ID = 1;
 
         private const float
-            PADDING_X = 5f,
+            PADDING_X = 10f,
             PADDING_Y = 7f;
 
         private Dictionary<HeroDefinition, Texture2D> _heroesSelectionTextures = new Dictionary<HeroDefinition, Texture2D>();

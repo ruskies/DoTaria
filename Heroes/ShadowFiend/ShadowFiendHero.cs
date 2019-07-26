@@ -46,8 +46,8 @@ namespace DoTaria.Heroes.ShadowFiend
 
         public override void ModifyWeaponDamage(DoTariaPlayer dotariaPlayer, Item item, ref float add, ref float mult, ref float flat)
         {
-            if (item.melee || item.ranged)
-                flat += dotariaPlayer.Souls * 2;
+            if ((item.melee || item.ranged) && dotariaPlayer.HasAbility(AbilityDefinitionManager.Instance.Necromastery))
+                flat += AbilityDefinitionManager.Instance.Necromastery.GetExtraFlatDamage(dotariaPlayer);
         }        
     }
 }

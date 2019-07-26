@@ -1,4 +1,5 @@
 ﻿using DoTaria.Heroes.Abaddon;
+using DoTaria.Heroes.Invoker;
 using DoTaria.Heroes.ShadowFiend;
 using DoTaria.Managers;
 
@@ -9,6 +10,7 @@ namespace DoTaria.Heroes
         internal override void DefaultInitialize()
         {
             Abaddon = Add(new AbaddonHero()) as AbaddonHero;
+            Invoker = Add(new InvokerHero()) as InvokerHero;
             ShadowFiend = Add(new ShadowFiendHero()) as ShadowFiendHero;
 
             for (int i = 0; i < byIndex.Count; i++)
@@ -21,6 +23,8 @@ namespace DoTaria.Heroes
 
 
         public AbaddonHero Abaddon { get; private set; }
+
+        public InvokerHero Invoker { get; private set; }
 
         public ShadowFiendHero ShadowFiend { get; private set; }
 

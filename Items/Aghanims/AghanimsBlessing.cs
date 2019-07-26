@@ -19,6 +19,10 @@ namespace DoTaria.Items.Aghanims
 
             item.expertOnly = true;
             item.consumable = true;
+            item.useStyle = ItemUseStyleID.EatingUsing;
+
+            item.useAnimation = 25;
+            item.useTime = 25;
         }
 
         public override void AddRecipes()

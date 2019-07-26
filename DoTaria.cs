@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using DoTaria.Abilities;
 using Microsoft.Xna.Framework.Input;
 using Terraria.ModLoader;
 using Main = Terraria.Main;
@@ -43,6 +46,16 @@ namespace DoTaria
 
             AltFirstAbility = RegisterHotKey("Alternate First Ability", Keys.OemTilde.ToString());
             AltSecondAbility = RegisterHotKey("Alternate Second Ability", Keys.Tab.ToString());
+
+            ModHotKeys = new ReadOnlyDictionary<ModHotKey, AbilitySlot>(new Dictionary<ModHotKey, AbilitySlot>()
+            {
+                { FirstAbility, AbilitySlot.First },
+                { SecondAbility, AbilitySlot.Second },
+                { ThirdAbility, AbilitySlot.Third },
+                { UltimateAbility, AbilitySlot.Ultimate },
+                { AltFirstAbility, AbilitySlot.Fourth },
+                { AltSecondAbility, AbilitySlot.Fifth }
+            });
         }
 
         private void UnloadHotKeys()
@@ -50,10 +63,13 @@ namespace DoTaria
             FirstAbility = null;
             SecondAbility = null;
             ThirdAbility = null;
-            UltimateAbility = null;
 
             AltFirstAbility = null;
             AltSecondAbility = null;
+
+            UltimateAbility = null;
+
+            ModHotKeys = null;
         }
 
 
@@ -70,6 +86,9 @@ namespace DoTaria
         public ModHotKey AltSecondAbility { get; private set; }
 
         public ModHotKey UltimateAbility { get; private set; }
+
+
+        public IReadOnlyDictionary<ModHotKey, AbilitySlot> ModHotKeys { get; private set; }
 
         #endregion
     }

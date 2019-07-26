@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DoTaria.UserInterfaces;
 using DoTaria.UserInterfaces.Abilities;
 using DoTaria.UserInterfaces.HeroSelection;
+using DoTaria.UserInterfaces.HeroStatistics;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -16,18 +18,29 @@ namespace DoTaria
             MENU_MODE_CHARACTER_SELECTION = 1,
             MENU_MODE_CHARACTER_NAMING = 2;
 
-        private UserInterface _abilitiesInterface;
+        private UserInterface 
+            _abilitiesInterface,
+            _heroStatisticsInterface;
 
 
         private void LoadInterfaces()
         {
             HeroSelectionUI = new HeroSelectionUIState(this);
 
+
             AbilitiesUI = new AbilitiesUIState(this);
             AbilitiesUI.Activate();
 
             _abilitiesInterface = new UserInterface();
             _abilitiesInterface.SetState(AbilitiesUI);
+
+
+            HeroStatisticsUI = new HeroStatisticsUIState(this);
+            HeroStatisticsUI.Activate();
+            
+            _heroStatisticsInterface = new UserInterface();
+            _heroStatisticsInterface.SetState(HeroStatisticsUI);
+
 
             AbilitiesUI.Visible = true;
 
@@ -39,6 +52,9 @@ namespace DoTaria
             AbilitiesUI.Visible = false;
             AbilitiesUI = null;
 
+            HeroStatisticsUI.Visible = false;
+            HeroSelectionUI = null;
+
             HeroSelectionUI.Dispose();
             HeroSelectionUI = null;
 
@@ -48,10 +64,13 @@ namespace DoTaria
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
-            int abilitiesBarLayerIndex = layers.FindIndex(l => l.Name.Contains("Resource Bars"));
+            int abilitiesBarLayerIndex = layers.FindIndex(l => l.Name.Equals("Vanilla: Resource Bars", StringComparison.CurrentCultureIgnoreCase));
 
             if (abilitiesBarLayerIndex != -1)
-                layers.Insert(abilitiesBarLayerIndex, new DoTariaInterfaceLayer(typeof(AbilitiesUIState).FullName, InterfaceScaleType.Game, AbilitiesUI, _abilitiesInterface));
+                layers.Insert(abilitiesBarLayerIndex, new DoTariaInterfaceLayer(typeof(HeroStatisticsUIState).FullName, InterfaceScaleType.UI, HeroStatisticsUI, _heroStatisticsInterface));
+
+            if (abilitiesBarLayerIndex != -1)
+                layers.Insert(abilitiesBarLayerIndex, new DoTariaInterfaceLayer(typeof(AbilitiesUIState).FullName, InterfaceScaleType.UI, AbilitiesUI, _abilitiesInterface));
         }
 
 
@@ -88,5 +107,6 @@ namespace DoTaria
 
         internal AbilitiesUIState AbilitiesUI { get; private set; }
         internal HeroSelectionUIState HeroSelectionUI { get; private set; }
+        internal HeroStatisticsUIState HeroStatisticsUI { get; private set; }
     }
 }

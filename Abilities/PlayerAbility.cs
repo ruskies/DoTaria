@@ -16,7 +16,7 @@
 
         public AbilityDefinition Ability { get; }
 
-        public int Level { get; }
+        public int Level { get; set; }
 
         public int Cooldown { get; set; }
     }

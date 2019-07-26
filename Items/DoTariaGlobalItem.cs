@@ -1,6 +1,7 @@
 ﻿using DoTaria.Attribute;
 using DoTaria.Players;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace DoTaria.Items
@@ -19,6 +20,24 @@ namespace DoTaria.Items
             }
 
             return 1f;
+        }
+
+
+        public override bool OnPickup(Item item, Player player)
+        {
+            DoTariaGlobalConfiguration globalConfiguration = mod.GetConfig<DoTariaGlobalConfiguration>();
+
+            if (globalConfiguration.CustomManaRestore && item.type == ItemID.Star)
+            {
+                int manaHeal = (int) (player.statManaMax2 * globalConfiguration.ManaRestoredOnStarPercentage);
+
+                player.statMana += manaHeal;
+                player.ManaEffect(manaHeal);
+
+                return false;
+            }
+
+            return base.OnPickup(item, player);
         }
     }
 }

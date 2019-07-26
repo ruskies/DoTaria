@@ -1,4 +1,5 @@
-﻿using DoTaria.Buffs;
+﻿using DoTaria.Abilities;
+using DoTaria.Buffs;
 using DoTaria.Players;
 using Terraria;
 
@@ -13,14 +14,13 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities
         {
         }
 
-
         public override void ModifyBuffTip(ref string tip, ref int rare)
         {
             base.ModifyBuffTip(ref tip, ref rare);
 
             DoTariaPlayer dotariaPlayer = Main.LocalPlayer.GetModPlayer<DoTariaPlayer>();
 
-            tip += $"\n\nYou currently have {dotariaPlayer.Souls} souls, giving you an extra {dotariaPlayer.Souls * 2} damage to all physical attacks.";
+            tip += $"\n\nYou currently have {dotariaPlayer.Souls} souls, giving you an extra {AbilityDefinitionManager.Instance.Necromastery.GetExtraFlatDamage(dotariaPlayer)} damage to all physical attacks.";
         }
     }
 }

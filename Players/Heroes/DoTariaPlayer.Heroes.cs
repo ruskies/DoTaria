@@ -1,5 +1,4 @@
 ﻿using DoTaria.Heroes;
-using DoTaria.UserInterfaces.HeroSelection;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
@@ -45,6 +44,7 @@ namespace DoTaria.Players
 
             return true;
         }
+
 
         private void PreUpdateMovementHeroes()
         {

@@ -8,12 +8,30 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities
     {
         public const string UNLOCALIZED_NAME_SUFFIX = "necromastery";
 
-        public NecromasteryAbility() : base(ShadowFiendHero.UNLOCALIZED_NAME + '.' + UNLOCALIZED_NAME_SUFFIX, "Necromastery", AbilityType.Passive, DamageType.Physical, AbilitySlot.Fourth, 4)
+        public NecromasteryAbility() : base(ShadowFiendHero.UNLOCALIZED_NAME + '.' + UNLOCALIZED_NAME_SUFFIX, "Necromastery", AbilityType.Passive, DamageType.Physical, AbilitySlot.Fourth, 1, 4)
         {
         }
 
 
-        public int GetMaxSouls(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 4 + playerAbility.Level * 8;
+        public int GetMaxSouls(DoTariaPlayer dotariaPlayer)
+        {
+            if (!dotariaPlayer.HasAbility(this))
+                return 0;
+
+            return 4 + dotariaPlayer.AcquiredAbilities[this].Level * 8 + (dotariaPlayer.HasAghanims() ? 10 : 0);
+        }
+
+        public int GetExtraFlatDamage(DoTariaPlayer dotariaPlayer)
+        {
+            // TODO Add support for talent.
+            int actualSouls = dotariaPlayer.Souls;
+            int maxSouls = AbilityDefinitionManager.Instance.Necromastery.GetMaxSouls(dotariaPlayer);
+
+            if (actualSouls > maxSouls)
+                actualSouls = maxSouls;
+
+            return actualSouls * 2;
+        }
 
 
         public override float GetCooldown(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 0;

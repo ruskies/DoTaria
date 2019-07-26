@@ -8,7 +8,7 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities
     {
         public const string UNLOCALIZED_NAME = "presenceoftheDarkLord"; 
 
-        public PresenceoftheDarkLordAbility() : base(ShadowFiendHero.UNLOCALIZED_NAME + '.' + UNLOCALIZED_NAME, "Presence of the Dark Lord", AbilityType.Passive, DamageType.None, AbilitySlot.Fifth, 4)
+        public PresenceoftheDarkLordAbility() : base(ShadowFiendHero.UNLOCALIZED_NAME + '.' + UNLOCALIZED_NAME, "Presence of the Dark Lord", AbilityType.Passive, DamageType.None, AbilitySlot.Fifth, 1, 4)
         {
         }
 

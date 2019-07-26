@@ -1,6 +1,6 @@
 ﻿namespace DoTaria.Abilities
 {
-    public enum AbilityType
+    public enum AbilityType : byte
     {
         None,
         Passive,

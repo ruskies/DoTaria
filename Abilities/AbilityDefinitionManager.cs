@@ -1,5 +1,7 @@
 ﻿using DoTaria.Heroes.Abaddon.Abilities;
+using DoTaria.Heroes.Abaddon.Abilities.BorrowedTime;
 using DoTaria.Heroes.ShadowFiend.Abilities;
+using DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes;
 using DoTaria.Managers;
 
 namespace DoTaria.Abilities

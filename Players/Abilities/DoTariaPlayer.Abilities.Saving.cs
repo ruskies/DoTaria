@@ -27,7 +27,7 @@ namespace DoTaria.Players
             for (int i = 0; i < abilitiesInformationUnparsed.Count; i++)
             {
                 string[] splitInformation = abilitiesInformationUnparsed[i].Split('|');
-                string[] splitAbilityInformation = abilitiesInformationUnparsed[1].Split(':');
+                string[] splitAbilityInformation = splitInformation[1].Split(':');
 
                 AbilityDefinition ability = AbilityDefinitionManager.Instance[splitInformation[0]];
                 AcquiredAbilities.Add(ability, new PlayerAbility(ability, int.Parse(splitAbilityInformation[0]), int.Parse(splitAbilityInformation[1])));
