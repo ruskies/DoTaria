@@ -29,6 +29,7 @@ namespace DoTaria.Network
                 return _networkPacketsByType[networkPacket.GetType()];
 
             _networkPacketsById.Add(_latestPacketTypeId, networkPacket);
+            _networkPacketsByType.Add(networkPacket.GetType(), networkPacket);
 
             networkPacket.PacketType = _latestPacketTypeId;
             _latestPacketTypeId++;

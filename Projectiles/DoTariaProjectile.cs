@@ -11,6 +11,8 @@ namespace DoTaria.Projectiles
 
         protected DoTariaProjectile(string displayName, int width, int height, bool cloneNewInstances = true)
         {
+            _displayName = displayName;
+
             _width = width;
             _height = height;
 

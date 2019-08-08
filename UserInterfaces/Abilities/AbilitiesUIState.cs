@@ -20,13 +20,15 @@ namespace DoTaria.UserInterfaces.Abilities
 
         private const float
             ACTIVE_VISIBILITY = 1f,
-            INACTIVE_VISIBILITY = 0.75f;
+            COOLDOWN_VISIBILITY = 0.65f,
+            INACTIVE_VISIBILITY = 0.5f;
 
         private DoTariaUIPanel _mainPanel;
-        private Texture2D _emptyAbilitySlot, _abilityNotLearned, _abilityLevel, _abilityUnlevel, _upgradeButton;
+        private readonly Texture2D _emptyAbilitySlot, _abilityNotLearned, _abilityLevel, _abilityUnlevel, _upgradeButton;
 
         private readonly List<UIImageButton> _abilityButtons = new List<UIImageButton>();
 
+        // I have acquired the will to commit toaster bath :)
         private readonly Dictionary<UIImageButton, UIImage> _abilityNotLearnedMasks = new Dictionary<UIImageButton, UIImage>();
 
         private readonly Dictionary<AbilityDefinition, UIImageButton> _abilityButtonsForAbilityDefinitions = new Dictionary<AbilityDefinition, UIImageButton>();
@@ -35,6 +37,9 @@ namespace DoTaria.UserInterfaces.Abilities
         private readonly Dictionary<UIImageButton, AbilityDefinition> _definitionsForAbilityButton = new Dictionary<UIImageButton, AbilityDefinition>();
         private readonly Dictionary<UIImageButton, UIImageButton> _upgradeButtonsForAbilityButtons = new Dictionary<UIImageButton, UIImageButton>();
         private readonly Dictionary<UIImageButton, UIImageButton> _abilityButtonsForUpgradeButtons = new Dictionary<UIImageButton, UIImageButton>();
+
+        private readonly Dictionary<UIImageButton, UIText> _cooldownTextPerAbilityButtons = new Dictionary<UIImageButton, UIText>();
+        private readonly Dictionary<UIImageButton, UIText> _leveledTextPerAbilityButtons = new Dictionary<UIImageButton, UIText>();
 
         private readonly float _panelPadding;
 
@@ -69,7 +74,6 @@ namespace DoTaria.UserInterfaces.Abilities
 
             Append(_mainPanel);
 
-            CalculatedStyle dimensions = _mainPanel.GetInnerDimensions();
             int xOffset = 0;
 
             for (int i = 0; i < ABILITIES_COUNT; i++)
@@ -119,6 +123,9 @@ namespace DoTaria.UserInterfaces.Abilities
             _abilityButtonsForAbilityDefinitions.Clear();
             _upgradeButtonsForAbilityDefinitions.Clear();
 
+            _cooldownTextPerAbilityButtons.Clear();
+            _leveledTextPerAbilityButtons.Clear();
+
             foreach (AbilityDefinition ability in dotariaPlayer.Hero.Abilities)
             {
                 if (ability.AlwaysShowInAbilitiesBar)
@@ -130,6 +137,11 @@ namespace DoTaria.UserInterfaces.Abilities
 
                     _abilityButtonsForAbilityDefinitions.Add(ability, imageButton);
                     _upgradeButtonsForAbilityDefinitions.Add(_upgradeButtonsForAbilityButtons[imageButton], ability);
+
+
+                    UIText cooldownLabel = 
+
+                    _cooldownTextPerAbilityButtons.Add(ability, );
                 }
             }
         }
@@ -155,6 +167,11 @@ namespace DoTaria.UserInterfaces.Abilities
             {
                 UIImageButton upgradeButton = GetUpgradeButtonForAbility(ability);
                 UIImageButton abilityButton = GetAbilityButtonForAbility(ability);
+
+                if (dotariaPlayer.AcquiredAbilities[ability].Cooldown > 0)
+                    abilityButton.SetVisibility(COOLDOWN_VISIBILITY, COOLDOWN_VISIBILITY);
+                else
+                    abilityButton.SetVisibility(ACTIVE_VISIBILITY, INACTIVE_VISIBILITY);
 
                 if (upgradeButton == null)
                     continue;
@@ -223,6 +240,14 @@ namespace DoTaria.UserInterfaces.Abilities
             return _upgradeButtonsForAbilityButtons[abilityButton];
         }
 
+
+        /*private UIImage[] GetLeveledImagesForDefinition(AbilityDefinition definition)
+        {
+            if (!_abilityButtonsForAbilityDefinitions.ContainsKey(definition))
+                return null;
+
+            return _leveledTextPerAbilityButtons[_abilityButtonsForAbilityDefinitions[definition]];
+        }*/
 
         public Mod Mod { get; }
     }

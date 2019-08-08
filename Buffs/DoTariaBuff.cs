@@ -16,6 +16,8 @@ namespace DoTaria.Buffs
             _hideTime = hideTime;
             _save = save;
             _persistent = persistent;
+
+            _canBeCleared = canBeCleared;
         }
 
         public override void SetDefaults()
