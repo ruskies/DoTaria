@@ -11,7 +11,7 @@ using Terraria.UI;
 
 namespace DoTaria
 {
-    public sealed partial class DoTaria : Mod
+    public sealed partial class DoTariaMod : Mod
     {
         private const int 
             MENU_MODE_HERO_SELECTION = 888,

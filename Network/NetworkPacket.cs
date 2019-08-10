@@ -26,7 +26,7 @@ namespace DoTaria.Network
 
         protected ModPacket MakePacket()
         {
-            ModPacket packet = DoTaria.Instance.GetPacket();
+            ModPacket packet = DoTariaMod.Instance.GetPacket();
             packet.Write(PacketType);
 
             return packet;

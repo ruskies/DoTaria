@@ -9,7 +9,7 @@ namespace DoTaria.Players
     {
         private void ProcessTriggersHotkeys(TriggersSet triggersSet)
         {
-            foreach (KeyValuePair<ModHotKey, AbilitySlot> kvp in DoTaria.Instance.ModHotKeys)
+            foreach (KeyValuePair<ModHotKey, AbilitySlot> kvp in DoTariaMod.Instance.ModHotKeys)
                 if (kvp.Key.JustReleased)
                     TryActivateAbility(kvp.Value);
         }

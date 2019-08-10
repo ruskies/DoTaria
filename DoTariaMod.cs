@@ -1,15 +1,17 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using DoTaria.Abilities;
+using DoTaria.Network;
 using Microsoft.Xna.Framework.Input;
+using Terraria;
 using Terraria.ModLoader;
-using Main = Terraria.Main;
 
 namespace DoTaria
 {
-	public sealed partial class DoTaria : Mod
+	public sealed partial class DoTariaMod : Mod
 	{
-        public DoTaria()
+        public DoTariaMod()
 		{
             Instance = this;
 		}
@@ -73,7 +75,13 @@ namespace DoTaria
         }
 
 
-        public static DoTaria Instance { get; private set; }
+        public override void HandlePacket(BinaryReader reader, int whoAmI)
+        {
+            NetworkPacketManager.Instance.HandlePacket(reader, whoAmI);
+        }
+
+
+        public static DoTariaMod Instance { get; private set; }
 
 
         #region Hotkeys
