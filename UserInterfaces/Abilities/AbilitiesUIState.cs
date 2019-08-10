@@ -99,8 +99,8 @@ namespace DoTaria.UserInterfaces.Abilities
 
                 UIAbilityButton upgradeButton = new UIAbilityButton(_upgradeButton, _cooldownTexture);
 
+                upgradeButton.Top.Set(-22, 0);
                 upgradeButton.Left.Set(xOffset, 0);
-                upgradeButton.Top.Set(_emptyAbilitySlot.Height + 5, 0);
                 upgradeButton.OnClick += OnAbilityUpgradeButtonClicked;
 
                 _upgradeButtonsForAbilityButtons.Add(abilityButton, upgradeButton);
@@ -112,7 +112,6 @@ namespace DoTaria.UserInterfaces.Abilities
                 xOffset += _emptyAbilitySlot.Width + ABILITY_PADDING_X;
             }
         }
-
 
         public void OnPlayerEnterWorld(DoTariaPlayer dotariaPlayer)
         {
@@ -140,6 +139,10 @@ namespace DoTaria.UserInterfaces.Abilities
                     _abilityButtonsForAbilityDefinitions.Add(ability, imageButton);
                     _upgradeButtonsForAbilityDefinitions.Add(_upgradeButtonsForAbilityButtons[imageButton], ability);
 
+
+                    UIAbilityButton abilityButton = GetAbilityButtonForAbility(ability);
+                    abilityButton.currentLevel = 0;
+                    abilityButton.maxLevel = 0;
 
                 }
             }
@@ -172,16 +175,23 @@ namespace DoTaria.UserInterfaces.Abilities
                     if (dotariaPlayer.AcquiredAbilities.ContainsKey(ability))
                     {
                         float percent = (float)(dotariaPlayer.AcquiredAbilities[ability].Cooldown / (ability.GetCooldown(dotariaPlayer, dotariaPlayer.AcquiredAbilities[ability]) * DoTariaMath.TICKS_PER_SECOND));
+
                         abilityButton.percent = percent;
+                        abilityButton.currentLevel = dotariaPlayer.AcquiredAbilities[ability].Level;
+                        abilityButton.maxLevel = ability.MaxLevel;
+
                         if (dotariaPlayer.AcquiredAbilities[ability].Cooldown > 0)
                             abilityButton.seconds = dotariaPlayer.AcquiredAbilities[ability].Cooldown / DoTariaMath.TICKS_PER_SECOND + 1;
                         else
                             abilityButton.seconds = 0;
+
                         abilityButton.SetVisibility(COOLDOWN_VISIBILITY, COOLDOWN_VISIBILITY);
                     }
+
                     else
                         abilityButton.SetVisibility(ACTIVE_VISIBILITY, INACTIVE_VISIBILITY);
                 }
+
                 if (upgradeButton == null)
                     continue;
 
@@ -190,7 +200,6 @@ namespace DoTaria.UserInterfaces.Abilities
             }
             
         }
-
 
         private void OnAbilityUpgradeButtonClicked(UIMouseEvent evt, UIElement element)
         {
