@@ -20,8 +20,8 @@ namespace DoTaria.Network
 
         protected abstract void SendPacket(ModPacket packet, int toWho, int fromWho, params object[] args);
 
-        public void SendPacketToAllClients(int fromWho, params object[] args) => SendPacket(-1, fromWho, args);
-        public void SendPacketToServer(int fromWho, params object[] args) => SendPacket(256, fromWho, args);
+        public virtual void SendPacketToAllClients(int fromWho, params object[] args) => SendPacket(-1, fromWho, args);
+        public virtual void SendPacketToServer(int fromWho, params object[] args) => SendPacket(256, fromWho, args);
 
 
         protected ModPacket MakePacket()

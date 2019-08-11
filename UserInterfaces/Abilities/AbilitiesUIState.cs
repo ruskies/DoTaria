@@ -141,8 +141,8 @@ namespace DoTaria.UserInterfaces.Abilities
 
 
                     UIAbilityButton abilityButton = GetAbilityButtonForAbility(ability);
-                    abilityButton.currentLevel = 0;
-                    abilityButton.maxLevel = 0;
+                    abilityButton.CurrentLevel = 0;
+                    abilityButton.MaxLevel = 0;
 
                 }
             }
@@ -176,14 +176,14 @@ namespace DoTaria.UserInterfaces.Abilities
                     {
                         float percent = (float)(dotariaPlayer.AcquiredAbilities[ability].Cooldown / (ability.GetCooldown(dotariaPlayer, dotariaPlayer.AcquiredAbilities[ability]) * DoTariaMath.TICKS_PER_SECOND));
 
-                        abilityButton.percent = percent;
-                        abilityButton.currentLevel = dotariaPlayer.AcquiredAbilities[ability].Level;
-                        abilityButton.maxLevel = ability.MaxLevel;
+                        abilityButton.Percent = percent;
+                        abilityButton.CurrentLevel = dotariaPlayer.AcquiredAbilities[ability].Level;
+                        abilityButton.MaxLevel = ability.MaxLevel;
 
                         if (dotariaPlayer.AcquiredAbilities[ability].Cooldown > 0)
-                            abilityButton.seconds = dotariaPlayer.AcquiredAbilities[ability].Cooldown / DoTariaMath.TICKS_PER_SECOND + 1;
+                            abilityButton.Seconds = dotariaPlayer.AcquiredAbilities[ability].Cooldown / DoTariaMath.TICKS_PER_SECOND + 1;
                         else
-                            abilityButton.seconds = 0;
+                            abilityButton.Seconds = 0;
 
                         abilityButton.SetVisibility(COOLDOWN_VISIBILITY, COOLDOWN_VISIBILITY);
                     }

@@ -8,18 +8,22 @@ namespace DoTaria.UserInterfaces
 {
     public sealed class UIAbilityButton : UIImageButton
     {
+        private readonly Texture2D _cooldownTexture;
+
+
         public UIAbilityButton(Texture2D texture, Texture2D cooldownTexture) : base(texture)
         {
             _cooldownTexture = cooldownTexture;
-            percent = 0.0f;
+            Percent = 0.0f;
         }
+
 
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             base.DrawSelf(spriteBatch);
 
             CalculatedStyle dims = base.GetDimensions();
-            Effect effect = DoTaria.Instance.GetEffect("Effects/ProgressBar");
+            Effect effect = DoTariaMod.Instance.GetEffect("Effects/ProgressBar");
 
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.Default, RasterizerState.CullNone, effect, Main.UIScaleMatrix);
@@ -28,7 +32,7 @@ namespace DoTaria.UserInterfaces
             effect.Parameters["uImageSize0"].SetValue(new Vector2(34, 34));
             effect.Parameters["uRotation"].SetValue(3f);
             effect.Parameters["uDirection"].SetValue(-1f);
-            effect.Parameters["uSaturation"].SetValue(percent);
+            effect.Parameters["uSaturation"].SetValue(Percent);
             effect.CurrentTechnique.Passes[0].Apply();
 
             spriteBatch.Draw(_cooldownTexture, dims.Position(), new Rectangle(0, 0, 32, 32), Color.White * 0.85f, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
@@ -36,28 +40,27 @@ namespace DoTaria.UserInterfaces
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.UIScaleMatrix);
 
-            if (seconds > 0.0f)
-                Utils.DrawBorderString(spriteBatch, seconds.ToString(), dims.Position() + new Vector2(12, 7) - new Vector2(2 * (seconds.ToString().Length - 1), 0), Color.White, 1);
+            if (Seconds > 0.0f)
+                Utils.DrawBorderString(spriteBatch, Seconds.ToString(), dims.Position() + new Vector2(12, 7) - new Vector2(2 * (Seconds.ToString().Length - 1), 0), Color.White, 1);
 
-            Texture2D unleveled = DoTaria.Instance.GetTexture("UserInterfaces/Abilities/AbilityUnlevel");
+            Texture2D unleveled = DoTariaMod.Instance.GetTexture("UserInterfaces/Abilities/AbilityUnlevel");
 
-            Texture2D leveled = DoTaria.Instance.GetTexture("UserInterfaces/Abilities/AbilityLevel");
+            Texture2D leveled = DoTariaMod.Instance.GetTexture("UserInterfaces/Abilities/AbilityLevel");
 
-            for (int i = 0; i < maxLevel; i++)
+            for (int i = 0; i < MaxLevel; i++)
                 spriteBatch.Draw(unleveled, dims.Position() + new Vector2((9 - i * 2) + 6 * i, 34 + 4), null, Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
 
-            for (int i = 0; i < currentLevel; i++)
+            for (int i = 0; i < CurrentLevel; i++)
                 spriteBatch.Draw(leveled, dims.Position() + new Vector2((9 - i * 2) + 6 * i, 34 + 4), null, Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
         }
 
-        private Texture2D _cooldownTexture;
 
-        public float percent;
+        public float Percent { get; set; }
 
-        public int seconds;
+        public int Seconds { get; set; }
 
-        public int maxLevel;
+        public int MaxLevel { get; set; }
 
-        public int currentLevel;
+        public int CurrentLevel { get; set; }
     }
 }
