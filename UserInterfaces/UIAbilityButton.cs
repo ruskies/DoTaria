@@ -47,11 +47,19 @@ namespace DoTaria.UserInterfaces
 
             Texture2D leveled = DoTariaMod.Instance.GetTexture("UserInterfaces/Abilities/AbilityLevel");
 
-            for (int i = 0; i < MaxLevel; i++)
-                spriteBatch.Draw(unleveled, dims.Position() + new Vector2((9 - i * 2) + 6 * i, 34 + 4), null, Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
+            float spacing = 0;
 
-            for (int i = 0; i < CurrentLevel; i++)
-                spriteBatch.Draw(leveled, dims.Position() + new Vector2((9 - i * 2) + 6 * i, 34 + 4), null, Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
+            if (MaxLevel != 0)
+                spacing = 32 / MaxLevel;
+
+            if (MaxLevel > 0)
+            {
+                for (int i = 0; i < MaxLevel; i++)
+                    spriteBatch.Draw(unleveled, dims.Position() + new Vector2(spacing * 0.5f + spacing * i, 34 + 4), null, Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
+
+                for (int i = 0; i < CurrentLevel; i++)
+                    spriteBatch.Draw(leveled, dims.Position() + new Vector2(spacing * 0.5f + spacing * i, 34 + 4), null, Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
+            }
         }
 
 
