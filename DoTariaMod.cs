@@ -42,7 +42,7 @@ namespace DoTaria
         private void LoadHotKeys()
         {
             FirstAbility = RegisterHotKey("First Ability", Keys.Q.ToString());
-            SecondAbility = RegisterHotKey("Second Ability", Keys.E.ToString());
+            SecondAbility = RegisterHotKey("Second Ability", Keys.W.ToString());
             ThirdAbility = RegisterHotKey("Third Ability", Keys.E.ToString());
             UltimateAbility = RegisterHotKey("Ultimate Ability", Keys.R.ToString());
 

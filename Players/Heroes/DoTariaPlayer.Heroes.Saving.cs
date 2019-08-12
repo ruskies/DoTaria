@@ -1,4 +1,5 @@
-﻿using DoTaria.Heroes;
+﻿using DoTaria.Abilities;
+using DoTaria.Heroes;
 using DoTaria.UserInterfaces.HeroSelection;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -14,8 +15,8 @@ namespace DoTaria.Players
             if (!HeroSelected && hero != null)
             {
                 Hero = hero;
-                HeroSelectionUIState.SelectedHero = null;
 
+                HeroSelectionUIState.SelectedHero = null;
                 HeroSelected = true;
             }
 

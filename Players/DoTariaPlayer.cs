@@ -16,6 +16,7 @@ namespace DoTaria.Players
         public override void Initialize()
         {
             InitializeAbilities();
+            InitializeHeroes();
         }
 
 
@@ -92,10 +93,10 @@ namespace DoTaria.Players
 
         public override void ResetEffects()
         {
-            ResetEffectsHeroes();
-
             ResetEffectsAttributes();
             ResetEffectsStatistics();
+
+            ResetEffectsHeroes();
 
             ResetEffectsAbilities();
         }

@@ -32,6 +32,10 @@ namespace DoTaria.Players
                 AbilityDefinition ability = AbilityDefinitionManager.Instance[splitInformation[0]];
                 AcquiredAbilities.Add(ability, new PlayerAbility(ability, int.Parse(splitAbilityInformation[0]), int.Parse(splitAbilityInformation[1])));
             }
+
+            foreach (AbilityDefinition ability in Hero.Abilities)
+                if (ability.UnlockableAtLevel == 0 && !HasAbility(ability))
+                    AcquireOrLevelUp(ability); // TODO Add a way to verify this.
         }
     }
 }

@@ -32,7 +32,8 @@ namespace DoTaria.Players
 
             foreach (KeyValuePair<AbilityDefinition, PlayerAbility> kvp in AcquiredAbilities)
             {
-                LevelsSpentOnAbilities += kvp.Value.Level;
+                if (kvp.Key.UnlockableAtLevel > 0)
+                    LevelsSpentOnAbilities += kvp.Value.Level;
 
                 if (kvp.Value.Cooldown > 0)
                     kvp.Value.Cooldown--;

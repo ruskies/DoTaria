@@ -18,9 +18,9 @@ namespace DoTaria.Players
 
         public override void Load(TagCompound tag)
         {
+            LoadHeroes(tag);
             LoadAbilities(tag);
             LoadAghanims(tag);
-            LoadHeroes(tag);
             LoadLevels(tag);
         }
     }

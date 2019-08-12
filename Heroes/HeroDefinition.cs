@@ -79,6 +79,8 @@ namespace DoTaria.Heroes
         public virtual void OnPlayerPreUpdateMovement(DoTariaPlayer dotariaPlayer) { }
 
 
+        public virtual void OnPlayerResetEffects(DoTariaPlayer dotariaPlayer) { }
+
         public virtual void ModifyWeaponDamage(DoTariaPlayer dotariaPlayer, Item item, ref float add, ref float mult, ref float flat) { }
 
 

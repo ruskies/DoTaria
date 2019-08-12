@@ -76,7 +76,7 @@ namespace DoTaria.Abilities
             return (playerAbility.Level * 2) + 1;
         }
 
-        internal virtual void InternalOnAbilityLeveledUp(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => OnAbilityLeveledUp(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
+        internal void InternalOnAbilityLeveledUp(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => OnAbilityLeveledUp(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
         public virtual void OnAbilityLeveledUp(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }
 
 

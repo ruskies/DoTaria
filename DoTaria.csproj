@@ -22,4 +22,7 @@
     <None Remove="DoTarria.csproj.DotSettings" />
     <None Remove="LICENSE" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Network\Heroes\" />
+  </ItemGroup>
 </Project>

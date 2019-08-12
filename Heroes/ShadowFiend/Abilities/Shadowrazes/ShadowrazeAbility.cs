@@ -14,6 +14,9 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
     {
         public const string UNLOCALIZED_NAME_PREFIX = ShadowFiendHero.UNLOCALIZED_NAME + ".";
 
+        public static readonly AbilityDefinition[] shadowrazes = new AbilityDefinition[] { AbilityDefinitionManager.Instance.ShadowrazeNear, AbilityDefinitionManager.Instance.ShadowrazeMiddle, AbilityDefinitionManager.Instance.ShadowrazeFar };
+
+
         protected ShadowrazeAbility(string unlocalizedName, string displayName, AbilitySlot abilitySlot, int range) :
             base(UNLOCALIZED_NAME_PREFIX + unlocalizedName, displayName, AbilityType.Active, DamageType.Magical, abilitySlot, 1, 4)
         {
@@ -45,6 +48,14 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
         public override float GetManaCost(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 90;
 
         public override float GetAbilityDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 20 + 70 * playerAbility.Level;
+
+        public override void OnAbilityLeveledUp(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility)
+        {
+            for (int i = 0; i < shadowrazes.Length; i++)
+                if (shadowrazes[i] != this)
+                    dotariaPlayer.AcquireOrLevelUp(shadowrazes[i]);
+        }
+
 
         public int Range { get; }
     }

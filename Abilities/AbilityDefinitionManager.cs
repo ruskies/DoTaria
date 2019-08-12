@@ -1,5 +1,7 @@
 ﻿using DoTaria.Heroes.Abaddon.Abilities;
 using DoTaria.Heroes.Abaddon.Abilities.BorrowedTime;
+using DoTaria.Heroes.Invoker.Abilities;
+using DoTaria.Heroes.Invoker.Abilities.Elements;
 using DoTaria.Heroes.ShadowFiend.Abilities;
 using DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes;
 using DoTaria.Managers;
@@ -13,6 +15,16 @@ namespace DoTaria.Abilities
             #region Abaddon
 
             BorrowedTime = Add(new BorrowedTimeAbility()) as BorrowedTimeAbility;
+
+            #endregion
+
+            #region Invoker
+
+            Exort = Add(new ExortAbility()) as ExortAbility;
+            Quas = Add(new QuasAbility()) as QuasAbility;
+            Wex = Add(new WexAbility()) as WexAbility;
+
+            Invoke = Add(new InvokeAbility()) as InvokeAbility;
 
             #endregion
 
@@ -35,6 +47,16 @@ namespace DoTaria.Abilities
         #region Abaddon
 
         public BorrowedTimeAbility BorrowedTime { get; private set; }
+
+        #endregion
+
+        #region Invoker
+
+        public ExortAbility Exort { get; private set; }
+        public QuasAbility Quas { get; private set; }
+        public WexAbility Wex { get; private set; }
+
+        public InvokeAbility Invoke { get; private set; }
 
         #endregion
 

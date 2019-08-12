@@ -9,6 +9,12 @@ namespace DoTaria.Players
     {
         private HeroDefinition _hero = null;
 
+
+        private void InitializeHeroes()
+        {
+            InitializeInvoker();
+        }
+
         private void KillHeroes(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
             Hero.OnPlayerDeath(this, damage, hitDirection, pvp, damageSource);
@@ -54,7 +60,7 @@ namespace DoTaria.Players
 
         private void ResetEffectsHeroes()
         {
-            
+            Hero.OnPlayerResetEffects(this);
         }
 
 
