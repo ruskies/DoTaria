@@ -76,8 +76,17 @@ namespace DoTaria.Abilities
             return (playerAbility.Level * 2) + 1;
         }
 
-        internal void InternalOnAbilityLeveledUp(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => OnAbilityLeveledUp(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
+        internal void InternalOnAbilityLeveledUp(DoTariaPlayer dotariaPlayer) => OnAbilityLeveledUp(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
         public virtual void OnAbilityLeveledUp(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }
+
+
+        #region Player Hooks
+
+        public virtual void OnPlayerPreUpdateMovement(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }
+
+        public virtual void OnPlayerPreUpdate(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }
+
+        #endregion
 
 
         public string UnlocalizedName { get; }

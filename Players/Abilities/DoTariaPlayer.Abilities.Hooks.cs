@@ -25,6 +25,15 @@ namespace DoTaria.Players
                     DisplayedAbilities.Add(ability);
         }
 
+        private void PreUpdateAbilities()
+        {
+            ForAllAcquiredAbilities((a, p) => a.OnPlayerPreUpdate(this, p));
+        }
+
+        private void PreUpdateMovementAbilities()
+        {
+            ForAllAcquiredAbilities((a, p) => a.OnPlayerPreUpdateMovement(this, p));
+        }
 
         private void ResetEffectsAbilities()
         {

@@ -1,6 +1,7 @@
 ﻿using DoTaria.Abilities;
 using DoTaria.Heroes.ShadowFiend;
 using DoTaria.Heroes.ShadowFiend.Abilities;
+using DoTaria.Heroes.ShadowFiend.Abilities.Necromastery;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 

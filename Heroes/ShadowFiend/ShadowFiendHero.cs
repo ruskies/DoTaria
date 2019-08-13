@@ -6,6 +6,7 @@ using DoTaria.Abilities;
 using Terraria;
 using Terraria.DataStructures;
 using DoTaria.Attribute;
+using DoTaria.Heroes.ShadowFiend.Abilities.Necromastery;
 using DoTaria.Statistic;
 
 namespace DoTaria.Heroes.ShadowFiend

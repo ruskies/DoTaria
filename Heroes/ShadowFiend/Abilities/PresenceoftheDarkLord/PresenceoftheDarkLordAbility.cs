@@ -2,7 +2,7 @@
 using DoTaria.Enums;
 using DoTaria.Players;
 
-namespace DoTaria.Heroes.ShadowFiend.Abilities
+namespace DoTaria.Heroes.ShadowFiend.Abilities.PresenceoftheDarkLord
 {
     public sealed class PresenceoftheDarkLordAbility : AbilityDefinition
     {
@@ -10,6 +10,12 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities
 
         public PresenceoftheDarkLordAbility() : base(ShadowFiendHero.UNLOCALIZED_NAME + '.' + UNLOCALIZED_NAME, "Presence of the Dark Lord", AbilityType.Passive, DamageType.None, AbilitySlot.Fifth, 1, 4)
         {
+        }
+
+
+        public override void OnPlayerPreUpdate(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility)
+        {
+            
         }
 
 

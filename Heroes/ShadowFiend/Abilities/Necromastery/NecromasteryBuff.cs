@@ -3,7 +3,7 @@ using DoTaria.Buffs;
 using DoTaria.Players;
 using Terraria;
 
-namespace DoTaria.Heroes.ShadowFiend.Abilities
+namespace DoTaria.Heroes.ShadowFiend.Abilities.Necromastery
 {
     public sealed class NecromasteryBuff : DoTariaBuff
     {

@@ -3,6 +3,8 @@ using DoTaria.Heroes.Abaddon.Abilities.BorrowedTime;
 using DoTaria.Heroes.Invoker.Abilities;
 using DoTaria.Heroes.Invoker.Abilities.Elements;
 using DoTaria.Heroes.ShadowFiend.Abilities;
+using DoTaria.Heroes.ShadowFiend.Abilities.Necromastery;
+using DoTaria.Heroes.ShadowFiend.Abilities.PresenceoftheDarkLord;
 using DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes;
 using DoTaria.Managers;
 

@@ -74,14 +74,18 @@ namespace DoTaria.Players
         public override void PreUpdate()
         {
             PreUpdateAttributes();
+
+            PreUpdateAbilities();
         }
 
         public override void PreUpdateMovement()
         {
             PreUpdateMovementAttributes();
-            
             PreUpdateMovementAghanims();
+
             PreUpdateMovementHeroes();
+
+            PreUpdateMovementAbilities();
         }
 
 

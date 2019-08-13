@@ -18,6 +18,8 @@ namespace DoTaria.Players
                 AcquiredAbilities.Add(ability, new PlayerAbility(ability, 1, 0));
             else
                 AcquiredAbilities[ability].Level++;
+
+            ability.InternalOnAbilityLeveledUp(this);
         }
 
 
@@ -61,6 +63,13 @@ namespace DoTaria.Players
                     return DisplayedAbilities[i];
 
             return null;
+        }
+
+
+        public void ForAllAcquiredAbilities(Action<AbilityDefinition, PlayerAbility> action)
+        {
+            foreach (KeyValuePair<AbilityDefinition, PlayerAbility> kvp in AcquiredAbilities)
+                action(kvp.Key, kvp.Value);
         }
 
 
