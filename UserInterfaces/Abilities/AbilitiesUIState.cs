@@ -146,6 +146,11 @@ namespace DoTaria.UserInterfaces.Abilities
 
                 }
             }
+            foreach (var button in _abilityButtons)
+            {
+                button.MaxLevel = 0;
+                button.CurrentLevel = 0;
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -163,6 +168,11 @@ namespace DoTaria.UserInterfaces.Abilities
                     kvp.Value.ImageScale = 0f;
                 else
                     kvp.Value.ImageScale = 1f;
+            }
+
+            foreach (var button in _upgradeButtonsForAbilityButtons)
+            {
+                ChangeUpgradeButton(button.Value, false);
             }
 
             foreach (AbilityDefinition ability in dotariaPlayer.DisplayedAbilities)
