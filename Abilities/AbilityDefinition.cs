@@ -10,7 +10,19 @@ namespace DoTaria.Abilities
 {
     public abstract class AbilityDefinition : IHasUnlocalizedName
     {
-        protected AbilityDefinition(string unlocalizedName, string displayName, AbilityType abilityType, DamageType damageType, AbilitySlot abilitySlot, int unlockableAtLevel, int maxLevel, bool alwaysShowInAbilitesBar = true)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="unlocalizedName"></param>
+        /// <param name="displayName"></param>
+        /// <param name="abilityType"></param>
+        /// <param name="damageType"></param>
+        /// <param name="abilitySlot"></param>
+        /// <param name="unlockableAtLevel">At what level can the player start leveling this ability. A level of 0 means the player starts with the ability.</param>
+        /// <param name="maxLevel">The maximum level that this ability can be leveled up to.</param>
+        /// <param name="alwaysShowInAbilitesBar"></param>
+        /// <param name="baseCastRange">The maximum distance between the target point and the player.</param>
+        protected AbilityDefinition(string unlocalizedName, string displayName, AbilityType abilityType, DamageType damageType, AbilitySlot abilitySlot, int unlockableAtLevel, int maxLevel, bool alwaysShowInAbilitesBar = true, float baseCastRange = -1)
         {
             UnlocalizedName = unlocalizedName;
             DisplayName = displayName;
@@ -24,6 +36,8 @@ namespace DoTaria.Abilities
             MaxLevel = maxLevel;
 
             AlwaysShowInAbilitiesBar = alwaysShowInAbilitesBar;
+
+            BaseCastRange = baseCastRange;
         }
 
 
@@ -52,13 +66,23 @@ namespace DoTaria.Abilities
         internal int InternalGetCooldown(DoTariaPlayer dotariaPlayer) => (int) Math.Ceiling(GetCooldown(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]));
         public abstract float GetCooldown(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility);
 
-        internal float InternalGetManaCost(DoTariaPlayer dotariaPlayer) => GetManaCost(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]) * Statistics.TERRARIA_MANA_RATIO;
+        internal float InternalGetManaCost(DoTariaPlayer dotariaPlayer)
+        {
+            float manacost = GetManaCost(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]) * Statistics.TERRARIA_MANA_RATIO;
+
+            return manacost < 0 ? 0 : manacost;
+        }
+
         public abstract float GetManaCost(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility);
 
 
         internal float InternalGetAbilityDamage(DoTariaPlayer dotariaPlayer) => InternalGetAbilityDamage(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
         internal float InternalGetAbilityDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => GetAbilityDamage(dotariaPlayer, playerAbility) * dotariaPlayer.SpellAmplification;
         public virtual float GetAbilityDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 0;
+
+
+        internal float InternalGetCastRange(DoTariaPlayer dotariaPlayer) => GetCastRange(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
+        public virtual float GetCastRange(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => BaseCastRange;
 
 
         internal bool InternalCanLevelUp(DoTariaPlayer dotariaPlayer) => 
@@ -101,6 +125,8 @@ namespace DoTaria.Abilities
         public int MaxLevel { get; }
 
         public bool AlwaysShowInAbilitiesBar { get; }
+
+        public float BaseCastRange { get; }
 
         public Texture2D Icon => this.GetType().GetTexture();
     }

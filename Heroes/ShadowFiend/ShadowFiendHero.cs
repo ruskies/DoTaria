@@ -13,7 +13,7 @@ namespace DoTaria.Heroes.ShadowFiend
 {
     public sealed class ShadowFiendHero : HeroDefinition
     {
-        public const string UNLOCALIZED_NAME = HeroDefinition.UNLOCALIZED_NAME_PREFIX + "shadowFiend";
+        public const string UNLOCALIZED_NAME = UNLOCALIZED_NAME_PREFIX + "shadowFiend";
 
         public ShadowFiendHero() : base(UNLOCALIZED_NAME, "Shadow Fiend", new Attributes(19, 20, 18), new Attributes(2.5f, 3.5f, 2.2f), 
             new Statistics(200, 0.25f, 0.25f, 0, 0.59f, 0, 75, 0.3f, 0),

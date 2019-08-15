@@ -17,17 +17,16 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
         public static readonly AbilityDefinition[] shadowrazes = new AbilityDefinition[] { AbilityDefinitionManager.Instance.ShadowrazeNear, AbilityDefinitionManager.Instance.ShadowrazeMiddle, AbilityDefinitionManager.Instance.ShadowrazeFar };
 
 
-        protected ShadowrazeAbility(string unlocalizedName, string displayName, AbilitySlot abilitySlot, int range) :
-            base(UNLOCALIZED_NAME_PREFIX + unlocalizedName, displayName, AbilityType.Active, DamageType.Magical, abilitySlot, 1, 4)
+        protected ShadowrazeAbility(string unlocalizedName, string displayName, AbilitySlot abilitySlot, int baseCastRange) :
+            base(UNLOCALIZED_NAME_PREFIX + unlocalizedName, displayName, AbilityType.Active, DamageType.Magical, abilitySlot, 1, 4, baseCastRange: baseCastRange)
         {
-            Range = range;
         }
 
         public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility)
         {
             Texture2D texture = typeof(ShadowrazeProjectile).GetTexture();
             Vector2 spawnPosition = new Vector2(dotariaPlayer.player.position.X, dotariaPlayer.player.position.Y + dotariaPlayer.player.height + 25) - 
-                                    new Vector2((-Range * dotariaPlayer.player.direction) * DoTariaMath.TERRARIA_RANGE_RATIO, texture.Height / (ShadowrazeProjectile.FRAME_COUNT * 2f));
+                                    new Vector2((-InternalGetCastRange(dotariaPlayer) * dotariaPlayer.player.direction) * DoTariaMath.TERRARIA_RANGE_RATIO, texture.Height / (ShadowrazeProjectile.FRAME_COUNT * 2f));
 
             for (int i = 0; i < 10; i++)
             {
@@ -55,8 +54,5 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
                 if (shadowrazes[i] != this)
                     dotariaPlayer.AcquireOrLevelUp(shadowrazes[i]);
         }
-
-
-        public int Range { get; }
     }
 }
