@@ -44,9 +44,9 @@ namespace DoTaria.Abilities
         public virtual void OnAbilityCasted(DoTariaPlayer dotariaPlayer) { }
 
 
-        internal bool InternalCastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility)
+        internal bool InternalCastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer)
         {
-            if (CastAbility(dotariaPlayer, playerAbility))
+            if (CastAbility(dotariaPlayer, playerAbility, casterIsLocalPlayer))
             {
                 playerAbility.Cooldown = playerAbility.Ability.InternalGetCooldown(dotariaPlayer) * DoTariaMath.TICKS_PER_SECOND;
                 return true;
@@ -55,7 +55,7 @@ namespace DoTaria.Abilities
             return false;
         }
 
-        public virtual bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility)
+        public virtual bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer)
         {
             return false;
         }

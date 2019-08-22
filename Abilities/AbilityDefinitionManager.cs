@@ -1,5 +1,8 @@
 ﻿using DoTaria.Heroes.Abaddon.Abilities;
+using DoTaria.Heroes.Abaddon.Abilities.AphoticShield;
 using DoTaria.Heroes.Abaddon.Abilities.BorrowedTime;
+using DoTaria.Heroes.Abaddon.Abilities.CurseOfAvernus;
+using DoTaria.Heroes.Abaddon.Abilities.MistCoil;
 using DoTaria.Heroes.Invoker.Abilities;
 using DoTaria.Heroes.Invoker.Abilities.Elements;
 using DoTaria.Heroes.ShadowFiend.Abilities;
@@ -16,6 +19,9 @@ namespace DoTaria.Abilities
         {
             #region Abaddon
 
+            MistCoil = Add(new MistCoilAbility()) as MistCoilAbility;
+            AphoticShield = Add(new AphoticShieldAbility()) as AphoticShieldAbility;
+            CurseOfAvernus = Add(new CurseOfAvernusAbility()) as CurseOfAvernusAbility;
             BorrowedTime = Add(new BorrowedTimeAbility()) as BorrowedTimeAbility;
 
             #endregion
@@ -48,6 +54,9 @@ namespace DoTaria.Abilities
 
         #region Abaddon
 
+        public MistCoilAbility MistCoil { get; private set; }
+        public AphoticShieldAbility AphoticShield { get; private set; }
+        public CurseOfAvernusAbility CurseOfAvernus { get; private set; }
         public BorrowedTimeAbility BorrowedTime { get; private set; }
 
         #endregion

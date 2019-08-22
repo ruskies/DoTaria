@@ -17,7 +17,7 @@ namespace DoTaria.Players
         {
             DisplayedAbilities.Clear();
 
-            if (Main.LocalPlayer.whoAmI == player.whoAmI)
+            if (Main.myPlayer == player.whoAmI)
                 DoTariaMod.Instance.AbilitiesUI.OnPlayerEnterWorld(this);
 
             foreach (AbilityDefinition ability in Hero.Abilities)

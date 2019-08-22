@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using DoTaria.Abilities;
+using DoTaria.Network;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace DoTaria.Players
@@ -44,8 +46,11 @@ namespace DoTaria.Players
             if (playerAbility.Cooldown > 0 || ability.InternalGetManaCost(this) > player.statMana)
                 return false;
 
-            if (ability.InternalCastAbility(this, playerAbility))
+            if (ability.InternalCastAbility(this, playerAbility, true))
             {
+                if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI == Main.myPlayer)
+                    NetworkPacketManager.Instance.AbilityCasted.SendPacketToAllClients(player.whoAmI, player.whoAmI, ability.UnlocalizedName, AcquiredAbilities[ability].Cooldown);
+
                 player.statMana -= (int)Math.Ceiling(ability.InternalGetManaCost(this));
 
                 return true;
@@ -75,7 +80,7 @@ namespace DoTaria.Players
 
         internal List<AbilityDefinition> DisplayedAbilities { get; private set; }
 
-        internal Dictionary<AbilityDefinition, PlayerAbility> AcquiredAbilities { get; private set; }
+        internal Dictionary<AbilityDefinition, PlayerAbility> AcquiredAbilities { get; set; }
         
         public int LevelsSpentOnAbilities { get; private set; }
         public bool HasSpareLevels => LevelsSpentOnAbilities < Level;
