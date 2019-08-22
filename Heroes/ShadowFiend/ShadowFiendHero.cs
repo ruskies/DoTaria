@@ -49,7 +49,7 @@ namespace DoTaria.Heroes.ShadowFiend
         {
             // TODO Move this to necromastery.
 
-            if ((item.melee || item.ranged) && dotariaPlayer.HasAbility(AbilityDefinitionManager.Instance.Necromastery))
+            if (item.ranged && dotariaPlayer.HasAbility(AbilityDefinitionManager.Instance.Necromastery))
                 flat += AbilityDefinitionManager.Instance.Necromastery.GetExtraFlatDamage(dotariaPlayer);
         }        
     }

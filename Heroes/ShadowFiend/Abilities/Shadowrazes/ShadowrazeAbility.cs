@@ -22,7 +22,7 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
         {
         }
 
-        public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility)
+        public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer)
         {
             Texture2D texture = typeof(ShadowrazeProjectile).GetTexture();
             Vector2 spawnPosition = new Vector2(dotariaPlayer.player.position.X, dotariaPlayer.player.position.Y + dotariaPlayer.player.height + 25) - 
@@ -35,7 +35,8 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
                 Dust.NewDust(spawnPosition - new Vector2(37.5f, -60), 65, 15, dotariaPlayer.mod.DustType<ShadowTrail>(), 1f * (left ? -1 : 1), -1f, 0, new Color(255, 255, 255), 3f);
             }
 
-            Projectile.NewProjectile(spawnPosition, Vector2.Zero, dotariaPlayer.mod.ProjectileType<ShadowrazeProjectile>(), (int)InternalGetAbilityDamage(dotariaPlayer, playerAbility), 0, dotariaPlayer.player.whoAmI);
+            if (casterIsLocalPlayer)
+                Projectile.NewProjectile(spawnPosition, Vector2.Zero, dotariaPlayer.mod.ProjectileType<ShadowrazeProjectile>(), (int)InternalGetAbilityDamage(dotariaPlayer, playerAbility), 0, dotariaPlayer.player.whoAmI);
 
             return true;
         }

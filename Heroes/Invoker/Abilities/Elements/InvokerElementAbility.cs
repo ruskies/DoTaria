@@ -17,7 +17,7 @@ namespace DoTaria.Heroes.Invoker.Abilities.Elements
         }
 
 
-        public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility)
+        public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer)
         {
             CombatText.NewText(new Rectangle((int) dotariaPlayer.player.position.X, (int) dotariaPlayer.player.position.Y,
                 (int) (dotariaPlayer.player.width), (int) (dotariaPlayer.player.height)), AbilityColor, DisplayName);
