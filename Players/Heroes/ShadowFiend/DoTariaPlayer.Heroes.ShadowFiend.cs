@@ -19,7 +19,7 @@ namespace DoTaria.Players
 
         private void LoadShadowFiend(TagCompound tag)
         {
-            Souls = tag.GetAsInt(nameof(Souls));
+            _souls = tag.GetAsInt(nameof(Souls));
         }
 
         public int Souls
