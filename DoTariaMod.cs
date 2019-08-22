@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using DoTaria.Abilities;
+using DoTaria.Heroes;
+using DoTaria.Leveling.Rules.NPCs;
 using DoTaria.Network;
 using Microsoft.Xna.Framework.Input;
 using Terraria;
@@ -36,6 +38,11 @@ namespace DoTaria
             }
 
             Instance = null;
+
+            HeroDefinitionManager.Instance.Unload();
+            AbilityDefinitionManager.Instance.Unload();
+            NetworkPacketManager.Instance.Unload();
+            NPCLevelingRulesManager.Instance.Unload();
         }
 
 
