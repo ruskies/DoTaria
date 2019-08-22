@@ -53,8 +53,6 @@ namespace DoTaria
             AbilitiesUI = null;
 
             HeroStatisticsUI.Visible = false;
-            HeroSelectionUI = null;
-
             HeroSelectionUI.Dispose();
             HeroSelectionUI = null;
 
