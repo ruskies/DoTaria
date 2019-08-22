@@ -1,3 +1,44 @@
-This mod was "inspired" by Dota 2 on Steam. Check it out its pretty fun.
+This mod was "inspired" by Dota 2 on Steam. Check it out, its pretty fun.
 
-Adds different weapons and skins from different Dota 2 heroes as well as abilities.
+The mod's goal is to add different weapons and skins from different Dota 2 heroes as well as abilities. You gain levels by defeating various bosses and (in the future) invasions/events.
+It is a heavy work in progress.
+
+
+== Leveling Scheme ==
+Pre Hardmode
+###########################################
+
+King Slime: 1
+EoC: 1
+EoW/BoC: 2
+Queen Bee: 1
+Skeletron: 1
+Wall of Flesh: 2
+
++ Goblin Invasion : 1
+
+Total : 10
+
+Hardmode
+###########################################
+
+The Twins: 1
+The Destroyer: 1
+Skeletron Prime: 1
+
+Plantera: 1
+Golem: 2
+Duke Fishron: 1
+Lunatic Cultist: 1
+
+Moon Lord: 2
+
+Pirate Invasion: 1
+Frost Moon: 1
+Pumpking Invasion: 1
+Martian Invasion: 1
+
+Total: 14
+
+
+The link below sends you to my discord, not an actual forum page.
