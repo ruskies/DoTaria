@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DoTaria.Managers;
+using DoTaria.Network.Abilities;
+using DoTaria.Network.NPCs;
+using DoTaria.Network.Players;
 
 namespace DoTaria.Network
 {
@@ -18,10 +21,26 @@ namespace DoTaria.Network
 
         internal void DefaultInitialize()
         {
-            
+            AbilityCasted = Add(new AbilityCastedPacket()) as AbilityCastedPacket;
+
+            PlayerJoiningSynchronization = Add(new PlayerJoiningSynchronizationPacket()) as PlayerJoiningSynchronizationPacket;
+            PlayerKilledNPC = Add(new PlayerKilledNPCPacket()) as PlayerKilledNPCPacket;
+            PlayerLeveledUp = Add(new PlayerLeveledUpPacket()) as PlayerLeveledUpPacket;
+
+            PlayerAbilityLeveledUp = Add(new PlayerAbilityLeveledUpPacket()) as PlayerAbilityLeveledUpPacket;
 
             Initialized = true;
         }
+
+
+        public AbilityCastedPacket AbilityCasted { get; private set; }
+
+        public PlayerJoiningSynchronizationPacket PlayerJoiningSynchronization { get; private set; }
+        public PlayerKilledNPCPacket PlayerKilledNPC { get; private set; }
+        public PlayerLeveledUpPacket PlayerLeveledUp { get; private set; }
+
+        public PlayerAbilityLeveledUpPacket PlayerAbilityLeveledUp { get; private set; }
+
 
         public NetworkPacket Add(NetworkPacket networkPacket)
         {
@@ -45,7 +64,13 @@ namespace DoTaria.Network
         }
 
 
-        
+        internal void Unload()
+        {
+            _networkPacketsById.Clear();
+            _networkPacketsByType.Clear();
+
+            _instance = null;
+        }
 
 
         public bool Initialized { get; private set; }
