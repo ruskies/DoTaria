@@ -1,21 +1,44 @@
-﻿using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using DoTaria.Leveling.Rules;
+using DoTaria.Leveling.Rules.NPCs;
+using DoTaria.Network;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace DoTaria.Players
 {
     public sealed partial class DoTariaPlayer : ModPlayer
     {
-        private void SaveLevels(TagCompound tag)
+        private List<string> _executedLevelingRuleNames = new List<string>();
+
+
+        public void OnKilledNPCLevels(NPC npc)
         {
-            tag.Add(nameof(Level), Level);
+            NPCLevelingRulesManager.Instance.ForAllItems(nlr =>
+            {
+                if (nlr.CanExecuteRule(this, npc, _executedLevelingRuleNames.Any(n => n.Equals(nlr.UnlocalizedName, StringComparison.CurrentCultureIgnoreCase))))
+                {
+                    _executedLevelingRuleNames.Add(nlr.UnlocalizedName); // We store the name so that even if a player removes a mod, the leveling rule will still be saved.
+                    LevelUp(nlr.Levels);
+                }
+            });
         }
 
-        public void LoadLevels(TagCompound tag)
+        public void LevelUp(int levels)
         {
-            Level = tag.GetAsInt(nameof(Level));
+            Level += levels;
+
+            if (Main.netMode == NetmodeID.MultiplayerClient)
+                NetworkPacketManager.Instance.PlayerLeveledUp.SendPacketToServer(player.whoAmI, player.whoAmI, levels);
         }
 
 
         public int Level { get; set; } = 1;
+
+        public IReadOnlyList<LevelingRule> ExecutedLevelingRules => LevelingRuleManager.Instance.Where(lr => _executedLevelingRuleNames.Any(lrn => lrn.Equals(lr.UnlocalizedName, StringComparison.CurrentCultureIgnoreCase))).AsReadOnly();
+        public IReadOnlyList<string> ExecutedNPCLevelingRuleNames => _executedLevelingRuleNames.AsReadOnly();
     }
 }
