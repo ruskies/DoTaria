@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DoTaria.Leveling.Rules;
+using DoTaria.Leveling.Rules.Invasions;
 using DoTaria.Leveling.Rules.NPCs;
 using DoTaria.Network;
 using Terraria;
@@ -26,6 +27,27 @@ namespace DoTaria.Players
                 }
             });
         }
+
+        public void OnPlayerSurvivedInvasion(int invasionId)
+        {
+            InvasionLevelingRule rule = InvasionLevelingRuleManager.Instance[invasionId];
+
+            if (rule == null)
+                return;
+
+            if (rule.CanExecuteRule(this, invasionId, _executedLevelingRuleNames.Any(n => n.Equals(rule.UnlocalizedName, StringComparison.CurrentCultureIgnoreCase))))
+            {
+                _executedLevelingRuleNames.Add(rule.UnlocalizedName); // We store the name so that even if a player removes a mod, the leveling rule will still be saved.
+                LevelUp(rule.Levels);
+            }
+        }
+
+
+        private void PreUpdateLevels()
+        {
+            PreUpdateInvasions();
+        }
+
 
         public void LevelUp(int levels)
         {
