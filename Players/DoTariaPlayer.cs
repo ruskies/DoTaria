@@ -19,6 +19,8 @@ namespace DoTaria.Players
         {
             InitializeAbilities();
             InitializeHeroes();
+
+            InitializeInvasions();
         }
 
 
@@ -80,8 +82,7 @@ namespace DoTaria.Players
             PreUpdateAttributes();
             PreUpdateAbilities();
 
-            if (Main.invasionType != InvasionID.None && Main.invasionProgress >= Main.invasionProgressMax - 1)
-                Main.NewText("Invasion Completed!");
+            PreUpdateInvasions();
 
             PreUpdateLevels();
         }

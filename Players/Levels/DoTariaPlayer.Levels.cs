@@ -30,7 +30,7 @@ namespace DoTaria.Players
 
         public void OnPlayerSurvivedInvasion(int invasionId)
         {
-            InvasionLevelingRule rule = InvasionLevelingRuleManager.Instance[invasionId];
+            InvasionLevelingRule rule = InvasionLevelingRuleManager.Instance.Get(invasionId);
 
             if (rule == null)
                 return;
@@ -45,7 +45,7 @@ namespace DoTaria.Players
 
         private void PreUpdateLevels()
         {
-            PreUpdateInvasions();
+            
         }
 
 

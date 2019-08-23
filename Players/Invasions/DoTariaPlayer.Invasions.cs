@@ -7,9 +7,14 @@ namespace DoTaria.Players
 {
     public sealed partial class DoTariaPlayer : ModPlayer
     {
+        private void InitializeInvasions()
+        {
+            WaitingForEndOfInvasionType = InvasionID.None;
+        }
+
         private void PreUpdateInvasions()
         {
-            if (Main.invasionType != InvasionID.None && WaitingForEndOfInvasionType != InvasionID.None)
+            if (Main.invasionType != InvasionID.None && WaitingForEndOfInvasionType == InvasionID.None)
                 WaitingForEndOfInvasionType = Main.invasionType;
 
             if (Main.invasionProgress == Main.invasionProgressMax && WaitingForEndOfInvasionType != InvasionID.None)
