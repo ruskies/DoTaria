@@ -5,7 +5,7 @@ namespace DoTaria.Leveling.Rules.NPCs
 {
     public class StandardNPCLevelingRule : NPCLevelingRule
     {
-        public StandardNPCLevelingRule(string unlocalizedName, int npcType, int levels) : base(unlocalizedName, levels)
+        public StandardNPCLevelingRule(string unlocalizedName, int levels, int npcType) : base(unlocalizedName, levels)
         {
             NPCType = npcType;
         }
