@@ -17,7 +17,11 @@ namespace DoTaria.Leveling.Rules.NPCs
             Add(new StandardNPCLevelingRule(nameof(NPCID.SkeletronHead), NPCID.SkeletronHead, 1));
             Add(new StandardNPCLevelingRule(nameof(NPCID.WallofFlesh), NPCID.WallofFlesh, 2));
 
-            Add(new StandardNPCLevelingRule(nameof(NPCID.SkeletronPrime), ))
+            Add(new StandardNPCLevelingRule(nameof(NPCID.SkeletronPrime), NPCID.SkeletronPrime, 1));
+            Add(new StandardNPCLevelingRule(nameof(NPCID.Plantera), NPCID.Plantera, 1));
+            Add(new StandardNPCLevelingRule(nameof(NPCID.Golem), NPCID.Golem, 2));
+            Add(new StandardNPCLevelingRule(nameof(NPCID.CultistBoss), NPCID.CultistBoss, 1));
+            Add(new StandardNPCLevelingRule(nameof(NPCID.MoonLordCore), NPCID.MoonLordCore, 2));
 
             base.DefaultInitialize();
         }
