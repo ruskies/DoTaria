@@ -20,7 +20,7 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Necromastery
 
             DoTariaPlayer dotariaPlayer = Main.LocalPlayer.GetModPlayer<DoTariaPlayer>();
 
-            tip += $"\n\nYou currently have {dotariaPlayer.Souls} souls, giving you an extra {AbilityDefinitionManager.Instance.Necromastery.GetExtraFlatDamage(dotariaPlayer)} damage to all physical attacks.";
+            tip += $"\n\nYou currently have {dotariaPlayer.Souls} souls, giving you an extra {AbilityDefinitionManager.Instance.Necromastery.GetExtraFlatDamage(dotariaPlayer)} damage to ranged attacks.";
         }
     }
 }
