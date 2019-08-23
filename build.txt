@@ -1,6 +1,6 @@
 displayName = DoTaria
-author = Webmilio, Blockaroz
-version = 0.1
+author = Webmilio, Blockaroz, HellGoesOn
+version = 0.1.1
 side = Both
 homepage = https://discord.gg/tukvh6d
 hideCode = false

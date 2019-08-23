@@ -3,6 +3,16 @@ This mod was "inspired" by Dota 2 on Steam. Check it out, its pretty fun.
 The mod's goal is to add different weapons and skins from different Dota 2 heroes as well as abilities. You gain levels by defeating various bosses and (in the future) invasions/events.
 It is a heavy work in progress.
 
+== Changelog ==
+v0.1
+First public version of the mod.
+Has leveling strictly from bosses, invasions are still a work in progress.
+Hero selection screen on new characters: will default to Abaddon for existing characters.
+
+Available heroes:
+- Abaddon: Borrowed Time
+- Invoker: Quas, Wex, Exort
+- Shadow Fiend: Shadowraze (all three), Necromastery
 
 == Leveling Scheme ==
 Pre Hardmode
@@ -39,6 +49,8 @@ Pumpking Invasion: 1
 Martian Invasion: 1
 
 Total: 14
+
+
 
 
 The link below sends you to my discord, not an actual forum page.
