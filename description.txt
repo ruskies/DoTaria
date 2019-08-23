@@ -3,11 +3,14 @@ This mod was "inspired" by Dota 2 on Steam. Check it out, its pretty fun.
 The mod's goal is to add different weapons and skins from different Dota 2 heroes as well as abilities. You gain levels by defeating various bosses and (in the future) invasions/events.
 It is a heavy work in progress.
 
+The health ratio is 0.25 Terraria health per Dota health. Currently doesn't apply to damage.
+The mana ratio is 0.375 Terraria mana per Dota mana. For example, Shadowraze is 33.75 mana.
+
 == Changelog ==
-v0.1
-First public version of the mod.
-Has leveling strictly from bosses, invasions are still a work in progress.
-Hero selection screen on new characters: will default to Abaddon for existing characters.
+v0.1.3
+~ Fixed shadowrazes counting as individual abilities when it comes to leveling.
+
+All other changelogs are kept in #dotaria-releases in the discord (click on bottom button to access)
 
 Available heroes:
 - Abaddon: Borrowed Time

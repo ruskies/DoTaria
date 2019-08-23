@@ -14,14 +14,15 @@ namespace DoTaria.Players
 
         public bool HasAbility(AbilityDefinition ability, int level) => HasAbility(ability) && level <= AcquiredAbilities[ability].Level;
 
-        public void AcquireOrLevelUp(AbilityDefinition ability)
+        public void AcquireOrLevelUp(AbilityDefinition ability, bool callAbilityLeveledUp = true)
         {
             if (!HasAbility(ability))
                 AcquiredAbilities.Add(ability, new PlayerAbility(ability, 1, 0));
             else
                 AcquiredAbilities[ability].Level++;
 
-            ability.InternalOnAbilityLeveledUp(this);
+            if (callAbilityLeveledUp)
+                ability.InternalOnAbilityLeveledUp(this);
         }
 
 

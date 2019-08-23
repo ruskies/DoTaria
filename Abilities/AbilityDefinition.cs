@@ -22,7 +22,7 @@ namespace DoTaria.Abilities
         /// <param name="maxLevel">The maximum level that this ability can be leveled up to.</param>
         /// <param name="alwaysShowInAbilitesBar"></param>
         /// <param name="baseCastRange">The maximum distance between the target point and the player.</param>
-        protected AbilityDefinition(string unlocalizedName, string displayName, AbilityType abilityType, DamageType damageType, AbilitySlot abilitySlot, int unlockableAtLevel, int maxLevel, bool alwaysShowInAbilitesBar = true, float baseCastRange = -1)
+        protected AbilityDefinition(string unlocalizedName, string displayName, AbilityType abilityType, DamageType damageType, AbilitySlot abilitySlot, int unlockableAtLevel, int maxLevel, bool alwaysShowInAbilitesBar = true, float baseCastRange = -1, bool affectsTotalAbilityLevelCount = true)
         {
             UnlocalizedName = unlocalizedName;
             DisplayName = displayName;
@@ -38,6 +38,7 @@ namespace DoTaria.Abilities
             AlwaysShowInAbilitiesBar = alwaysShowInAbilitesBar;
 
             BaseCastRange = baseCastRange;
+            AffectsTotalAbilityLevelCount = affectsTotalAbilityLevelCount;
         }
 
 
@@ -68,7 +69,7 @@ namespace DoTaria.Abilities
 
         internal float InternalGetManaCost(DoTariaPlayer dotariaPlayer)
         {
-            float manacost = GetManaCost(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]) * Statistics.TERRARIA_MANA_RATIO;
+            float manacost = GetManaCost(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
 
             return manacost < 0 ? 0 : manacost;
         }
@@ -127,6 +128,8 @@ namespace DoTaria.Abilities
         public bool AlwaysShowInAbilitiesBar { get; }
 
         public float BaseCastRange { get; }
+
+        public bool AffectsTotalAbilityLevelCount { get; }
 
         public Texture2D Icon => this.GetType().GetTexture();
     }

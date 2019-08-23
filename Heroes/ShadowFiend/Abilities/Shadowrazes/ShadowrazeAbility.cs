@@ -4,6 +4,7 @@ using DoTaria.Enums;
 using DoTaria.Extensions;
 using DoTaria.Heroes.ShadowFiend.Skins.Default;
 using DoTaria.Players;
+using DoTaria.Statistic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -17,8 +18,8 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
         public static readonly AbilityDefinition[] shadowrazes = new AbilityDefinition[] { AbilityDefinitionManager.Instance.ShadowrazeNear, AbilityDefinitionManager.Instance.ShadowrazeMiddle, AbilityDefinitionManager.Instance.ShadowrazeFar };
 
 
-        protected ShadowrazeAbility(string unlocalizedName, string displayName, AbilitySlot abilitySlot, int baseCastRange) :
-            base(UNLOCALIZED_NAME_PREFIX + unlocalizedName, displayName, AbilityType.Active, DamageType.Magical, abilitySlot, 1, 4, baseCastRange: baseCastRange)
+        protected ShadowrazeAbility(string unlocalizedName, string displayName, AbilitySlot abilitySlot, int baseCastRange, bool affectsTotalAbilityLevelCount) :
+            base(UNLOCALIZED_NAME_PREFIX + unlocalizedName, displayName, AbilityType.Active, DamageType.Magical, abilitySlot, 1, 4, baseCastRange: baseCastRange, affectsTotalAbilityLevelCount: affectsTotalAbilityLevelCount)
         {
         }
 
@@ -45,7 +46,7 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
         // TODO Add support for talents.
         public override float GetCooldown(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 10;
 
-        public override float GetManaCost(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 90;
+        public override float GetManaCost(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 90 * Statistics.TERRARIA_MANA_RATIO;
 
         public override float GetAbilityDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 20 + 70 * playerAbility.Level;
 
@@ -53,7 +54,7 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
         {
             for (int i = 0; i < shadowrazes.Length; i++)
                 if (shadowrazes[i] != this)
-                    dotariaPlayer.AcquireOrLevelUp(shadowrazes[i]);
+                    dotariaPlayer.AcquireOrLevelUp(shadowrazes[i], false);
         }
     }
 }

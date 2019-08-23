@@ -1,6 +1,7 @@
 ﻿using DoTaria.Abilities;
 using DoTaria.Enums;
 using DoTaria.Players;
+using DoTaria.Statistic;
 
 namespace DoTaria.Heroes.ShadowFiend.Abilities
 {
@@ -15,6 +16,6 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities
 
         public override float GetCooldown(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 130 - playerAbility.Level * 10;
 
-        public override float GetManaCost(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 125 + playerAbility.Level * 25;
+        public override float GetManaCost(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => (125 + playerAbility.Level * 25) * Statistics.TERRARIA_MANA_RATIO;
     }
 }

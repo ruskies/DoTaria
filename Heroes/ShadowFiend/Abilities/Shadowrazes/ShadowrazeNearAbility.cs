@@ -11,7 +11,7 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
     {
         public const string UNLOCALIZED_NAME = "shadowrazeNear";
 
-        public ShadowrazeNearAbility() : base(UNLOCALIZED_NAME, "Shadowraze (Near)", AbilitySlot.First, 200)
+        public ShadowrazeNearAbility() : base(UNLOCALIZED_NAME, "Shadowraze (Near)", AbilitySlot.First, 200, true)
         {
         }
     }

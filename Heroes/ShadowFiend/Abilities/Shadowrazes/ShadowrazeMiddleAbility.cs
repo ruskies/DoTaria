@@ -8,7 +8,7 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
     {
         public const string UNLOCALIZED_NAME = "shadowrazeMiddle";
 
-        public ShadowrazeMiddleAbility() : base(UNLOCALIZED_NAME, "Shadowraze (Middle)", AbilitySlot.Second, 450)
+        public ShadowrazeMiddleAbility() : base(UNLOCALIZED_NAME, "Shadowraze (Middle)", AbilitySlot.Second, 450, false)
         {
         }
     }
