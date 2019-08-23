@@ -9,7 +9,7 @@ namespace DoTaria.Heroes.Abaddon.Abilities.AphoticShield
         public const string UNLOCALIZED_NAME = AbaddonHero.UNLOCALIZED_NAME + ".aphoticShield";
 
 
-        public AphoticShieldAbility() : base(UNLOCALIZED_NAME, "Aphotic Shield", AbilityType.Active, DamageType.None, AbilitySlot.Second, 1, 4, baseCastRange: 500)
+        public AphoticShieldAbility() : base(UNLOCALIZED_NAME, "Aphotic Shield", AbilityType.Active, AbilityTargetType.TargetUnit, AbilityTargetFaction.Self & AbilityTargetFaction.Allies, DamageType.None, AbilitySlot.Second, 1, 4, baseCastRange: 500)
         {
         }
 

@@ -9,7 +9,7 @@ namespace DoTaria.Heroes.Terrorblade.Abilities.Sunder
         public const string UNLOCALIZED_NAME = TerrorbladeHero.UNLOCALIZED_NAME + ".sunder";
 
 
-        public SunderAbility() : base(UNLOCALIZED_NAME, "Sunder", AbilityType.Active, DamageType.None, AbilitySlot.Ultimate, 6, 3, baseCastRange: 475)
+        public SunderAbility() : base(UNLOCALIZED_NAME, "Sunder", AbilityType.Active, AbilityTargetType.TargetUnit, AbilityTargetFaction.Allies & AbilityTargetFaction.Enemies, DamageType.None, AbilitySlot.Ultimate, 6, 3, baseCastRange: 475)
         {
         }
 

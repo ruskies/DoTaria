@@ -19,11 +19,11 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
 
 
         protected ShadowrazeAbility(string unlocalizedName, string displayName, AbilitySlot abilitySlot, int baseCastRange, bool affectsTotalAbilityLevelCount) :
-            base(UNLOCALIZED_NAME_PREFIX + unlocalizedName, displayName, AbilityType.Active, DamageType.Magical, abilitySlot, 1, 4, baseCastRange: baseCastRange, affectsTotalAbilityLevelCount: affectsTotalAbilityLevelCount)
+            base(UNLOCALIZED_NAME_PREFIX + unlocalizedName, displayName, AbilityType.Active, AbilityTargetType.NoTarget, AbilityTargetFaction.Enemies, DamageType.Magical, abilitySlot, 1, 4, baseCastRange: baseCastRange, affectsTotalAbilityLevelCount: affectsTotalAbilityLevelCount)
         {
         }
 
-        public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer)
+        public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool networkCast)
         {
             Texture2D texture = typeof(ShadowrazeProjectile).GetTexture();
             Vector2 spawnPosition = new Vector2(dotariaPlayer.player.position.X, dotariaPlayer.player.position.Y + dotariaPlayer.player.height + 25) - 
@@ -36,7 +36,7 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
                 Dust.NewDust(spawnPosition - new Vector2(37.5f, -60), 65, 15, dotariaPlayer.mod.DustType<ShadowTrail>(), 1f * (left ? -1 : 1), -1f, 0, new Color(255, 255, 255), 3f);
             }
 
-            if (casterIsLocalPlayer)
+            if (networkCast)
                 Projectile.NewProjectile(spawnPosition, Vector2.Zero, dotariaPlayer.mod.ProjectileType<ShadowrazeProjectile>(), (int)InternalGetAbilityDamage(dotariaPlayer, playerAbility), 0, dotariaPlayer.player.whoAmI);
 
             return true;

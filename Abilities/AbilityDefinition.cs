@@ -16,18 +16,23 @@ namespace DoTaria.Abilities
         /// <param name="unlocalizedName"></param>
         /// <param name="displayName"></param>
         /// <param name="abilityType"></param>
+        /// <param name="abilityTargetType"></param>
+        /// <param name="abilityTargetFaction"></param>
         /// <param name="damageType"></param>
         /// <param name="abilitySlot"></param>
         /// <param name="unlockableAtLevel">At what level can the player start leveling this ability. A level of 0 means the player starts with the ability.</param>
         /// <param name="maxLevel">The maximum level that this ability can be leveled up to.</param>
         /// <param name="alwaysShowInAbilitesBar"></param>
         /// <param name="baseCastRange">The maximum distance between the target point and the player.</param>
-        protected AbilityDefinition(string unlocalizedName, string displayName, AbilityType abilityType, DamageType damageType, AbilitySlot abilitySlot, int unlockableAtLevel, int maxLevel, bool alwaysShowInAbilitesBar = true, float baseCastRange = -1, bool affectsTotalAbilityLevelCount = true)
+        /// <param name="affectsTotalAbilityLevelCount">Should this ability contribute towards the total levels spent on abilities count.</param>
+        protected AbilityDefinition(string unlocalizedName, string displayName, AbilityType abilityType, AbilityTargetType abilityTargetType, AbilityTargetFaction abilityTargetFaction, DamageType damageType, AbilitySlot abilitySlot, int unlockableAtLevel, int maxLevel, bool alwaysShowInAbilitesBar = true, float baseCastRange = -1, bool affectsTotalAbilityLevelCount = true)
         {
             UnlocalizedName = unlocalizedName;
             DisplayName = displayName;
 
             AbilityType = abilityType;
+            AbilityTargetType = abilityTargetType;
+            AbilityTargetFaction = abilityTargetFaction;
             DamageType = damageType;
 
             AbilitySlot = abilitySlot;
@@ -118,6 +123,8 @@ namespace DoTaria.Abilities
         public string DisplayName { get; }
 
         public AbilityType AbilityType { get; }
+        public AbilityTargetType AbilityTargetType { get; }
+        public AbilityTargetFaction AbilityTargetFaction { get; }
         public DamageType DamageType { get; }
 
         public AbilitySlot AbilitySlot { get; }

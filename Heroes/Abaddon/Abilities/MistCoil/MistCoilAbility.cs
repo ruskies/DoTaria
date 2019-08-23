@@ -2,6 +2,7 @@
 using DoTaria.Abilities;
 using DoTaria.Enums;
 using DoTaria.Players;
+using Terraria;
 
 namespace DoTaria.Heroes.Abaddon.Abilities.MistCoil
 {
@@ -9,14 +10,17 @@ namespace DoTaria.Heroes.Abaddon.Abilities.MistCoil
     {
         private const string UNLOCALIZED_NAME = AbaddonHero.UNLOCALIZED_NAME + ".mistCoil";
 
-        public MistCoilAbility() : base(UNLOCALIZED_NAME, "Mist Coil", AbilityType.Active, DamageType.Pure, AbilitySlot.First, 1, 4)
+        public MistCoilAbility() : base(UNLOCALIZED_NAME, "Mist Coil", AbilityType.Active, AbilityTargetType.TargetUnit, AbilityTargetFaction.Allies & AbilityTargetFaction.Enemies, DamageType.Pure, AbilitySlot.First, 1, 4)
         {
         }
 
 
-        public override void OnAbilityCasted(DoTariaPlayer dotariaPlayer)
+        public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer)
         {
-
+            if (casterIsLocalPlayer)
+            {
+                Projectile mistCoil = Projectile.NewProjectile()
+            }
         }
 
 

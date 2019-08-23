@@ -9,6 +9,7 @@ namespace DoTaria.Heroes.Abaddon.Abilities.MistCoil
         internal Player homeOntoPlayer = null;
         internal NPC homeOntoNPC = null;
 
+
         public MistCoilProjectile() : base("Mist Coil", 34, 34)
         {
         }
@@ -30,6 +31,6 @@ namespace DoTaria.Heroes.Abaddon.Abilities.MistCoil
         }
 
 
-
+        
     }
 }
