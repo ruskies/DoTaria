@@ -78,8 +78,12 @@ namespace DoTaria.Players
         public override void PreUpdate()
         {
             PreUpdateAttributes();
-
             PreUpdateAbilities();
+
+            if (Main.invasionType != InvasionID.None && Main.invasionProgress >= Main.invasionProgressMax - 1)
+                Main.NewText("Invasion Completed!");
+
+            PreUpdateLevels();
         }
 
         public override void PreUpdateMovement()
@@ -108,5 +112,8 @@ namespace DoTaria.Players
 
             ResetEffectsAbilities();
         }
+
+
+        public bool BeingInvaded { get; private set; }
     }
 }

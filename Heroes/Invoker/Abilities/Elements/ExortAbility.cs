@@ -18,7 +18,7 @@ namespace DoTaria.Heroes.Invoker.Abilities.Elements
 
         public override void CastElementModifyWeaponDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, Item item, ref float add, ref float mult, ref float flat)
         {
-            if (item.ranged)
+            if (item.ranged || item.magic)
                 flat += GetExtraDamage(playerAbility.Level);
         }
 
