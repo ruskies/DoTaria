@@ -7,6 +7,10 @@ The health ratio is 0.25 Terraria health per Dota health. Currently doesn't appl
 The mana ratio is 0.375 Terraria mana per Dota mana. For example, Shadowraze is 33.75 mana.
 
 == Changelog ==
+v0.1.4
+~ Added mistcoil: only works on enemies. (Does nothing on allied heroes, just hurts you)
+# Known Bug: multiplayer synching for abilities is not working properly.
+
 v0.1.3
 ~ Fixed shadowrazes counting as individual abilities when it comes to leveling.
 

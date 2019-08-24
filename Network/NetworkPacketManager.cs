@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DoTaria.Heroes.Abaddon.Abilities.MistCoil;
 using DoTaria.Managers;
 using DoTaria.Network.Abilities;
 using DoTaria.Network.NPCs;
@@ -29,6 +30,8 @@ namespace DoTaria.Network
 
             PlayerAbilityLeveledUp = Add(new PlayerAbilityLeveledUpPacket()) as PlayerAbilityLeveledUpPacket;
 
+            MistCoilFired = Add(new MistCoilFiredPacket()) as MistCoilFiredPacket;
+
             Initialized = true;
         }
 
@@ -40,6 +43,9 @@ namespace DoTaria.Network
         public PlayerLeveledUpPacket PlayerLeveledUp { get; private set; }
 
         public PlayerAbilityLeveledUpPacket PlayerAbilityLeveledUp { get; private set; }
+
+
+        public MistCoilFiredPacket MistCoilFired { get; private set; }
 
 
         public NetworkPacket Add(NetworkPacket networkPacket)

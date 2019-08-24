@@ -32,8 +32,10 @@ namespace DoTaria.Heroes.Abaddon.Abilities.MistCoil
 
         public override void AI()
         {
-            if (HomeOntoPlayer == null && HomeOntoNPC == null)
-                Main.NewText("Nothing to home onto!");
+            projectile.netUpdate = true;
+            projectile.rotation += MathHelper.ToRadians(20);
+
+            if (HomeOntoPlayer == null && HomeOntoNPC == null) return;
 
             projectile.velocity = DoTariaMath.CalculateSpeedForTarget(projectile.position, HomeOntoPlayer?.Center ?? HomeOntoNPC.Center, 15);
 
@@ -41,10 +43,19 @@ namespace DoTaria.Heroes.Abaddon.Abilities.MistCoil
                 Dust.NewDust(projectile.position, projectile.width, projectile.height, DustID.Smoke, newColor: Color.Black, Scale: 2f);
 
 
-            projectile.rotation += MathHelper.ToRadians(20);
+            if (HomeOntoPlayer != null && HomeOntoPlayer.getRect().Contains((int) projectile.position.X, (int) projectile.position.Y))
+            {
+                HomeOntoPlayer.statLife += DamageOnContact;
+                HomeOntoPlayer.HealEffect(DamageOnContact);
 
-            if ((HomeOntoPlayer?.getRect() ?? HomeOntoNPC.getRect()).Contains((int) projectile.position.X, (int) projectile.position.Y))
+                projectile.timeLeft = 0;
+            }
+            else if (HomeOntoNPC != null && HomeOntoNPC.getRect().Contains((int) projectile.position.X, (int) projectile.position.Y))
+            {
                 projectile.damage = DamageOnContact;
+                projectile.timeLeft = 0;
+            }
+
 
             if ((HomeOntoPlayer != null && !HomeOntoPlayer.active) || (HomeOntoNPC != null && !HomeOntoNPC.active))
                 projectile.timeLeft = 0;

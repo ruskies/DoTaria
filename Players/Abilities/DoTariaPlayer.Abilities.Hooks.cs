@@ -28,6 +28,12 @@ namespace DoTaria.Players
         private void PreUpdateAbilities()
         {
             ForAllAcquiredAbilities((a, p) => a.OnPlayerPreUpdate(this, p));
+
+            ForAllAcquiredAbilities((a, p) =>
+            {
+                if (p.Cooldown > 0)
+                    p.Cooldown--;
+            });
         }
 
         private void PreUpdateMovementAbilities()
@@ -40,13 +46,8 @@ namespace DoTaria.Players
             LevelsSpentOnAbilities = 0;
 
             foreach (KeyValuePair<AbilityDefinition, PlayerAbility> kvp in AcquiredAbilities)
-            {
                 if (kvp.Key.UnlockableAtLevel != 0 && kvp.Key.AffectsTotalAbilityLevelCount)
                     LevelsSpentOnAbilities += kvp.Value.Level;
-
-                if (kvp.Value.Cooldown > 0)
-                    kvp.Value.Cooldown--;
-            }
         }
     }
 }

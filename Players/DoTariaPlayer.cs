@@ -50,6 +50,14 @@ namespace DoTaria.Players
             ModifyWeaponDamageHeroes(item, ref add, ref mult, ref flat);
         }
 
+        public override void OnRespawn(Player player)
+        {
+            if (!mod.GetConfig<DoTariaGlobalConfiguration>().EnableModCompatibility)
+            {
+                player.statLife = player.statLifeMax2;
+                player.statMana = player.statManaMax2;
+            }
+        }
 
         public override void PostHurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
         {

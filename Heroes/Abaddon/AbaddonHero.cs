@@ -32,16 +32,5 @@ namespace DoTaria.Heroes.Abaddon
 
             return true;
         }
-
-        public override void OnPlayerPostHurt(DoTariaPlayer dotariaPlayer, bool pvp, bool quiet, double damage, int hitDirection, bool crit)
-        {
-            if (dotariaPlayer.player.dead || 
-                dotariaPlayer.player.statLife / Statistics.TERRARIA_HEALTH_RATIO > 400 / Statistics.TERRARIA_HEALTH_RATIO ||
-                dotariaPlayer.player.HasBuff<BorrowedTimeBuff>())
-                return;
-
-            else
-                dotariaPlayer.player.AddBuff<BorrowedTimeBuff>(6 * DoTariaMath.TICKS_PER_SECOND);
-        }
     }
 }

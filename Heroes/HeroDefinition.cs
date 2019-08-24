@@ -52,7 +52,11 @@ namespace DoTaria.Heroes
         public virtual void OnPlayerKilledNPC(DoTariaPlayer dotariaPlayer, NPC npc) { }
 
 
-        public virtual void OnPlayerPostHurt(DoTariaPlayer dotariaPlayer, bool pvp, bool quiet, double damage, int hitDirection, bool crit) { }
+        public virtual void OnPlayerPostHurt(DoTariaPlayer dotariaPlayer, bool pvp, bool quiet, double damage, int hitDirection, bool crit)
+        {
+            dotariaPlayer.ForAllAcquiredAbilities((a, p) => a.OnPlayerPostHurt(dotariaPlayer, p, pvp, quiet, damage, hitDirection, crit));
+        }
+
 
         /// <summary></summary>
         /// <param name="dotariaPlayer"></param>

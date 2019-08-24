@@ -9,7 +9,7 @@ namespace DoTaria.Helpers
         {
             Vector2 mousePosition = Main.MouseWorld;
 
-            for (int i = 0; i < Main.ActivePlayersCount; i++)
+            for (int i = 0; i < Main.player.Length; i++)
                 if (Main.player[i].getRect().Contains((int)mousePosition.X, (int)mousePosition.Y))
                     return Main.player[i];
 

@@ -149,6 +149,8 @@ namespace DoTaria.Abilities
 
         #region Player Hooks
 
+        public virtual void OnPlayerPostHurt(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool pvp, bool quiet, double damage, int hitDirection, bool crit) { }
+
         public virtual void OnPlayerPreUpdateMovement(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }
 
         public virtual void OnPlayerPreUpdate(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }

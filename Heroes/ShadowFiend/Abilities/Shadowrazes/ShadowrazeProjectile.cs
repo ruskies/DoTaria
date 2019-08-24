@@ -53,6 +53,7 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
 
         public override void AI()
         {
+            projectile.netUpdate = true;
             projectile.frameCounter++;
 
             if (projectile.frameCounter % FRAME_PER_FRAME == 0)
