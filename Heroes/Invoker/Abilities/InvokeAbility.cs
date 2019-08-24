@@ -9,7 +9,9 @@ namespace DoTaria.Heroes.Invoker.Abilities
         public const string UNLOCALIZED_NAME = "invoke";
 
 
-        public InvokeAbility() : base(UNLOCALIZED_NAME, "Invoke", AbilityType.Active, AbilityTargetType.NoTarget, AbilityTargetFaction.Self, DamageType.None, AbilitySlot.Ultimate, 0, 1)
+        public InvokeAbility() : base(UNLOCALIZED_NAME, "Invoke", 
+            AbilityType.Active, AbilityTargetType.NoTarget, AbilityTargetFaction.Self, AbilityTargetUnitType.None,
+            DamageType.None, AbilitySlot.Ultimate, 0, 1)
         {
         }
 

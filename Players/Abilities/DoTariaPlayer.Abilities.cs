@@ -47,8 +47,13 @@ namespace DoTaria.Players
             if (playerAbility.Cooldown > 0 || ability.InternalGetManaCost(this) > player.statMana)
                 return false;
 
+            if (!ability.InternalCanCastAbility(this, playerAbility))
+                return false;
+
             if (ability.InternalCastAbility(this, playerAbility, true))
             {
+                ability.OnAbilityCasted(this, playerAbility);
+
                 if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI == Main.myPlayer)
                     NetworkPacketManager.Instance.AbilityCasted.SendPacketToAllClients(player.whoAmI, player.whoAmI, ability.UnlocalizedName, AcquiredAbilities[ability].Cooldown);
 

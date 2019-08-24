@@ -6,7 +6,7 @@ namespace DoTaria.Abilities
     public enum AbilityTargetFaction
     {
         Self = 1 << 0,
-        Enemies = 1 << 1,
-        Allies = 1 << 2,
+        Allies = 1 << 1,
+        Enemies = 1 << 2
     }
 }

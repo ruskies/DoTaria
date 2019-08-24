@@ -8,7 +8,9 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Necromastery
     {
         public const string UNLOCALIZED_NAME = ShadowFiendHero.UNLOCALIZED_NAME + ".necromastery";
 
-        public NecromasteryAbility() : base(UNLOCALIZED_NAME, "Necromastery", AbilityType.Passive, AbilityTargetType.NoTarget, AbilityTargetFaction.Self, DamageType.Physical, AbilitySlot.Fourth, 1, 4)
+        public NecromasteryAbility() : base(UNLOCALIZED_NAME, "Necromastery", 
+            AbilityType.Passive, AbilityTargetType.NoTarget, AbilityTargetFaction.Self, AbilityTargetUnitType.None,
+            DamageType.Physical, AbilitySlot.Fourth, 1, 4)
         {
         }
 
