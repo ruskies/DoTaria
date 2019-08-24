@@ -9,7 +9,9 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities
     {
         public const string UNLOCALIZED_NAME = "requiemofSouls";
 
-        public RequiemofSoulsAbility() : base(ShadowFiendHero.UNLOCALIZED_NAME + '.' + UNLOCALIZED_NAME, "Requiem of Souls", AbilityType.Active, DamageType.Magical, AbilitySlot.Ultimate, 6, 3)
+        public RequiemofSoulsAbility() : base(ShadowFiendHero.UNLOCALIZED_NAME + '.' + UNLOCALIZED_NAME, "Requiem of Souls", 
+            AbilityType.Active, AbilityTargetType.NoTarget, AbilityTargetFaction.Enemies, AbilityTargetUnitType.Living,
+            DamageType.Magical, AbilitySlot.Ultimate, 6, 3)
         {
         }
 

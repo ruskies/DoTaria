@@ -17,7 +17,7 @@ namespace DoTaria.Heroes.Abaddon
         public AbaddonHero() : base(UNLOCALIZED_NAME, "Abaddon", new Attributes(23, 23, 21), new Attributes(3, 1.5f, 2),
             new Statistics(200, 0, 0.25f, -2, 0.68f, 1, 75, 0, 0),
             325,
-            AbilityDefinitionManager.Instance.MistCoil, AbilityDefinitionManager.Instance.AphoticShield, AbilityDefinitionManager.Instance.CurseOfAvernus, AbilityDefinitionManager.Instance.BorrowedTime)
+            AbilityDefinitionManager.Instance.MistCoil, AbilityDefinitionManager.Instance.AphoticShield, AbilityDefinitionManager.Instance.CurseofAvernus, AbilityDefinitionManager.Instance.BorrowedTime)
         {
         }
 

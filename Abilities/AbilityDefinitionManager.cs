@@ -21,7 +21,7 @@ namespace DoTaria.Abilities
 
             MistCoil = Add(new MistCoilAbility()) as MistCoilAbility;
             AphoticShield = Add(new AphoticShieldAbility()) as AphoticShieldAbility;
-            CurseOfAvernus = Add(new CurseOfAvernusAbility()) as CurseOfAvernusAbility;
+            CurseofAvernus = Add(new CurseofAvernusAbility()) as CurseofAvernusAbility;
             BorrowedTime = Add(new BorrowedTimeAbility()) as BorrowedTimeAbility;
 
             #endregion
@@ -56,7 +56,7 @@ namespace DoTaria.Abilities
 
         public MistCoilAbility MistCoil { get; private set; }
         public AphoticShieldAbility AphoticShield { get; private set; }
-        public CurseOfAvernusAbility CurseOfAvernus { get; private set; }
+        public CurseofAvernusAbility CurseofAvernus { get; private set; }
         public BorrowedTimeAbility BorrowedTime { get; private set; }
 
         #endregion

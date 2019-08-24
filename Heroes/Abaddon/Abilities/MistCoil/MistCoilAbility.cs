@@ -5,6 +5,7 @@ using DoTaria.Helpers;
 using DoTaria.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 
 namespace DoTaria.Heroes.Abaddon.Abilities.MistCoil
 {
@@ -21,25 +22,37 @@ namespace DoTaria.Heroes.Abaddon.Abilities.MistCoil
 
         public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer, float calculatedDamage)
         {
-            EntitiesHelper.GetLocalHoveredEntity(out Player player, out NPC npc);
-
-            if (player == null && npc == null)
-                return false;
+            dotariaPlayer.player.Hurt(PlayerDeathReason.ByPlayer(dotariaPlayer.player.whoAmI), (int) GetSelfDamage(dotariaPlayer, playerAbility), 1);
 
             if (casterIsLocalPlayer)
             {
-                MistCoilProjectile mistCoil = Main.projectile[Projectile.NewProjectile(dotariaPlayer.player.position, Vector2.Zero, dotariaPlayer.mod.ProjectileType<MistCoilProjectile>(), (int) calculatedDamage, 0f, dotariaPlayer.player.whoAmI)].modProjectile as MistCoilProjectile;
+                EntitiesHelper.GetLocalHoveredEntity(out Player player, out NPC npc);
+
+                if (player == null && npc == null)
+                    return false;
+
+                Projectile projectile = Main.projectile[Projectile.NewProjectile(dotariaPlayer.player.position, Vector2.Zero, dotariaPlayer.mod.ProjectileType<MistCoilProjectile>(), 0, 0f, dotariaPlayer.player.whoAmI)];
+                MistCoilProjectile mistCoil = projectile.modProjectile as MistCoilProjectile;
+
+                if (player != null && dotariaPlayer.CanHitPvpWithProj(projectile, player) && calculatedDamage > 0)
+                    calculatedDamage *= -1;
 
                 if (player != null)
-                    mistCoil.homeOntoPlayer = player;
+                    mistCoil.HomeOntoPlayer = player;
 
                 if (npc != null)
-                    mistCoil.homeOntoNPC = npc;
+                    mistCoil.HomeOntoNPC = npc;
+
+                mistCoil.DamageOnContact = (int) calculatedDamage;
             }
 
             return true;
         }
 
+
+        public float GetSelfDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 50 + playerAbility.Level * 25;
+
+        public override float GetAbilityDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 95 + playerAbility.Level * 45;
 
         // TODO Add support for talents.
         public override float GetCooldown(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 4.5f;
