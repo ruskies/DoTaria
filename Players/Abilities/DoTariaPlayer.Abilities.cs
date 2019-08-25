@@ -14,7 +14,7 @@ namespace DoTaria.Players
 
         public bool HasAbility(AbilityDefinition ability, int level) => HasAbility(ability) && level <= AcquiredAbilities[ability].Level;
 
-        public void AcquireOrLevelUp(AbilityDefinition ability, bool callAbilityLeveledUp = true)
+        public void AcquireOrLevelUp(AbilityDefinition ability, bool callAbilityLeveledUp = true, bool networkCall = false)
         {
             if (!HasAbility(ability))
                 AcquiredAbilities.Add(ability, new PlayerAbility(ability, 1, 0));
@@ -23,6 +23,9 @@ namespace DoTaria.Players
 
             if (callAbilityLeveledUp)
                 ability.InternalOnAbilityLeveledUp(this);
+
+            if (!networkCall && Main.netMode == NetmodeID.MultiplayerClient)
+                NetworkPacketManager.Instance.PlayerAbilityLeveledUp.SendPacketToAllClients(player.whoAmI, player.whoAmI, ability.UnlocalizedName, AcquiredAbilities[ability].Level);
         }
 
 

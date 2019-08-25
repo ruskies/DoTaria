@@ -1,6 +1,6 @@
 displayName = DoTaria
 author = Webmilio, Blockaroz, HellGoesOn
-version = 0.1.4
+version = 0.1.6
 side = Both
 homepage = https://forums.terraria.org/index.php?threads/dotaria.82253/
 hideCode = false

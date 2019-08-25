@@ -23,7 +23,7 @@ namespace DoTaria.Heroes.Invoker.Abilities.Elements
         }
 
 
-        public static int GetExtraDamage(int level) => 2 + 4 * (level - 1);
+        public static int GetExtraDamage(int level) => 2 + 2 * (level - 1);
 
 
         public override float GetCooldown(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 0;

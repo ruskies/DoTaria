@@ -17,6 +17,11 @@ namespace DoTaria.Heroes.Invoker.Abilities.Elements
 
         public override void CastElementPreUpdateMovement(DoTariaPlayer player, PlayerAbility playerAbility) => player.player.moveSpeed += GetExtraMoveSpeed(player.player.moveSpeed, playerAbility.Level);
 
+        public override void CastElementPlayerResetEffects(DoTariaPlayer player, PlayerAbility playerAbility)
+        {
+            player.BufferedManaRegen += player.player.statManaMax2 * (0.02f + playerAbility.Level * 0.005f);
+        }
+
 
         public static float GetExtraMoveSpeedPercentage(int level) => 0.01f * level;
         public static float GetExtraMoveSpeed(float moveSpeed, int level) => moveSpeed * GetExtraMoveSpeedPercentage(level);

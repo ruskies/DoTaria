@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DoTaria.Heroes.Invoker.Abilities.Elements;
+using Terraria.ModLoader.IO;
 
 namespace DoTaria.Players
 {
@@ -33,7 +34,7 @@ namespace DoTaria.Players
 
         private void InitializeInvoker()
         {
-            currentInvokerElements.Clear();
+            
         }
 
 
@@ -41,6 +42,12 @@ namespace DoTaria.Players
         {
             for (int i = 0; i < currentInvokerElements.Count; i++)
                 action(this, currentInvokerElements[i]);
+        }
+
+
+        private void LoadInvoker(TagCompound tag)
+        {
+            currentInvokerElements.Clear();
         }
 
 

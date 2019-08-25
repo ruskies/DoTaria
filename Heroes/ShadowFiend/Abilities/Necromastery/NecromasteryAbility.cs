@@ -1,6 +1,7 @@
 ﻿using DoTaria.Abilities;
 using DoTaria.Enums;
 using DoTaria.Players;
+using Terraria;
 
 namespace DoTaria.Heroes.ShadowFiend.Abilities.Necromastery
 {
@@ -12,6 +13,13 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Necromastery
             AbilityType.Passive, AbilityTargetType.NoTarget, AbilityTargetFaction.Self, AbilityTargetUnitType.None,
             DamageType.Physical, AbilitySlot.Fourth, 1, 4)
         {
+        }
+
+
+        public override void ModifyWeaponDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, Item item, ref float add, ref float mult, ref float flat)
+        {
+            if (item.ranged && item.ammo == 0)
+                flat += AbilityDefinitionManager.Instance.Necromastery.GetExtraFlatDamage(dotariaPlayer);
         }
 
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Terraria;
 
 namespace DoTaria.Helpers
@@ -31,6 +33,17 @@ namespace DoTaria.Helpers
         {
             player = GetLocalHoveredPlayer();
             npc = GetLocalHoveredNPC();
+        }
+
+        public static List<Player> GetPlayersInRange(Vector2 origin, int maxDistance)
+        {
+            List<Player> players = new List<Player>();
+
+            for (int i = 0; i < Main.player.Length; i++)
+                if (Vector2.Distance(Main.player[i].Center, origin) <= maxDistance)
+                    players.Add(Main.player[i]);
+
+            return players;
         }
     }
 }

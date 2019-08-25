@@ -43,14 +43,5 @@ namespace DoTaria.Heroes.ShadowFiend
             if (npc.boss)
                 dotariaPlayer.Souls += 15;
         }
-
-
-        public override void ModifyWeaponDamage(DoTariaPlayer dotariaPlayer, Item item, ref float add, ref float mult, ref float flat)
-        {
-            // TODO Move this to necromastery.
-
-            if (item.ranged && dotariaPlayer.HasAbility(AbilityDefinitionManager.Instance.Necromastery))
-                flat += AbilityDefinitionManager.Instance.Necromastery.GetExtraFlatDamage(dotariaPlayer);
-        }        
     }
 }

@@ -46,6 +46,8 @@ namespace DoTaria.Heroes.Invoker
 
         public override void ModifyWeaponDamage(DoTariaPlayer dotariaPlayer, Item item, ref float add, ref float mult, ref float flat)
         {
+            base.ModifyWeaponDamage(dotariaPlayer, item, ref add, ref mult, ref flat);
+
             foreach (InvokerElementAbility ability in dotariaPlayer.CurrentElements)
                 ability.CastElementModifyWeaponDamage(dotariaPlayer, dotariaPlayer.AcquiredAbilities[ability], item, ref add, ref mult, ref flat);
         }

@@ -27,7 +27,7 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
         {
             Texture2D texture = typeof(ShadowrazeProjectile).GetTexture();
             Vector2 spawnPosition = new Vector2(dotariaPlayer.player.position.X, dotariaPlayer.player.position.Y + dotariaPlayer.player.height + 25) - 
-                                    new Vector2((-InternalGetCastRange(dotariaPlayer) * dotariaPlayer.player.direction) * DoTariaMath.TERRARIA_RANGE_RATIO, texture.Height / (ShadowrazeProjectile.FRAME_COUNT * 2f));
+                                    new Vector2((-InternalGetCastRange(dotariaPlayer, playerAbility) * dotariaPlayer.player.direction) * DoTariaMath.TERRARIA_RANGE_RATIO, texture.Height / (ShadowrazeProjectile.FRAME_COUNT * 2f));
 
             for (int i = 0; i < 10; i++)
             {

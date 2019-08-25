@@ -55,7 +55,7 @@ namespace DoTaria.Abilities
         public virtual void OnAbilityCasted(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }
 
 
-        internal bool InternalCanCastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility)
+        public bool InternalCanCastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility)
         {
             if (AbilityType == AbilityType.Passive && AbilityType != AbilityType.Active)
                 return false;
@@ -88,7 +88,7 @@ namespace DoTaria.Abilities
         public virtual bool CanCastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => true;
 
 
-        internal bool InternalCastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer)
+        public bool InternalCastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer)
         {
             float calculatedDamage = InternalGetAbilityDamage(dotariaPlayer, playerAbility);
 
@@ -106,7 +106,7 @@ namespace DoTaria.Abilities
 
         public virtual bool CanUnlock(DoTariaPlayer dotariaPlayer) => dotariaPlayer.Level != -1 && dotariaPlayer.Level >= UnlockableAtLevel;
 
-        internal int InternalGetCooldown(DoTariaPlayer dotariaPlayer) => (int)Math.Ceiling(GetCooldown(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]));
+        public int InternalGetCooldown(DoTariaPlayer dotariaPlayer) => (int)Math.Ceiling(GetCooldown(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]));
         public abstract float GetCooldown(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility);
 
         internal float InternalGetManaCost(DoTariaPlayer dotariaPlayer)
@@ -119,12 +119,13 @@ namespace DoTaria.Abilities
         public abstract float GetManaCost(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility);
 
 
-        internal float InternalGetAbilityDamage(DoTariaPlayer dotariaPlayer) => InternalGetAbilityDamage(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
-        internal float InternalGetAbilityDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => GetAbilityDamage(dotariaPlayer, playerAbility) * dotariaPlayer.SpellAmplification;
+        public float InternalGetAbilityDamage(DoTariaPlayer dotariaPlayer) => InternalGetAbilityDamage(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
+        public float InternalGetAbilityDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => GetAbilityDamage(dotariaPlayer, playerAbility) * dotariaPlayer.SpellAmplification;
         public virtual float GetAbilityDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 0;
 
 
-        internal float InternalGetCastRange(DoTariaPlayer dotariaPlayer) => GetCastRange(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
+        public float InternalGetCastRange(DoTariaPlayer dotariaPlayer) => InternalGetCastRange(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
+        public float InternalGetCastRange(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => GetCastRange(dotariaPlayer, playerAbility);
         public virtual float GetCastRange(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => BaseCastRange;
 
 
@@ -133,7 +134,7 @@ namespace DoTaria.Abilities
 
         public virtual bool CanLevelUp(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => playerAbility.Level + 1 < dotariaPlayer.Level;
 
-        internal int InternalGetRequiredLevelForNextUpgrade(DoTariaPlayer dotariaPlayer) => GetRequiredLevelForNextUpgrade(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
+        public int InternalGetRequiredLevelForNextUpgrade(DoTariaPlayer dotariaPlayer) => GetRequiredLevelForNextUpgrade(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
 
         public virtual int GetRequiredLevelForNextUpgrade(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility)
         {
@@ -143,11 +144,13 @@ namespace DoTaria.Abilities
             return (playerAbility.Level * 2) + 1;
         }
 
-        internal void InternalOnAbilityLeveledUp(DoTariaPlayer dotariaPlayer) => OnAbilityLeveledUp(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
+        public void InternalOnAbilityLeveledUp(DoTariaPlayer dotariaPlayer) => OnAbilityLeveledUp(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
         public virtual void OnAbilityLeveledUp(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }
 
 
         #region Player Hooks
+
+        public virtual void ModifyWeaponDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, Item item, ref float add, ref float mult, ref float flat) { }
 
         public virtual void OnPlayerPostHurt(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool pvp, bool quiet, double damage, int hitDirection, bool crit) { }
 

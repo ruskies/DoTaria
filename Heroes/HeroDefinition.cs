@@ -47,15 +47,20 @@ namespace DoTaria.Heroes
         public virtual void VerifyAndApplyBuffs(DoTariaPlayer dotariaPlayer) { }
 
 
+        public virtual void ModifyWeaponDamage(DoTariaPlayer dotariaPlayer, Item item, ref float add, ref float mult, ref float flat)
+        {
+            foreach (KeyValuePair<AbilityDefinition, PlayerAbility> kvp in dotariaPlayer.AcquiredAbilities)
+                kvp.Key.ModifyWeaponDamage(dotariaPlayer, kvp.Value, item, ref add, ref mult, ref flat);
+        }
+
+
         public virtual void OnPlayerDeath(DoTariaPlayer dotariaPlayer, double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) { }
 
         public virtual void OnPlayerKilledNPC(DoTariaPlayer dotariaPlayer, NPC npc) { }
 
 
-        public virtual void OnPlayerPostHurt(DoTariaPlayer dotariaPlayer, bool pvp, bool quiet, double damage, int hitDirection, bool crit)
-        {
+        public virtual void OnPlayerPostHurt(DoTariaPlayer dotariaPlayer, bool pvp, bool quiet, double damage, int hitDirection, bool crit) =>
             dotariaPlayer.ForAllAcquiredAbilities((a, p) => a.OnPlayerPostHurt(dotariaPlayer, p, pvp, quiet, damage, hitDirection, crit));
-        }
 
 
         /// <summary></summary>
@@ -84,8 +89,6 @@ namespace DoTaria.Heroes
 
 
         public virtual void OnPlayerResetEffects(DoTariaPlayer dotariaPlayer) { }
-
-        public virtual void ModifyWeaponDamage(DoTariaPlayer dotariaPlayer, Item item, ref float add, ref float mult, ref float flat) { }
 
 
         public string UnlocalizedName { get; }

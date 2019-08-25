@@ -8,8 +8,6 @@ namespace DoTaria.Players
 {
     public sealed partial class DoTariaPlayer : ModPlayer
     {
-        private float _bufferedManaRegen = 0;
-
         private void ResetEffectsStatistics()
         {
             Statistics = Statistics.FromAttributes(Attributes);
@@ -41,14 +39,14 @@ namespace DoTaria.Players
 
                 SpellAmplification = 1 + (int)(Hero.BaseStatistics.SpellDamageAmplification + Statistics.SpellDamageAmplification);
 
-                _bufferedManaRegen += (Hero.BaseStatistics.TerrariaManaRegeneration + Statistics.TerrariaManaRegeneration) / DoTariaMath.TICKS_PER_SECOND;
+                BufferedManaRegen += (Hero.BaseStatistics.TerrariaManaRegeneration + Statistics.TerrariaManaRegeneration) / DoTariaMath.TICKS_PER_SECOND;
 
-                if (_bufferedManaRegen >= 1)
+                if (BufferedManaRegen >= 1)
                 {
-                    float toClip = _bufferedManaRegen % 1;
-                    player.statMana += (int) (_bufferedManaRegen - toClip);
+                    float toClip = BufferedManaRegen % 1;
+                    player.statMana += (int) (BufferedManaRegen - toClip);
 
-                    _bufferedManaRegen = toClip;
+                    BufferedManaRegen = toClip;
                 }
             }
         }
@@ -56,7 +54,7 @@ namespace DoTaria.Players
 
         public Statistics Statistics { get; private set; }
 
-
+        public float BufferedManaRegen { get; set; }
         public float SpellAmplification { get; private set; }
     }
 }

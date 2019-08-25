@@ -18,7 +18,9 @@ namespace DoTaria.Network.Players
             if (Main.netMode == NetmodeID.Server)
                 NetworkPacketManager.Instance.PlayerAbilityLeveledUp.SendPacketToAllClients(fromWho, whichPlayer, abilityName, abilityLevel);
 
-            DoTariaPlayer.Get(Main.player[whichPlayer]).AcquiredAbilities[AbilityDefinitionManager.Instance[abilityName]].Level = abilityLevel;
+            DoTariaPlayer dotariaPlayer = DoTariaPlayer.Get(Main.player[whichPlayer]);
+
+            dotariaPlayer.AcquireOrLevelUp(AbilityDefinitionManager.Instance[abilityName], networkCall: true);
             return true;
         }
 

@@ -1,9 +1,4 @@
 ﻿using DoTaria.Abilities;
-using DoTaria.Enums;
-using DoTaria.Extensions;
-using DoTaria.Players;
-using Microsoft.Xna.Framework;
-using Terraria;
 
 namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
 {

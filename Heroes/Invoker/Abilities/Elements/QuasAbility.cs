@@ -18,6 +18,6 @@ namespace DoTaria.Heroes.Invoker.Abilities.Elements
         public override void CastElementPlayerResetEffects(DoTariaPlayer player, PlayerAbility playerAbility) =>
             player.player.lifeRegen += GetExtraHealthRegeneration(playerAbility.Level);
 
-        public static int GetExtraHealthRegeneration(int level) => 1 + 2 * (level - 1);
+        public static int GetExtraHealthRegeneration(int level) => 1 + 1 * (level - 1);
     }
 }

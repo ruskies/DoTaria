@@ -34,6 +34,7 @@ namespace DoTaria.Players
             HeroSelected = tag.GetBool(nameof(HeroSelected));
 
             LoadShadowFiend(tag);
+            LoadInvoker(tag);
         }
     }
 }
