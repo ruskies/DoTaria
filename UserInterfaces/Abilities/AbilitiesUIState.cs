@@ -142,13 +142,13 @@ namespace DoTaria.UserInterfaces.Abilities
 
                     UIAbilityButton abilityButton = GetAbilityButtonForAbility(ability);
                     abilityButton.CurrentLevel = 0;
-                    abilityButton.MaxLevel = 0;
+                    abilityButton.Ability = null;
 
                 }
             }
             foreach (var button in _abilityButtons)
             {
-                button.MaxLevel = 0;
+                button.Ability = null;
                 button.CurrentLevel = 0;
             }
         }
@@ -179,6 +179,7 @@ namespace DoTaria.UserInterfaces.Abilities
             {
                 UIAbilityButton upgradeButton = GetUpgradeButtonForAbility(ability);
                 UIAbilityButton abilityButton = GetAbilityButtonForAbility(ability);
+                abilityButton.Ability = ability;
 
                 if (dotariaPlayer.AcquiredAbilities.Count > 0)
                 {
@@ -188,7 +189,7 @@ namespace DoTaria.UserInterfaces.Abilities
 
                         abilityButton.Percent = percent;
                         abilityButton.CurrentLevel = dotariaPlayer.AcquiredAbilities[ability].Level;
-                        abilityButton.MaxLevel = ability.MaxLevel;
+                        abilityButton.Ability = ability;
 
                         if (dotariaPlayer.AcquiredAbilities[ability].Cooldown > 0)
                             abilityButton.Seconds = dotariaPlayer.AcquiredAbilities[ability].Cooldown / DoTariaMath.TICKS_PER_SECOND + 1;
