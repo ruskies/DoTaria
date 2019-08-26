@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using System;
+using System.Text;
 using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
@@ -85,7 +86,7 @@ namespace DoTaria.UserInterfaces
             spriteBatch.Draw(Main.magicPixel, position, new Rectangle(0, 0, PANEL_WIDTH, PANEL_HEIGHT), Color.Black * 0.75f, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
             spriteBatch.Draw(Main.magicPixel, position + new Vector2(2, 2), new Rectangle(0, 0, PANEL_WIDTH - 4, 32), Color.Gray * 0.75f, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
             spriteBatch.DrawString(Main.fontMouseText, ability.DisplayName, position + new Vector2(6, 8), Color.White);
-            spriteBatch.DrawString(Main.fontMouseText, "Level: " + CurrentLevel, position + new Vector2(PANEL_WIDTH - 70, 8), Color.White);
+            spriteBatch.DrawString(Main.fontMouseText, CurrentLevel > 0 ?("Level: " + CurrentLevel) : "Not Learned", position + new Vector2(PANEL_WIDTH - (CurrentLevel > 0 ? 70 : 110), 8), Color.White);
 
             Texture2D manacostTexture = DoTariaMod.Instance.GetTexture("UserInterfaces/Abilities/ManacostIcon");
             Texture2D cooldownTexture = DoTariaMod.Instance.GetTexture("UserInterfaces/Abilities/CooldownIcon");
@@ -94,21 +95,34 @@ namespace DoTaria.UserInterfaces
 
             if (doTariaPlayer.AcquiredAbilities.ContainsKey(ability))
             {
-                string cooldownText = ability.InternalGetCooldown(doTariaPlayer).ToString();
+                spriteBatch.Draw(cooldownTexture, position + new Vector2(10, PANEL_HEIGHT - 22), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+                spriteBatch.DrawString(Main.fontMouseText, GenerateSlashedStringFor((player, pAbility) => Math.Ceiling((double) pAbility.Ability.InternalGetCooldown(player, pAbility)).ToString(), 
+                        DoTariaPlayer.Get(Main.LocalPlayer), ability), position + new Vector2(30, PANEL_HEIGHT - 24), Color.Gray);
 
-                if (ability.InternalGetCooldown(doTariaPlayer) > 0)
-                {
-                    spriteBatch.Draw(cooldownTexture, position + new Vector2(10, PANEL_HEIGHT - 22), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
-                    spriteBatch.DrawString(Main.fontMouseText, cooldownText, position + new Vector2(30, PANEL_HEIGHT - 24), Color.Gray);
-                }
-
-                if (ability.InternalGetManaCost(doTariaPlayer) > 0)
+                if (ability.AbilityType == AbilityType.Active)
                 {
                     spriteBatch.Draw(manacostTexture, position + new Vector2(PANEL_WIDTH / 2, PANEL_HEIGHT - 22), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
-                    spriteBatch.DrawString(Main.fontMouseText, ability.InternalGetManaCost(doTariaPlayer).ToString(), position + new Vector2(PANEL_WIDTH / 2 + 20, PANEL_HEIGHT - 24), Color.Gray);
+                    spriteBatch.DrawString(Main.fontMouseText, GenerateSlashedStringFor((player, pAbility) => Math.Ceiling(pAbility.Ability.InternalGetManaCost(player, pAbility)).ToString(),
+                            DoTariaPlayer.Get(Main.LocalPlayer), ability), position + new Vector2(PANEL_WIDTH / 2 + 20, PANEL_HEIGHT - 24), Color.Gray);
                 }
             }
         }
+
+        private string GenerateSlashedStringFor(Func<DoTariaPlayer, PlayerAbility, string> informationGetter, DoTariaPlayer dotariaPlayer, AbilityDefinition ability)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 1; i <= ability.MaxLevel; i++)
+            {
+                sb.Append(informationGetter(dotariaPlayer, new PlayerAbility(ability, i, 0)));
+
+                if (i < ability.MaxLevel)
+                    sb.Append("/");
+            }
+
+            return sb.ToString();
+        }
+
 
         private string SpliceText(string text, int lineLength)
         {

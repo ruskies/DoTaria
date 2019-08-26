@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DoTaria.Abilities;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 
 namespace DoTaria.Players
@@ -41,6 +42,26 @@ namespace DoTaria.Players
 
         private void OnKilledNPCAbilities(NPC npc) =>
             ForAllAcquiredAbilities((a, p) => a.OnPlayerKilledNPC(this, p, npc));
+
+        private void OnHitNPCWithItemAbilities(NPC npc, Player player, Item item, int damage, float knockback, bool crit) =>
+            ForAllAcquiredAbilities((a, p) => a.OnPlayerHitNPCWithItem(this, p, npc, player, item, damage, knockback, crit));
+
+        private void OnHitNPCWithProjectileAbilities(NPC npc, Projectile projectile, int damage, float knockback, bool crit) =>
+            ForAllAcquiredAbilities((a, p) => a.OnPlayerHitNPCWithProjectile(this, p, npc, projectile, damage, knockback, crit));
+
+
+        // 
+        private bool PreHurtAbilities(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        {
+            foreach (KeyValuePair<AbilityDefinition, PlayerAbility> kvp in AcquiredAbilities)
+                if (!kvp.Key.OnPlayerPreHurt(this, kvp.Value, pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource))
+                    return false;
+
+            return true;
+        }
+
+        private void PostHurtAbilities(bool pvp, bool quiet, double damage, int hitDirection, bool crit) =>
+            ForAllAcquiredAbilities((a, p) => a.OnPlayerPostHurt(this, p, pvp, quiet, damage, hitDirection, crit));
 
 
         private void PreUpdateAbilities()

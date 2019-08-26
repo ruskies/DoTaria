@@ -47,7 +47,16 @@ namespace DoTaria.Players
             OnKilledNPCLevels(npc);
         }
 
+        public void OnHitNPCWithItem(NPC npc, Player player, Item item, int damage, float knockback, bool crit)
+        {
+            OnHitNPCWithItemHeroes(npc, player, item, damage, knockback, crit);
+            OnHitNPCWithItemAbilities(npc, player, item, damage, knockback, crit);
+        }
 
+        public void OnHitNPCWithProjectile(NPC npc, Projectile projectile, int damage, float knockback, bool crit)
+        {
+            OnHitNPCWithProjectileAbilities(npc, projectile, damage, knockback, crit);
+        }
 
         #endregion
 
@@ -88,19 +97,23 @@ namespace DoTaria.Players
 
         #region Hurt
 
-        public override void PostHurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
-        {
-            PostHurtHeroes(pvp, quiet, damage, hitDirection, crit);
-
-            base.PostHurt(pvp, quiet, damage, hitDirection, crit);
-        }
-
         public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
             if (!PreHurtHeroes(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource))
                 return false;
 
+            if (!PreHurtAbilities(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource))
+                return false;
+
             return base.PreHurt(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource);
+        }
+
+        public override void PostHurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
+        {
+            PostHurtHeroes(pvp, quiet, damage, hitDirection, crit);
+            PostHurtAbilities(pvp, quiet, damage, hitDirection, crit);
+
+            base.PostHurt(pvp, quiet, damage, hitDirection, crit);
         }
 
         #endregion

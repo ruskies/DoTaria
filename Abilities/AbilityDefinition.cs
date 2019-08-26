@@ -9,6 +9,7 @@ using DoTaria.Statistic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 
 namespace DoTaria.Abilities
@@ -108,12 +109,15 @@ namespace DoTaria.Abilities
 
         public virtual bool CanUnlock(DoTariaPlayer dotariaPlayer) => dotariaPlayer.Level != -1 && dotariaPlayer.Level >= UnlockableAtLevel;
 
-        public int InternalGetCooldown(DoTariaPlayer dotariaPlayer) => (int)Math.Ceiling(GetCooldown(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]));
+        public int InternalGetCooldown(DoTariaPlayer dotariaPlayer) => (int)InternalGetCooldown(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
+        public int InternalGetCooldown(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => (int)Math.Ceiling(GetCooldown(dotariaPlayer, playerAbility));
         public abstract float GetCooldown(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility);
+        
 
-        internal float InternalGetManaCost(DoTariaPlayer dotariaPlayer)
+        public float InternalGetManaCost(DoTariaPlayer dotariaPlayer) => InternalGetManaCost(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
+        public float InternalGetManaCost(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility)
         {
-            float manacost = GetManaCost(dotariaPlayer, dotariaPlayer.AcquiredAbilities[this]);
+            float manacost = GetManaCost(dotariaPlayer, playerAbility);
 
             return manacost < 0 ? 0 : manacost;
         }
@@ -159,15 +163,22 @@ namespace DoTaria.Abilities
 
         #region Player Hooks
 
+        public virtual void OnPlayerHitNPCWithItem(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, NPC npc, Player player, Item item, int damage, float knockback, bool crit) { }
+        public virtual void OnPlayerHitNPCWithProjectile(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, NPC npc, Projectile projectile, int damage, float knockback, bool crit) { }
+
+        public virtual void OnPlayerKilledNPC(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, NPC npc) { }
+
         public virtual void ModifyPlayerDrawLayers(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, List<PlayerLayer> layers) { }
 
         public virtual void ModifyWeaponDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, Item item, ref float add, ref float mult, ref float flat) { }
 
+
+        public virtual bool OnPlayerPreHurt(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource) => true;
         public virtual void OnPlayerPostHurt(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool pvp, bool quiet, double damage, int hitDirection, bool crit) { }
 
-        public virtual void OnPlayerPreUpdateMovement(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }
 
         public virtual void OnPlayerPreUpdate(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }
+        public virtual void OnPlayerPreUpdateMovement(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }
 
         #endregion
 

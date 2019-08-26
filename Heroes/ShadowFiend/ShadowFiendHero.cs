@@ -40,13 +40,5 @@ namespace DoTaria.Heroes.ShadowFiend
         {
             dotariaPlayer.Souls = (int)Math.Ceiling(dotariaPlayer.Souls / 2f);
         }
-
-        public override void OnPlayerKilledNPC(DoTariaPlayer dotariaPlayer, NPC npc)
-        {
-            dotariaPlayer.Souls += 1;
-
-            if (npc.boss)
-                dotariaPlayer.Souls += 15;
-        }
     }
 }

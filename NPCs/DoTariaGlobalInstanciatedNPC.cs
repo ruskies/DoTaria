@@ -4,12 +4,11 @@ using Terraria.ModLoader;
 
 namespace DoTaria.NPCs
 {
-    public sealed class DoTariaGlobalHeroesNPC : GlobalNPC
+    public sealed class DoTariaGlobalInstanciatedNPC : GlobalNPC
     {
         public override void OnHitByItem(NPC npc, Player player, Item item, int damage, float knockback, bool crit)
         {
-            DoTariaPlayer dotariaPlayer = DoTariaPlayer.Get(player);
-            dotariaPlayer.Hero.InternalOnNPCHitByItem(dotariaPlayer, npc, damage, knockback, crit);
+            DoTariaPlayer.Get(player).OnHitNPCWithItem(npc, player, item, damage, knockback, crit);
         }
 
         public override void OnHitByProjectile(NPC npc, Projectile projectile, int damage, float knockback, bool crit)
@@ -22,8 +21,7 @@ namespace DoTaria.NPCs
             if (player.name == "")
                 return;
 
-            DoTariaPlayer dotariaPlayer = DoTariaPlayer.Get(player);
-            dotariaPlayer.Hero.InternalOnNPCHitByProjectile(dotariaPlayer, npc, projectile, damage, knockback, crit);
+            DoTariaPlayer.Get(player).OnHitNPCWithProjectile(npc, projectile, damage, knockback, crit);
         }
 
 

@@ -28,9 +28,20 @@ namespace DoTaria.Players
             Hero.InternalOnPlayerEnterWorld(player.GetModPlayer<DoTariaPlayer>());
         }
 
+
         private void OnKilledNPCHeroes(NPC npc)
         {
             Hero.OnPlayerKilledNPC(this, npc);
+        }
+
+        private void OnHitNPCWithItemHeroes(NPC npc, Player player, Item item, int damage, float knockback, bool crit)
+        {
+            Hero.OnNPCHitByItem(this, npc, player, item, damage, knockback, crit);
+        }
+
+        private void OnHitNPCWithProjectileHeroes(DoTariaPlayer dotariaPlayer, NPC npc, Projectile projectile, int damage, float knockback, bool crit)
+        {
+            Hero.OnNPCHitByProjectile(this, npc, projectile, damage, knockback, crit);
         }
 
 
@@ -40,17 +51,17 @@ namespace DoTaria.Players
         }
 
 
-        private void PostHurtHeroes(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
-        {
-            Hero.OnPlayerPostHurt(this, pvp, quiet, damage, hitDirection, crit);
-        }
-
         private bool PreHurtHeroes(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
             if (!Hero.OnPlayerPreHurt(this, pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource))
                 return false;
 
             return true;
+        }
+
+        private void PostHurtHeroes(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
+        {
+            Hero.OnPlayerPostHurt(this, pvp, quiet, damage, hitDirection, crit);
         }
 
 

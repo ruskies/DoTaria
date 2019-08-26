@@ -1,6 +1,8 @@
 ﻿using DoTaria.Abilities;
 using DoTaria.Enums;
+using DoTaria.NPCs;
 using DoTaria.Players;
+using Terraria;
 
 namespace DoTaria.Heroes.Abaddon.Abilities.CurseOfAvernus
 {
@@ -15,7 +17,12 @@ namespace DoTaria.Heroes.Abaddon.Abilities.CurseOfAvernus
         }
 
 
-        
+        public override void OnPlayerHitNPCWithItem(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, NPC npc, Player player, Item item, int damage, float knockback, bool crit)
+        {
+            if (!item.melee) return;
+
+            //npc.GetGlobalNPC<DoTariaGlobalInstanciatedNPC>().AddCurseofAvernus();
+        }
 
 
         public override float GetCooldown(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 0;

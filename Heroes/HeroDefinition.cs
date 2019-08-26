@@ -31,15 +31,7 @@ namespace DoTaria.Heroes
         }
 
 
-        public void InternalOnNPCHitByItem(DoTariaPlayer dotariaPlayer, NPC npc, int damage, float knockback, bool crit) =>
-            OnNPCHitByItem(dotariaPlayer, npc, damage, knockback, crit);
-
-        public virtual void OnNPCHitByItem(DoTariaPlayer dotariaPlayer, NPC npc, int damage, float knockback, bool crit) { }
-
-
-        public void InternalOnNPCHitByProjectile(DoTariaPlayer dotariaPlayer, NPC npc, Projectile projectile, int damage, float knockback, bool crit) =>
-            OnNPCHitByProjectile(dotariaPlayer, npc, projectile, damage, knockback, crit);
-
+        public virtual void OnNPCHitByItem(DoTariaPlayer dotariaPlayer, NPC npc, Player player, Item item, int damage, float knockback, bool crit) { }
 
         public virtual void OnNPCHitByProjectile(DoTariaPlayer dotariaPlayer, NPC npc, Projectile projectile, int damage, float knockback, bool crit) { }
 
@@ -68,10 +60,6 @@ namespace DoTaria.Heroes
         public virtual void OnPlayerKilledNPC(DoTariaPlayer dotariaPlayer, NPC npc) { }
 
 
-        public virtual void OnPlayerPostHurt(DoTariaPlayer dotariaPlayer, bool pvp, bool quiet, double damage, int hitDirection, bool crit) =>
-            dotariaPlayer.ForAllAcquiredAbilities((a, p) => a.OnPlayerPostHurt(dotariaPlayer, p, pvp, quiet, damage, hitDirection, crit));
-
-
         /// <summary></summary>
         /// <param name="dotariaPlayer"></param>
         /// <param name="pvp"></param>
@@ -85,6 +73,7 @@ namespace DoTaria.Heroes
         /// <param name="damageSource"></param>
         /// <returns>Return false to stop the player from taking damage. Default returns true.</returns>
         public virtual bool OnPlayerPreHurt(DoTariaPlayer dotariaPlayer, bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource) => true;
+        public virtual void OnPlayerPostHurt(DoTariaPlayer dotariaPlayer, bool pvp, bool quiet, double damage, int hitDirection, bool crit) { }
 
 
         internal void InternalOnPlayerPreUpdateMovement(DoTariaPlayer dotariaPlayer)

@@ -40,7 +40,10 @@ namespace DoTaria.Players
 
         public bool TryActivateAbility(AbilityDefinition ability)
         {
-            PlayerAbility playerAbility = AcquiredAbilities[ability];
+            PlayerAbility playerAbility = GetPlayerAbility(ability);
+
+            if (playerAbility == null)
+                return false;
 
             if (playerAbility.Cooldown > 0 || ability.InternalGetManaCost(this) > player.statMana)
                 return false;

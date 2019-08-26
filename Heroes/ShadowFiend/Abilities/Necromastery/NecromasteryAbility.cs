@@ -16,6 +16,15 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Necromastery
         }
 
 
+        public override void OnPlayerKilledNPC(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, NPC npc)
+        {
+            dotariaPlayer.Souls += 1;
+
+            if (npc.boss)
+                dotariaPlayer.Souls += 15;
+        }
+
+
         public override void ModifyWeaponDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, Item item, ref float add, ref float mult, ref float flat)
         {
             if (item.ranged && item.ammo == 0)

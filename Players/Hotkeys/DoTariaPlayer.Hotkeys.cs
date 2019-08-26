@@ -11,7 +11,13 @@ namespace DoTaria.Players
         {
             foreach (KeyValuePair<ModHotKey, AbilitySlot> kvp in DoTariaMod.Instance.ModHotKeys)
                 if (kvp.Key.JustReleased)
-                    TryActivateAbility(GetAbilityForSlot(kvp.Value));
+                {
+                    AbilityDefinition ability = GetAbilityForSlot(kvp.Value);
+                    if (ability == null)
+                        return;
+
+                    TryActivateAbility(ability);
+                }
         }
     }
 }
