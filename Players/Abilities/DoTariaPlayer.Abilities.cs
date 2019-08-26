@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace DoTaria.Players
 {
-    public sealed partial class DoTariaPlayer : ModPlayer
+    public sealed partial class DoTariaPlayer
     {
         public bool HasAbility(AbilityDefinition ability) => AcquiredAbilities.ContainsKey(ability);
 

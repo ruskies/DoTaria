@@ -38,38 +38,20 @@ namespace DoTaria.Players
             OnEnterWorldNetworking(player);
         }
 
+        #region NPCs
+
         public void OnKilledNPC(NPC npc)
         {
             OnKilledNPCHeroes(npc);
+            OnKilledNPCAbilities(npc);
             OnKilledNPCLevels(npc);
         }
 
 
-        public override void ModifyDrawLayers(List<PlayerLayer> layers)
-        {
-            ModifyDrawLayersAbilities(layers);
-        }
 
-        public override void ModifyWeaponDamage(Item item, ref float add, ref float mult, ref float flat)
-        {
-            ModifyWeaponDamageHeroes(item, ref add, ref mult, ref flat);
-        }
+        #endregion
 
-        public override void OnRespawn(Player player)
-        {
-            if (!mod.GetConfig<DoTariaGlobalConfiguration>().EnableModCompatibility)
-            {
-                player.statLife = player.statLifeMax2;
-                player.statMana = player.statManaMax2;
-            }
-        }
-
-        public override void PostHurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
-        {
-            PostHurtHeroes(pvp, quiet, damage, hitDirection, crit);
-            
-            base.PostHurt(pvp, quiet, damage, hitDirection, crit);
-        }
+        #region Updates
 
         public override void PostUpdate()
         {
@@ -80,14 +62,6 @@ namespace DoTaria.Players
                 for (int i = 0; i < sdoppu.Count; i++)
                     sdoppu[i].SpawnDustOnPlayerPostUpdate(this);
             }
-        }
-
-        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
-        {
-            if (!PreHurtHeroes(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource))
-                return false;
-
-            return base.PreHurt(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource);
         }
 
         public override void PreUpdate()
@@ -108,6 +82,47 @@ namespace DoTaria.Players
             PreUpdateMovementHeroes();
 
             PreUpdateMovementAbilities();
+        }
+
+        #endregion
+
+        #region Hurt
+
+        public override void PostHurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
+        {
+            PostHurtHeroes(pvp, quiet, damage, hitDirection, crit);
+
+            base.PostHurt(pvp, quiet, damage, hitDirection, crit);
+        }
+
+        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        {
+            if (!PreHurtHeroes(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource))
+                return false;
+
+            return base.PreHurt(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource);
+        }
+
+        #endregion
+
+        public override void ModifyDrawLayers(List<PlayerLayer> layers)
+        {
+            ModifyDrawLayersAbilities(layers);
+        }
+
+        public override void ModifyWeaponDamage(Item item, ref float add, ref float mult, ref float flat)
+        {
+            ModifyWeaponDamageHeroes(item, ref add, ref mult, ref flat);
+            ModifyWeaponDamageAbilities(item, ref add, ref mult, ref flat);
+        }
+
+        public override void OnRespawn(Player player)
+        {
+            if (!mod.GetConfig<DoTariaGlobalConfiguration>().EnableModCompatibility)
+            {
+                player.statLife = player.statLifeMax2;
+                player.statMana = player.statManaMax2;
+            }
         }
 
 

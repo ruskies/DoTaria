@@ -15,6 +15,9 @@ namespace DoTaria.Heroes.Abaddon.Abilities.CurseOfAvernus
         }
 
 
+        
+
+
         public override float GetCooldown(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 0;
 
         public override float GetManaCost(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 0;

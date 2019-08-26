@@ -19,7 +19,14 @@ namespace DoTaria.Players
             foreach (KeyValuePair<AbilityDefinition, PlayerAbility> kvp in AcquiredAbilities)
                 kvp.Key.ModifyPlayerDrawLayers(this, kvp.Value, layers);
         }
-        
+
+        private void ModifyWeaponDamageAbilities(Item item, ref float add, ref float mult, ref float flat)
+        {
+            foreach (KeyValuePair<AbilityDefinition, PlayerAbility> kvp in this.AcquiredAbilities)
+                kvp.Key.ModifyWeaponDamage(this, kvp.Value, item, ref add, ref mult, ref flat);
+        }
+
+
         private void OnEnterWorldAbilities(Player player)
         {
             DisplayedAbilities.Clear();
@@ -31,6 +38,10 @@ namespace DoTaria.Players
                 if (ability.AlwaysShowInAbilitiesBar)
                     DisplayedAbilities.Add(ability);
         }
+
+        private void OnKilledNPCAbilities(NPC npc) =>
+            ForAllAcquiredAbilities((a, p) => a.OnPlayerKilledNPC(this, p, npc));
+
 
         private void PreUpdateAbilities()
         {
@@ -55,6 +66,7 @@ namespace DoTaria.Players
         {
             ForAllAcquiredAbilities((a, p) => a.OnPlayerPreUpdateMovement(this, p));
         }
+
 
         private void ResetEffectsAbilities()
         {
