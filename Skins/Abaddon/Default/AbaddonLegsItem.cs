@@ -1,8 +1,7 @@
-﻿using DoTaria.Skins;
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DoTaria.Heroes.Abaddon.Skins.Default
+namespace DoTaria.Skins.Abaddon.Default
 {
     [AutoloadEquip(EquipType.Legs)]
     public sealed class AbaddonLegsItem : SkinLegsItem

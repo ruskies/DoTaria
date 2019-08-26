@@ -16,6 +16,9 @@ namespace DoTaria.Heroes.Abaddon.Abilities.AphoticShield
         }
 
 
+
+
+
         public override float GetCooldown(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 14 - playerAbility.Level * 2;
 
         public override float GetManaCost(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 95 + playerAbility.Level * 5;

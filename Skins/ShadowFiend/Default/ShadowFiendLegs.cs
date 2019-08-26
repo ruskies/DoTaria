@@ -1,12 +1,12 @@
 ﻿using DoTaria.Dusts;
+using DoTaria.Dusts.Heroes.ShadowFiend.Default;
 using DoTaria.Players;
-using DoTaria.Skins;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DoTaria.Heroes.ShadowFiend.Skins.Default
+namespace DoTaria.Skins.ShadowFiend.Default
 {
     [AutoloadEquip(EquipType.Legs)]
     public sealed class ShadowFiendLegs : SkinLegsItem, ISpawnDustOnPlayerPostUpdate

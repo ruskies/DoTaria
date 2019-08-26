@@ -1,9 +1,10 @@
 ﻿using DoTaria.Abilities;
 using DoTaria.Commons;
+using DoTaria.Dusts.Heroes.ShadowFiend.Default;
 using DoTaria.Enums;
 using DoTaria.Extensions;
-using DoTaria.Heroes.ShadowFiend.Skins.Default;
 using DoTaria.Players;
+using DoTaria.Skins.ShadowFiend.Default;
 using DoTaria.Statistic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -41,6 +42,9 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
 
             return true;
         }
+
+
+        public float GetDamageIncreasePerStack(int abilityLevel) => 40 + abilityLevel * 10;
 
 
         // TODO Add support for talents.

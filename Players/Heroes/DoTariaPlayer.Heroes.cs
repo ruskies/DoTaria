@@ -1,4 +1,6 @@
-﻿using DoTaria.Heroes;
+﻿using System.Collections.Generic;
+using DoTaria.Abilities;
+using DoTaria.Heroes;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;

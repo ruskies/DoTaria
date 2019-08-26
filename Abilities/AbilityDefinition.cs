@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DoTaria.Commons;
 using DoTaria.Enums;
 using DoTaria.Extensions;
@@ -8,6 +9,7 @@ using DoTaria.Statistic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace DoTaria.Abilities
 {
@@ -148,7 +150,16 @@ namespace DoTaria.Abilities
         public virtual void OnAbilityLeveledUp(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }
 
 
+        public void InternalOnAbilityCooldownExpired(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) =>
+            OnAbilityCooldownExpired(dotariaPlayer, playerAbility);
+
+        public virtual void OnAbilityCooldownExpired(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) =>
+            dotariaPlayer.TryActivateAbility(this);
+
+
         #region Player Hooks
+
+        public virtual void ModifyPlayerDrawLayers(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, List<PlayerLayer> layers) { }
 
         public virtual void ModifyWeaponDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, Item item, ref float add, ref float mult, ref float flat) { }
 

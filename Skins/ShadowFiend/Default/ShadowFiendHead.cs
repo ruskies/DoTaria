@@ -1,8 +1,7 @@
-﻿using DoTaria.Skins;
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DoTaria.Heroes.ShadowFiend.Skins.Default
+namespace DoTaria.Skins.ShadowFiend.Default
 {
     [AutoloadEquip(EquipType.Head)]
     public sealed class ShadowFiendHead : SkinHeadItem

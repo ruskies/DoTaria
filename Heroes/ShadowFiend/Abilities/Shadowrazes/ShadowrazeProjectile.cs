@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DoTaria.Extensions;
-using DoTaria.Heroes.ShadowFiend.Skins.Default;
 using DoTaria.Items;
 using DoTaria.Projectiles;
 using Microsoft.Xna.Framework;

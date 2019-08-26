@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DoTaria.Abilities;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace DoTaria.Players
 {
@@ -13,6 +14,12 @@ namespace DoTaria.Players
         }
 
 
+        private void ModifyDrawLayersAbilities(List<PlayerLayer> layers)
+        {
+            foreach (KeyValuePair<AbilityDefinition, PlayerAbility> kvp in AcquiredAbilities)
+                kvp.Key.ModifyPlayerDrawLayers(this, kvp.Value, layers);
+        }
+        
         private void OnEnterWorldAbilities(Player player)
         {
             DisplayedAbilities.Clear();
@@ -31,8 +38,16 @@ namespace DoTaria.Players
 
             ForAllAcquiredAbilities((a, p) =>
             {
+                bool hadCooldown = false;
+
                 if (p.Cooldown > 0)
+                {
+                    hadCooldown = true;
                     p.Cooldown--;
+                }
+
+                if (hadCooldown && p.Cooldown == 0 && a.AbilityType == AbilityType.Passive)
+                    a.InternalOnAbilityCooldownExpired(this, p);
             });
         }
 

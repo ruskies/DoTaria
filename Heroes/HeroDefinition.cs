@@ -31,6 +31,19 @@ namespace DoTaria.Heroes
         }
 
 
+        public void InternalOnNPCHitByItem(DoTariaPlayer dotariaPlayer, NPC npc, int damage, float knockback, bool crit) =>
+            OnNPCHitByItem(dotariaPlayer, npc, damage, knockback, crit);
+
+        public virtual void OnNPCHitByItem(DoTariaPlayer dotariaPlayer, NPC npc, int damage, float knockback, bool crit) { }
+
+
+        public void InternalOnNPCHitByProjectile(DoTariaPlayer dotariaPlayer, NPC npc, Projectile projectile, int damage, float knockback, bool crit) =>
+            OnNPCHitByProjectile(dotariaPlayer, npc, projectile, damage, knockback, crit);
+
+
+        public virtual void OnNPCHitByProjectile(DoTariaPlayer dotariaPlayer, NPC npc, Projectile projectile, int damage, float knockback, bool crit) { }
+
+
         internal void InternalOnPlayerEnterWorld(DoTariaPlayer dotariaPlayer)
         {
             VerifyAndApplyBuffs(dotariaPlayer);

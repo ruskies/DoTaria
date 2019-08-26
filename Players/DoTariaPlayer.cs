@@ -45,6 +45,11 @@ namespace DoTaria.Players
         }
 
 
+        public override void ModifyDrawLayers(List<PlayerLayer> layers)
+        {
+            ModifyDrawLayersAbilities(layers);
+        }
+
         public override void ModifyWeaponDamage(Item item, ref float add, ref float mult, ref float flat)
         {
             ModifyWeaponDamageHeroes(item, ref add, ref mult, ref flat);

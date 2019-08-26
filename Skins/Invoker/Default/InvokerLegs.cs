@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DoTaria.Skins;
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DoTaria.Heroes.Invoker.Skins.Default
+namespace DoTaria.Skins.Invoker.Default
 {
     [AutoloadEquip(EquipType.Legs)]
     public sealed class InvokerLegs : SkinLegsItem

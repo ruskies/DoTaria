@@ -1,10 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ModLoader;
 
-namespace DoTaria.Heroes.ShadowFiend.Skins.Default
+namespace DoTaria.Dusts.Heroes.ShadowFiend.Default
 {
-    public class ShadowTrail : ModDust
+    public class ShadowTrail : DoTariaDust
     {
         public override void OnSpawn(Dust dust)
         {

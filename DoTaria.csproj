@@ -23,7 +23,8 @@
     <None Remove="LICENSE" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Heroes\Terrorblade\Skins\Default\" />
+    <Folder Include="Skins\Terrorblade\Default\" />
     <Folder Include="Network\Heroes\" />
+    <Folder Include="Skins\Terrorblade\" />
   </ItemGroup>
 </Project>

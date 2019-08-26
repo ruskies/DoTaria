@@ -31,6 +31,11 @@ namespace DoTaria.Heroes.ShadowFiend
         }
 
 
+        public override void OnNPCHitByProjectile(DoTariaPlayer dotariaPlayer, NPC npc, Projectile projectile, int damage, float knockback, bool crit)
+        {
+            
+        }
+
         public override void OnPlayerDeath(DoTariaPlayer dotariaPlayer, double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
             dotariaPlayer.Souls = (int)Math.Ceiling(dotariaPlayer.Souls / 2f);

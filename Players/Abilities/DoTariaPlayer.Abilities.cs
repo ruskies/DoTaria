@@ -38,13 +38,8 @@ namespace DoTaria.Players
         }
 
 
-        public bool TryActivateAbility(AbilitySlot abilitySlot)
+        public bool TryActivateAbility(AbilityDefinition ability)
         {
-            AbilityDefinition ability = GetAbilityForSlot(abilitySlot);
-
-            if (ability == null || !HasAbility(ability))
-                return false;
-
             PlayerAbility playerAbility = AcquiredAbilities[ability];
 
             if (playerAbility.Cooldown > 0 || ability.InternalGetManaCost(this) > player.statMana)
@@ -67,6 +62,17 @@ namespace DoTaria.Players
 
             return false;
         }
+
+        public bool TryActivateAbility(AbilitySlot abilitySlot)
+        {
+            AbilityDefinition ability = GetAbilityForSlot(abilitySlot);
+
+            if (ability == null || !HasAbility(ability))
+                return false;
+
+            return TryActivateAbility(ability);
+        }
+
 
         public AbilityDefinition GetAbilityForSlot(AbilitySlot abilitySlot)
         {
