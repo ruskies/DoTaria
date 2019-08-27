@@ -1,6 +1,6 @@
-displayName = DoTaria
+displayName = DoTaria - Heroes of Dota in Terraria
 author = Webmilio, Blockaroz, HellGoesOn
-version = 0.1.6
+version = 0.1.7
 side = Both
 homepage = https://forums.terraria.org/index.php?threads/dotaria.82253/
 hideCode = false
