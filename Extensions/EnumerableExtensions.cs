@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace DoTaria.Extensions
 {
@@ -10,6 +11,13 @@ namespace DoTaria.Extensions
         public static string GenerateSlashedString(this float[] values)
         {
             StringBuilder sb = new StringBuilder();
+
+            int matches = 0;
+
+            matches = values.Count(x => x == values[0]);
+
+            if (matches >= values.Length)
+                return values[0].ToString();
 
             for (int i = 0; i < values.Length; i++)
             {
