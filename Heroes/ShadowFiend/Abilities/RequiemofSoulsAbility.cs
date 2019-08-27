@@ -2,6 +2,7 @@
 using DoTaria.Enums;
 using DoTaria.Players;
 using DoTaria.Statistic;
+using Terraria;
 
 namespace DoTaria.Heroes.ShadowFiend.Abilities
 {
@@ -13,6 +14,8 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities
             AbilityType.Active, AbilityTargetType.NoTarget, AbilityTargetFaction.Enemies, AbilityTargetUnitType.Living,
             DamageType.Magical, AbilitySlot.Ultimate, 6, 3)
         {
+            if (Main.rand.Next(0, 1000) > 995)
+                DisplayName = "Golden Experience Requiem";
         }
 
 

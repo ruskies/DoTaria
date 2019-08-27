@@ -15,8 +15,10 @@ namespace DoTaria.Heroes.Abaddon.Abilities.AphoticShield
         {
         }
 
-
-
+        public override string GetAbilityTooltip(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility)
+        {
+            return base.GetAbilityTooltip(dotariaPlayer, playerAbility);
+        }
 
 
         public override float GetCooldown(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 14 - playerAbility.Level * 2;

@@ -9,7 +9,7 @@ namespace DoTaria.Abilities
         Heroes = 1 << 0,
         Units = 1 << 1,
         Towers = 1 << 2,
-        Living = Units & Heroes,
-        Everything = Living & Towers
+        Living = Units | Heroes,
+        Everything = Towers | Living
     }
 }

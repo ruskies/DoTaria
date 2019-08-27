@@ -14,16 +14,21 @@ namespace DoTaria.Heroes.Abaddon.Abilities.MistCoil
     {
         private const string UNLOCALIZED_NAME = AbaddonHero.UNLOCALIZED_NAME + ".mistCoil";
 
-        public MistCoilAbility() : base(UNLOCALIZED_NAME, "Mist Coil", 
+        public MistCoilAbility() : base(UNLOCALIZED_NAME, "Mist Coil",
             AbilityType.Active, AbilityTargetType.TargetUnit, AbilityTargetFaction.Allies & AbilityTargetFaction.Enemies, AbilityTargetUnitType.Living,
             DamageType.Pure, AbilitySlot.First, 1, 4)
         {
         }
 
+        public override string GetAbilityTooltip(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) =>
+            "Abaddon releases a coil of deathly mist that can damage an enemy unit or heal a friendly unit at the cost of some of Abaddon's health.\n\n" +
+            $"Self damage: {AbilitiesHelper.GenerateCleanSlashedString((player, ability) => GetSelfDamage(dotariaPlayer, ability), dotariaPlayer, this)}\n" +
+            $"Damage/Heal: {AbilitiesHelper.GenerateCleanSlashedString((player, ability) => InternalGetAbilityDamage(dotariaPlayer, ability), dotariaPlayer, this)}";
+
 
         public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer, float calculatedDamage)
         {
-            dotariaPlayer.player.Hurt(PlayerDeathReason.ByPlayer(dotariaPlayer.player.whoAmI), (int) GetSelfDamage(dotariaPlayer, playerAbility), 1);
+            dotariaPlayer.player.Hurt(PlayerDeathReason.ByPlayer(dotariaPlayer.player.whoAmI), (int)GetSelfDamage(dotariaPlayer, playerAbility), 1);
 
             if (casterIsLocalPlayer)
             {
@@ -41,10 +46,10 @@ namespace DoTaria.Heroes.Abaddon.Abilities.MistCoil
                 else if (npc != null)
                     mistCoil.HomeOntoNPC = npc;
 
-                mistCoil.DamageOnContact = (int) calculatedDamage;
+                mistCoil.DamageOnContact = (int)calculatedDamage;
 
                 NetworkPacketManager.Instance.MistCoilFired.SendPacketToAllClients(dotariaPlayer.player.whoAmI, dotariaPlayer.player.whoAmI, (player != null ? MistCoilFiredPacket.TargetType.Player : MistCoilFiredPacket.TargetType.NPC).ToString(),
-                    projectileId, player?.whoAmI ?? NPCsHelper.GetNPCIdFromNPC(npc), (int) calculatedDamage);
+                    projectileId, player?.whoAmI ?? NPCsHelper.GetNPCIdFromNPC(npc), (int)calculatedDamage);
             }
 
             return true;

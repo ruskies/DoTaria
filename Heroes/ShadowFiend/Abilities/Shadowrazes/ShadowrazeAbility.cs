@@ -3,6 +3,7 @@ using DoTaria.Commons;
 using DoTaria.Dusts.Heroes.ShadowFiend.Default;
 using DoTaria.Enums;
 using DoTaria.Extensions;
+using DoTaria.Helpers;
 using DoTaria.Players;
 using DoTaria.Skins.ShadowFiend.Default;
 using DoTaria.Statistic;
@@ -24,6 +25,13 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
         {
         }
 
+        public override string GetAbilityTooltip(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) =>
+            $"Base damage: {AbilitiesHelper.GenerateCleanSlashedString(InternalGetAbilityDamage, dotariaPlayer, this)}\n" +
+            $"Range: {AbilitiesHelper.GenerateCleanSlashedString(InternalGetCastRange, dotariaPlayer, this)}\n" +
+            $"Bonus per stack: {AbilitiesHelper.GenerateCleanSlashedString(GetDamageIncreasePerStack, dotariaPlayer, this)}\n" + 
+            $"Stack duration: {AbilitiesHelper.GenerateCleanSlashedString(GetStackDuration, dotariaPlayer, this)}";
+
+
         public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer, float calculatedDamage)
         {
             Texture2D texture = typeof(ShadowrazeProjectile).GetTexture();
@@ -44,7 +52,9 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
         }
 
 
-        public float GetDamageIncreasePerStack(int abilityLevel) => 40 + abilityLevel * 10;
+        public float GetDamageIncreasePerStack(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 40 + playerAbility.Level * 10;
+
+        public float GetStackDuration(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => 8;
 
 
         // TODO Add support for talents.

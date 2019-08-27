@@ -16,6 +16,11 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.PresenceoftheDarkLord
         {
         }
 
+        public override string GetAbilityTooltip(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) =>
+            "Shadow Fiend's presence reduces the armor of nearby enemies.\n\n" +
+            $"Reduction (%): {AbilitiesHelper.GenerateCleanSlashedString((player, ability) => GetDefenseReduction(player, ability) * 100, dotariaPlayer, this)}\n" +
+            $"Range: {AbilitiesHelper.GenerateCleanSlashedString(InternalGetCastRange, dotariaPlayer, this)}";
+
 
         public override void OnPlayerPreUpdate(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility)
         {

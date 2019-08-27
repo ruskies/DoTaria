@@ -31,7 +31,7 @@ namespace DoTaria.Abilities
         /// <param name="alwaysShowInAbilitesBar"></param>
         /// <param name="baseCastRange">The maximum distance between the target point and the player.</param>
         /// <param name="affectsTotalAbilityLevelCount">Should this ability contribute towards the total levels spent on abilities count.</param>
-        protected AbilityDefinition(string unlocalizedName, string displayName, AbilityType abilityType, AbilityTargetType abilityTargetType, AbilityTargetFaction abilityTargetUnitFaction, AbilityTargetUnitType abilityTargetUnitType, DamageType damageType, AbilitySlot abilitySlot, int unlockableAtLevel, int maxLevel, bool alwaysShowInAbilitesBar = true, float baseCastRange = -1, bool affectsTotalAbilityLevelCount = true)
+        protected AbilityDefinition(string unlocalizedName, string displayName, AbilityType abilityType, AbilityTargetType abilityTargetType, AbilityTargetFaction abilityTargetUnitFaction, AbilityTargetUnitType abilityTargetUnitType, DamageType damageType, AbilitySlot abilitySlot, int unlockableAtLevel, int maxLevel, bool alwaysShowInAbilitesBar = true, float baseCastRange = -1, bool affectsTotalAbilityLevelCount = true, DispelType baseDispelType = DispelType.None)
         {
             UnlocalizedName = unlocalizedName;
             DisplayName = displayName;
@@ -52,7 +52,13 @@ namespace DoTaria.Abilities
 
             BaseCastRange = baseCastRange;
             AffectsTotalAbilityLevelCount = affectsTotalAbilityLevelCount;
+
+            BaseDispelType = baseDispelType;
         }
+
+
+        // TODO Change this to abstract
+        public virtual string GetAbilityTooltip(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => "ABILITY NOT YET IMPLEMENTED/TOOLTIP NOT YET WRITTEN";
 
 
         public virtual void OnAbilityCasted(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }
@@ -161,6 +167,9 @@ namespace DoTaria.Abilities
             dotariaPlayer.TryActivateAbility(this);
 
 
+        public virtual DispelType GetDispelType(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => BaseDispelType;
+
+
         #region Player Hooks
 
         public virtual void OnPlayerHitNPCWithItem(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, NPC npc, Player player, Item item, int damage, float knockback, bool crit) { }
@@ -184,7 +193,7 @@ namespace DoTaria.Abilities
 
 
         public string UnlocalizedName { get; }
-        public string DisplayName { get; }
+        public string DisplayName { get; protected set; }
 
         public AbilityType AbilityType { get; }
         public AbilityTargetType AbilityTargetType { get; }
@@ -199,10 +208,11 @@ namespace DoTaria.Abilities
         public int MaxLevel { get; }
 
         public bool AlwaysShowInAbilitiesBar { get; }
+        public bool AffectsTotalAbilityLevelCount { get; }
 
         public float BaseCastRange { get; }
 
-        public bool AffectsTotalAbilityLevelCount { get; }
+        public DispelType BaseDispelType { get; }
 
         public Texture2D Icon => this.GetType().GetTexture();
     }

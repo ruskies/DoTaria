@@ -12,6 +12,7 @@ namespace DoTaria.Extensions
         {
             StringBuilder sb = new StringBuilder();
 
+            
             int matches = 0;
 
             matches = values.Count(x => x == values[0]);

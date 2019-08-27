@@ -11,7 +11,7 @@ namespace DoTaria.Heroes.Abaddon.Abilities.CurseOfAvernus
         public const string UNLOCALIZED_NAME = AbaddonHero.UNLOCALIZED_NAME + ".curseOfAvernus";
 
         public CurseofAvernusAbility() : base(UNLOCALIZED_NAME, "Curse of Avernus", AbilityType.Passive, 
-            AbilityTargetType.NoTarget, AbilityTargetFaction.Self & AbilityTargetFaction.Allies & AbilityTargetFaction.Enemies, AbilityTargetUnitType.Everything,
+            AbilityTargetType.NoTarget, AbilityTargetFaction.Self & AbilityTargetFaction.Allies & AbilityTargetFaction.Enemies, AbilityTargetUnitType.Living,
             DamageType.None, AbilitySlot.Third, 1, 4)
         {
         }

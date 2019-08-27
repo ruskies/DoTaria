@@ -1,5 +1,9 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using DoTaria.Abilities;
+using DoTaria.Extensions;
+using DoTaria.Players;
 
 namespace DoTaria.Helpers
 {
@@ -33,5 +37,44 @@ namespace DoTaria.Helpers
 
             return abilities;
         }
+
+
+        public static List<float> GetDifferentValues(Func<DoTariaPlayer, PlayerAbility, float> informationGetter, DoTariaPlayer dotariaPlayer, AbilityDefinition ability)
+        {
+            List<float> differentValues = new List<float>();
+
+            for (int i = 1; i <= ability.MaxLevel; i++)
+            {
+                float value = informationGetter(dotariaPlayer, new PlayerAbility(ability, i, 0));
+
+                if (!differentValues.Contains(value))
+                    differentValues.Add(value);
+            }
+
+            return differentValues;
+        }
+
+        public static float[] GetAllValues(Func<DoTariaPlayer, PlayerAbility, float> informationGetter, DoTariaPlayer dotariaPlayer, AbilityDefinition ability)
+        {
+            float[] values = new float[ability.MaxLevel];
+
+            for (int i = 1; i <= ability.MaxLevel; i++)
+                values[i - 1] = informationGetter(dotariaPlayer, new PlayerAbility(ability, i, 0));
+
+            return values;
+        }
+
+
+        public static string GenerateCleanSlashedString(float[] values, List<float> differentValues)
+        {
+            if (differentValues.Count == 1)
+                return differentValues[0].ToString();
+
+            return values.GenerateSlashedString();
+        }
+
+
+        public static string GenerateCleanSlashedString(Func<DoTariaPlayer, PlayerAbility, float> informationGetter, DoTariaPlayer dotariaPlayer, AbilityDefinition ability) =>
+            GenerateCleanSlashedString(GetAllValues(informationGetter, dotariaPlayer, ability), GetDifferentValues(informationGetter, dotariaPlayer, ability));
     }
 }

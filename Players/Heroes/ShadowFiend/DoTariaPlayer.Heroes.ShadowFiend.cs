@@ -35,7 +35,7 @@ namespace DoTaria.Players
                     return;
                 }
 
-                int maxSouls = necromastery.GetMaxSouls(this);
+                int maxSouls = necromastery.GetMaxSouls(this, AcquiredAbilities[necromastery]);
 
                 if (_souls > maxSouls || value == _souls || _souls == maxSouls)
                     return;
