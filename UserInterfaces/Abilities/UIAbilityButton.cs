@@ -129,7 +129,7 @@ namespace DoTaria.UserInterfaces.Abilities
 
             spriteBatch.Draw(Main.magicPixel, position, new Rectangle(0, 0, panelWidth, panelHeight), Color.Black * 0.75f, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
             spriteBatch.Draw(Main.magicPixel, position + new Vector2(2, 2), new Rectangle(0, 0, panelWidth - 4, 32), Color.Gray * 0.75f, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(Main.fontMouseText, ability.DisplayName.ToUpper(), position + new Vector2(6, 8), Color.White);
+            spriteBatch.DrawString(Main.fontMouseText, ability.DisplayName, position + new Vector2(6, 8), Color.White);
             spriteBatch.DrawString(Main.fontMouseText, "Level: " + CurrentLevel, position + new Vector2(panelWidth - 56, 12), Color.White, 0, Vector2.Zero, 0.75f, SpriteEffects.None, 1f);
 
             spriteBatch.DrawString(Main.fontMouseText, finaliziedDescription, position + new Vector2(10, 40), Color.Gray, 0, Vector2.Zero, 0.85f, SpriteEffects.None, 1f);

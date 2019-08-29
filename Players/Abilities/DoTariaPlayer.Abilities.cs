@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DoTaria.Abilities;
 using DoTaria.Network;
 using Terraria;
@@ -11,7 +12,6 @@ namespace DoTaria.Players
     public sealed partial class DoTariaPlayer
     {
         public bool HasAbility(AbilityDefinition ability) => AcquiredAbilities.ContainsKey(ability);
-
         public bool HasAbility(AbilityDefinition ability, int level) => HasAbility(ability) && level <= AcquiredAbilities[ability].Level;
 
         public void AcquireOrLevelUp(AbilityDefinition ability, bool callAbilityLeveledUp = true, bool networkCall = false)
@@ -65,6 +65,8 @@ namespace DoTaria.Players
 
             return false;
         }
+
+
 
         public bool TryActivateAbility(AbilitySlot abilitySlot)
         {

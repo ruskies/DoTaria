@@ -30,6 +30,8 @@ namespace DoTaria.Heroes
             _abilities = new List<AbilityDefinition>(abilities);
         }
 
+        public virtual string GetAghanimsUpgrade(DoTariaPlayer dotariaPlayer) => null;
+
 
         public virtual void OnNPCHitByItem(DoTariaPlayer dotariaPlayer, NPC npc, Player player, Item item, int damage, float knockback, bool crit) { }
 

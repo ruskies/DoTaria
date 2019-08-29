@@ -26,7 +26,7 @@ namespace DoTaria.Heroes.Abaddon.Abilities.MistCoil
             $"Damage/Heal: {AbilitiesHelper.GenerateCleanSlashedString((player, ability) => InternalGetAbilityDamage(dotariaPlayer, ability), dotariaPlayer, this)}";
 
 
-        public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer, float calculatedDamage)
+        public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer)
         {
             dotariaPlayer.player.Hurt(PlayerDeathReason.ByPlayer(dotariaPlayer.player.whoAmI), (int)GetSelfDamage(dotariaPlayer, playerAbility), 1);
 
@@ -46,10 +46,10 @@ namespace DoTaria.Heroes.Abaddon.Abilities.MistCoil
                 else if (npc != null)
                     mistCoil.HomeOntoNPC = npc;
 
-                mistCoil.DamageOnContact = (int)calculatedDamage;
+                mistCoil.DamageOnContact = (int)InternalGetAbilityDamage(dotariaPlayer, playerAbility);
 
                 NetworkPacketManager.Instance.MistCoilFired.SendPacketToAllClients(dotariaPlayer.player.whoAmI, dotariaPlayer.player.whoAmI, (player != null ? MistCoilFiredPacket.TargetType.Player : MistCoilFiredPacket.TargetType.NPC).ToString(),
-                    projectileId, player?.whoAmI ?? NPCsHelper.GetNPCIdFromNPC(npc), (int)calculatedDamage);
+                    projectileId, player?.whoAmI ?? NPCsHelper.GetNPCIdFromNPC(npc), (int)mistCoil.DamageOnContact);
             }
 
             return true;

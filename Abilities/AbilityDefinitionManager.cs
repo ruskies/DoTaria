@@ -5,6 +5,7 @@ using DoTaria.Heroes.Abaddon.Abilities.CurseOfAvernus;
 using DoTaria.Heroes.Abaddon.Abilities.MistCoil;
 using DoTaria.Heroes.Invoker.Abilities;
 using DoTaria.Heroes.Invoker.Abilities.Elements;
+using DoTaria.Heroes.Invoker.Abilities.InvokableAbilities;
 using DoTaria.Heroes.ShadowFiend.Abilities;
 using DoTaria.Heroes.ShadowFiend.Abilities.Necromastery;
 using DoTaria.Heroes.ShadowFiend.Abilities.PresenceoftheDarkLord;
@@ -33,6 +34,8 @@ namespace DoTaria.Abilities
             Wex = Add(new WexAbility()) as WexAbility;
 
             Invoke = Add(new InvokeAbility()) as InvokeAbility;
+
+            GhostWalk = Add(new GhostWalkAbility()) as GhostWalkAbility;
 
             #endregion
 
@@ -68,6 +71,8 @@ namespace DoTaria.Abilities
         public WexAbility Wex { get; private set; }
 
         public InvokeAbility Invoke { get; private set; }
+
+        public GhostWalkAbility GhostWalk { get; private set; }
 
         #endregion
 

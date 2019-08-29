@@ -18,7 +18,7 @@ namespace DoTaria.Heroes.Invoker.Abilities.Elements
         }
 
 
-        public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer, float calculatedDamage)
+        public override bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer)
         {
             CombatText.NewText(new Rectangle((int) dotariaPlayer.player.position.X, (int) dotariaPlayer.player.position.Y,
                 (int) (dotariaPlayer.player.width), (int) (dotariaPlayer.player.height)), AbilityColor, DisplayName);
@@ -28,7 +28,7 @@ namespace DoTaria.Heroes.Invoker.Abilities.Elements
         }
 
 
-        public virtual void CastElementPlayerResetEffects(DoTariaPlayer player, PlayerAbility playerAbility) { }
+        public virtual void CastElementPlayerResetEffects(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }
 
         public virtual void CastElementModifyWeaponDamage(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, Item item, ref float add, ref float mult, ref float flat) { }
 

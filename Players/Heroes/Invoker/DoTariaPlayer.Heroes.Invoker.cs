@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using DoTaria.Heroes.Invoker.Abilities.Elements;
+using DoTaria.Heroes.Invoker.Abilities.InvokableAbilities;
 using Terraria.ModLoader.IO;
 
 namespace DoTaria.Players
 {
     public sealed partial class DoTariaPlayer
     {
-        internal readonly List<InvokerElementAbility> currentInvokerElements = new List<InvokerElementAbility>();
-
+        internal List<InvokerElementAbility> currentInvokerElements = new List<InvokerElementAbility>();
+        internal List<InvokableAbility> currentlyInvokedSpells = new List<InvokableAbility>();
 
         public void CastInvokerElement(InvokerElementAbility ability)
         {
@@ -32,6 +33,20 @@ namespace DoTaria.Players
         }
 
 
+        /*public void InvokerInvokeSpell(InvokableAbility invokableAbility)
+        {
+            int existingIndex = currentlyInvokedSpells.FindIndex(s => s == invokableAbility);
+
+            if (existingIndex != -1)
+            {
+                if (existingIndex == 0)
+                    return; // The spell is already the first in the list, no need to do anything.
+                else if (currentlyInvokedSpells.Count >= 2)
+
+            }
+        }*/
+
+
         private void InitializeInvoker()
         {
             
@@ -47,7 +62,8 @@ namespace DoTaria.Players
 
         private void LoadInvoker(TagCompound tag)
         {
-            currentInvokerElements.Clear();
+            currentInvokerElements = new List<InvokerElementAbility>();
+            currentlyInvokedSpells = new List<InvokableAbility>();
         }
 
 

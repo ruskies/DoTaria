@@ -13,7 +13,8 @@ namespace DoTaria.Heroes.Invoker.Abilities.Elements
 
         public override void ExtraModifyTooltip(DoTariaPlayer dotariaPlayer, int elementCount, ref string tip, ref int rare)
         {
-            tip += $"\nYou move {WexAbility.GetExtraMoveSpeedPercentage(dotariaPlayer.AcquiredAbilities[InvokerElementAbility].Level) * 100 * elementCount}% faster";
+            tip += $"\nYou move {WexAbility.GetExtraMoveSpeedPercentage(dotariaPlayer, dotariaPlayer.AcquiredAbilities[InvokerElementAbility]) * 100 * elementCount}% faster\n" + 
+                $"You regen {WexAbility.GetManaRegenerationPercentage(dotariaPlayer, dotariaPlayer.AcquiredAbilities[InvokerElementAbility]) * 100 * elementCount}% of your maximum mana per second";
         }
     }
 }

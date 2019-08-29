@@ -1,4 +1,5 @@
-﻿using DoTaria.Extensions;
+﻿using System.Collections.Generic;
+using DoTaria.Extensions;
 using DoTaria.Players;
 using Terraria;
 using Terraria.ID;
@@ -12,6 +13,7 @@ namespace DoTaria.Items.Aghanims
             value: Dota2BuyPrice(6200), rarity: ItemRarityID.Expert)
         {
         }
+
 
         public override void SetDefaults()
         {
@@ -35,6 +37,20 @@ namespace DoTaria.Items.Aghanims
 
             recipe.SetResult(this);
             recipe.AddRecipe();
+        }
+
+
+        public override void ModifyTooltips(List<TooltipLine> tooltips)
+        {
+            base.ModifyTooltips(tooltips);
+
+            DoTariaPlayer dotariaPlayer = DoTariaPlayer.Get(Main.LocalPlayer);
+            string tooltip = dotariaPlayer.Hero.GetAghanimsUpgrade(dotariaPlayer);
+
+            if (string.IsNullOrWhiteSpace(tooltip))
+                tooltip = "This hero has no Aghanim's upgrade";
+
+            tooltips.Add(new TooltipLine(mod, AghanimsScepter.TOOLTIP_AGHANIMS_UPGRADE, tooltip));
         }
 
 

@@ -13,7 +13,7 @@ namespace DoTaria.Heroes.Invoker.Abilities.Elements
 
         public override void ExtraModifyTooltip(DoTariaPlayer dotariaPlayer, int elementCount, ref string tip, ref int rare)
         {
-            tip += $"\nYou regenerate an extra {QuasAbility.GetExtraHealthRegeneration(dotariaPlayer.AcquiredAbilities[InvokerElementAbility].Level) * elementCount} life per second";
+            tip += $"\nYou regenerate an extra {QuasAbility.GetExtraHealthRegeneration(dotariaPlayer, dotariaPlayer.AcquiredAbilities[InvokerElementAbility]) * elementCount} life per second";
         }
     }
 }

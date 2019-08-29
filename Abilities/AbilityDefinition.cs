@@ -58,7 +58,7 @@ namespace DoTaria.Abilities
 
 
         // TODO Change this to abstract
-        public virtual string GetAbilityTooltip(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => "ABILITY NOT YET IMPLEMENTED/TOOLTIP NOT YET WRITTEN";
+        public virtual string GetAbilityTooltip(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) => "ABILITY NOT YET IMPLEMENTED/\nTOOLTIP NOT YET WRITTEN";
 
 
         public virtual void OnAbilityCasted(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility) { }
@@ -99,9 +99,7 @@ namespace DoTaria.Abilities
 
         public bool InternalCastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer)
         {
-            float calculatedDamage = InternalGetAbilityDamage(dotariaPlayer, playerAbility);
-
-            if (CastAbility(dotariaPlayer, playerAbility, casterIsLocalPlayer, calculatedDamage))
+            if (CastAbility(dotariaPlayer, playerAbility, casterIsLocalPlayer))
             {
                 playerAbility.Cooldown = playerAbility.Ability.InternalGetCooldown(dotariaPlayer) * DoTariaMath.TICKS_PER_SECOND;
                 return true;
@@ -110,7 +108,7 @@ namespace DoTaria.Abilities
             return false;
         }
 
-        public virtual bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer, float calculatedDamage) => true;
+        public virtual bool CastAbility(DoTariaPlayer dotariaPlayer, PlayerAbility playerAbility, bool casterIsLocalPlayer) => true;
 
 
         public virtual bool CanUnlock(DoTariaPlayer dotariaPlayer) => dotariaPlayer.Level != -1 && dotariaPlayer.Level >= UnlockableAtLevel;

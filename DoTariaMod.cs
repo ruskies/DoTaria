@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using DoTaria.Abilities;
 using DoTaria.Heroes;
+using DoTaria.Heroes.Invoker.Abilities.InvokableAbilities;
 using DoTaria.Leveling.Rules.NPCs;
 using DoTaria.Network;
 using Microsoft.Xna.Framework.Input;
@@ -26,6 +27,8 @@ namespace DoTaria
 
                 LoadHotKeys();
             }
+
+            InvokableAbilities.Load();
         }
 
         public override void Unload()
@@ -43,6 +46,8 @@ namespace DoTaria
             AbilityDefinitionManager.Instance.Unload();
             NetworkPacketManager.Instance.Unload();
             NPCLevelingRulesManager.Instance.Unload();
+
+            InvokableAbilities.Unload();
         }
 
 
