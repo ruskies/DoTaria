@@ -36,6 +36,7 @@ namespace DoTaria.Abilities
             Invoke = Add(new InvokeAbility()) as InvokeAbility;
 
             GhostWalk = Add(new GhostWalkAbility()) as GhostWalkAbility;
+            ColdSnap = Add(new ColdSnapAbility()) as ColdSnapAbility;
 
             #endregion
 
@@ -73,6 +74,7 @@ namespace DoTaria.Abilities
         public InvokeAbility Invoke { get; private set; }
 
         public GhostWalkAbility GhostWalk { get; private set; }
+        public ColdSnapAbility ColdSnap { get; private set; }
 
         #endregion
 
