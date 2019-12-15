@@ -9,6 +9,7 @@ using DoTaria.Network;
 using Microsoft.Xna.Framework.Input;
 using Terraria;
 using Terraria.ModLoader;
+using WebmilioCommons.Networking;
 
 namespace DoTaria
 {
@@ -44,7 +45,7 @@ namespace DoTaria
 
             HeroDefinitionManager.Instance.Unload();
             AbilityDefinitionManager.Instance.Unload();
-            NetworkPacketManager.Instance.Unload();
+            NetworkPacketLoader.Instance.Unload();
             NPCLevelingRulesManager.Instance.Unload();
 
             InvokableAbilities.Unload();

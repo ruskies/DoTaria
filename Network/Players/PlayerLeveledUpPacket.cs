@@ -1,34 +1,20 @@
 ﻿using System.IO;
 using DoTaria.Players;
 using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
+using WebmilioCommons.Networking.Packets;
 
 namespace DoTaria.Network.Players
 {
-    public sealed class PlayerLeveledUpPacket : NetworkPacket
+    public sealed class PlayerLeveledUpPacket : ModPlayerNetworkPacket<DoTariaPlayer>
     {
-        public override bool Receive(BinaryReader reader, int fromWho)
+        protected override bool PostReceive(BinaryReader reader, int fromWho)
         {
-            int whichPlayer = reader.ReadInt32();
-            int howManyLevels = reader.ReadInt32();
+            DoTariaPlayer.Get(Main.player[Player.whoAmI]).LevelUp(LevelsCount);
 
-            if (Main.netMode == NetmodeID.Server)
-                SendPacketToAllClients(fromWho, whichPlayer, howManyLevels);
-
-            DoTariaPlayer dotariaPlayer = DoTariaPlayer.Get(Main.player[whichPlayer]);
-            dotariaPlayer.LevelUp(howManyLevels);
-
-            return true;
+            return base.PostReceive(reader, fromWho);
         }
 
 
-        protected override void SendPacket(ModPacket packet, int toWho, int fromWho, params object[] args)
-        {
-            packet.Send((int) args[0]);
-            packet.Send((int) args[1]);
-
-            packet.Send(toWho, fromWho);
-        }
+        public int LevelsCount { get; set; }
     }
 }

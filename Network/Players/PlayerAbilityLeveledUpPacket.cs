@@ -4,33 +4,30 @@ using DoTaria.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using WebmilioCommons.Networking.Packets;
 
 namespace DoTaria.Network.Players
 {
-    public sealed class PlayerAbilityLeveledUpPacket : NetworkPacket
+    public sealed class PlayerAbilityLeveledUpPacket : ModPlayerNetworkPacket<DoTariaPlayer>
     {
-        public override bool Receive(BinaryReader reader, int fromWho)
+        public PlayerAbilityLeveledUpPacket()
         {
-            int whichPlayer = reader.ReadInt32();
-            string abilityName = reader.ReadString();
-            int abilityLevel = reader.ReadInt32();
+        }
 
-            if (Main.netMode == NetmodeID.Server)
-                NetworkPacketManager.Instance.PlayerAbilityLeveledUp.SendPacketToAllClients(fromWho, whichPlayer, abilityName, abilityLevel);
+        public PlayerAbilityLeveledUpPacket(AbilityDefinition ability)
+        {
+            AbilityName = ability.UnlocalizedName;
+        }
 
-            DoTariaPlayer dotariaPlayer = DoTariaPlayer.Get(Main.player[whichPlayer]);
 
-            dotariaPlayer.AcquireOrLevelUp(AbilityDefinitionManager.Instance[abilityName], networkCall: true);
+        protected override bool PostReceive(BinaryReader reader, int fromWho)
+        {
+            ModPlayer.AcquireOrLevelUp(AbilityDefinitionManager.Instance[AbilityName], networkCall: true);
+
             return true;
         }
 
-        protected override void SendPacket(ModPacket packet, int toWho, int fromWho, params object[] args)
-        {
-            packet.Write((int) args[0]);
-            packet.Write((string) args[1]);
-            packet.Write((int) args[2]);
 
-            packet.Send(toWho, fromWho);
-        }
+        public string AbilityName { get; set; }
     }
 }

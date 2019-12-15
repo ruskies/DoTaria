@@ -4,36 +4,36 @@ using DoTaria.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using WebmilioCommons.Networking.Packets;
 
 namespace DoTaria.Network.Abilities
 {
-    public sealed class AbilityCastedPacket : NetworkPacket
+    public sealed class AbilityCastedPacket : ModPlayerNetworkPacket<DoTariaPlayer>
     {
-        public override bool Receive(BinaryReader reader, int fromWho)
+        public AbilityCastedPacket()
         {
-            int whichPlayer = reader.ReadInt32();
-            string abilityName = reader.ReadString();
-            int newCooldown = reader.ReadInt32();
+        }
 
-            if (Main.netMode == NetmodeID.Server)
-                SendPacketToAllClients(fromWho, whichPlayer, abilityName, newCooldown);
+        public AbilityCastedPacket(AbilityDefinition ability, int newCooldown)
+        {
+            AbilityName = ability.UnlocalizedName;
+            NewCooldown = newCooldown;
+        }
 
-            DoTariaPlayer dotariaPlayer = DoTariaPlayer.Get(Main.player[whichPlayer]);
-            PlayerAbility playerAbility = dotariaPlayer.AcquiredAbilities[AbilityDefinitionManager.Instance[abilityName]];
 
-            playerAbility.Ability.InternalCastAbility(dotariaPlayer, playerAbility, false);
-            playerAbility.Cooldown = newCooldown;
+        protected override bool PostReceive(BinaryReader reader, int fromWho)
+        {
+            PlayerAbility playerAbility = ModPlayer.AcquiredAbilities[AbilityDefinitionManager.Instance[AbilityName]];
+
+            playerAbility.Ability.InternalCastAbility(ModPlayer, playerAbility, false);
+            playerAbility.Cooldown = NewCooldown;
 
             return true;
         }
 
-        protected override void SendPacket(ModPacket packet, int toWho, int fromWho, params object[] args)
-        {
-            packet.Write((int) args[0]);
-            packet.Write((string) args[1]);
-            packet.Write((int) args[2]);
 
-            packet.Send(toWho, fromWho);
-        }
+        public string AbilityName { get; set; }
+
+        public int NewCooldown { get; set; }
     }
 }

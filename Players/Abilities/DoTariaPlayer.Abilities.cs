@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using DoTaria.Abilities;
 using DoTaria.Network;
+using DoTaria.Network.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using WebmilioCommons.Extensions;
 
 namespace DoTaria.Players
 {
@@ -24,8 +26,7 @@ namespace DoTaria.Players
             if (callAbilityLeveledUp)
                 ability.InternalOnAbilityLeveledUp(this);
 
-            if (!networkCall && Main.netMode == NetmodeID.MultiplayerClient)
-                NetworkPacketManager.Instance.PlayerAbilityLeveledUp.SendPacketToAllClients(player.whoAmI, player.whoAmI, ability.UnlocalizedName, AcquiredAbilities[ability].Level);
+            this.SendIfLocal(new PlayerAbilityLeveledUpPacket(ability));
         }
 
 

@@ -8,57 +8,66 @@ using DoTaria.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using WebmilioCommons.Networking.Packets;
 
 namespace DoTaria.Network.Players
 {
-    public sealed class PlayerJoiningSynchronizationPacket : NetworkPacket
+    public sealed class PlayerJoiningSynchronizationPacket : ModPlayerNetworkPacket<DoTariaPlayer>
     {
-        public override bool Receive(BinaryReader reader, int fromWho)
+        private const string HERO_UNDEFINED = "undefined";
+
+
+        public PlayerJoiningSynchronizationPacket()
         {
-            int whichPlayer = reader.ReadInt32();
-            string heroUnlocalizedName = reader.ReadString();
-            int level = reader.ReadInt32();
-            bool isResponse = reader.ReadBoolean();
-            string serializedAbilities = reader.ReadString();
+        }
 
-            if (Main.netMode == NetmodeID.Server)
-                SendPacketToAllClients(fromWho, whichPlayer, heroUnlocalizedName, level, isResponse, serializedAbilities);
+        public PlayerJoiningSynchronizationPacket(DoTariaPlayer dotariaPlayer)
+        {
+            HeroSelected = dotariaPlayer.HeroSelected;
+            Hero = HeroSelected ? dotariaPlayer.Hero.UnlocalizedName : HERO_UNDEFINED;
 
-            DoTariaPlayer dotariaPlayer = DoTariaPlayer.Get(Main.player[whichPlayer]);
+            Level = dotariaPlayer.Level;
+            SerializedAbilities = AbilitiesHelper.SerializeAbilities(dotariaPlayer.AcquiredAbilities.Values.ToArray());
+        }
 
-            dotariaPlayer.Hero = HeroDefinitionManager.Instance[heroUnlocalizedName];
-            dotariaPlayer.Level = level;
 
-            if (!string.IsNullOrWhiteSpace(serializedAbilities))
+        protected override bool PostReceive(BinaryReader reader, int fromWho)
+        {
+            if (!IsResponse && Main.netMode == NetmodeID.MultiplayerClient)
+            {
+                IsResponse = true;
+                Send(Main.myPlayer, Player.whoAmI);
+            }
+
+            if (!HeroSelected) 
+                return true;
+
+            ModPlayer.Hero = HeroDefinitionManager.Instance[Hero];
+            ModPlayer.Level = Level;
+
+            if (!string.IsNullOrWhiteSpace(SerializedAbilities))
             {
                 Dictionary<AbilityDefinition, PlayerAbility> acquiredAbilities = new Dictionary<AbilityDefinition, PlayerAbility>();
-                PlayerAbility[] playerAbilities = AbilitiesHelper.DeserializeAbilities(serializedAbilities);
+                PlayerAbility[] playerAbilities = AbilitiesHelper.DeserializeAbilities(SerializedAbilities);
 
-                dotariaPlayer.AcquiredAbilities = acquiredAbilities;
+                ModPlayer.AcquiredAbilities = acquiredAbilities;
 
                 for (int i = 0; i < playerAbilities.Length; i++)
                     acquiredAbilities.Add(playerAbilities[i].Ability, playerAbilities[i]);
             }
 
-            if (Main.netMode == NetmodeID.MultiplayerClient && !isResponse)
-            {
-                DoTariaPlayer localDotariaPlayer = DoTariaPlayer.Get(Main.LocalPlayer);
-
-                NetworkPacketManager.Instance.PlayerJoiningSynchronization.SendPacket(whichPlayer, Main.myPlayer, Main.myPlayer, localDotariaPlayer.Hero.UnlocalizedName, localDotariaPlayer.Level, true, AbilitiesHelper.SerializeAbilities(localDotariaPlayer.AcquiredAbilities.Values.ToArray()));
-            }
-
             return true;
         }
 
-        protected override void SendPacket(ModPacket packet, int toWho, int fromWho, params object[] args)
-        {
-            packet.Write((int) args[0]);
-            packet.Write((string) args[1]);
-            packet.Write((int) args[2]);
-            packet.Write((bool) args[3]);
-            packet.Write((string) args[4]);
 
-            packet.Send(toWho, fromWho);
-        }
+        public bool HeroSelected { get; set; }
+
+        public string Hero { get; set; }
+
+        public int Level { get; set; }
+
+        public bool IsResponse { get; set; }
+
+        public string SerializedAbilities { get; set; }
     }
 }

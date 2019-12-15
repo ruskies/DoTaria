@@ -131,7 +131,7 @@ namespace DoTaria.Players
 
         public override void OnRespawn(Player player)
         {
-            if (!mod.GetConfig<DoTariaGlobalConfiguration>().EnableModCompatibility)
+            if (!ModContent.GetInstance<DoTariaGlobalConfiguration>().EnableModCompatibility)
             {
                 player.statLife = player.statLifeMax2;
                 player.statMana = player.statManaMax2;

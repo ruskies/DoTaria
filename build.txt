@@ -1,5 +1,5 @@
 displayName = DoTaria - Heroes of Dota in Terraria
-author = Webmilio, Blockaroz, HellGoesOn
+author = Webmilio, HellGoesOn
 version = 0.1.8
 side = Both
 homepage = https://forums.terraria.org/index.php?threads/dotaria.82253/

@@ -7,6 +7,7 @@ using DoTaria.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.ModLoader;
 
 namespace DoTaria.Heroes.Abaddon.Abilities.MistCoil
 {
@@ -37,16 +38,16 @@ namespace DoTaria.Heroes.Abaddon.Abilities.MistCoil
                 if (player == null && npc == null)
                     return false;
 
-                int projectileId = Projectile.NewProjectile(dotariaPlayer.player.position, Vector2.Zero, dotariaPlayer.mod.ProjectileType<MistCoilProjectile>(), 0, 0f, dotariaPlayer.player.whoAmI);
-                Projectile projectile = Main.projectile[projectileId];
-                MistCoilProjectile mistCoil = projectile.modProjectile as MistCoilProjectile;
+                int projectileId = Projectile.NewProjectile(dotariaPlayer.player.position, Vector2.Zero, ModContent.ProjectileType<MistCoilProjectile>(), 0, 0f, dotariaPlayer.player.whoAmI);
+                MistCoilProjectile mistCoil = Main.projectile[projectileId].modProjectile as MistCoilProjectile;
 
-                if (player != null)
+                if (player != null) 
                     mistCoil.HomeOntoPlayer = player;
                 else if (npc != null)
                     mistCoil.HomeOntoNPC = npc;
 
                 mistCoil.DamageOnContact = (int)InternalGetAbilityDamage(dotariaPlayer, playerAbility);
+
 
                 NetworkPacketManager.Instance.MistCoilFired.SendPacketToAllClients(dotariaPlayer.player.whoAmI, dotariaPlayer.player.whoAmI, (player != null ? MistCoilFiredPacket.TargetType.Player : MistCoilFiredPacket.TargetType.NPC).ToString(),
                     projectileId, player?.whoAmI ?? NPCsHelper.GetNPCIdFromNPC(npc), (int)mistCoil.DamageOnContact);

@@ -10,6 +10,8 @@ using DoTaria.Statistic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.ModLoader;
+using WebmilioCommons.Extensions;
 
 namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
 {
@@ -42,11 +44,11 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
             {
                 bool left = Main.rand.NextBool();
 
-                Dust.NewDust(spawnPosition - new Vector2(37.5f, -60), 65, 15, dotariaPlayer.mod.DustType<ShadowTrail>(), 1f * (left ? -1 : 1), -1f, 0, new Color(255, 255, 255), 3f);
+                Dust.NewDust(spawnPosition - new Vector2(37.5f, -60), 65, 15, ModContent.DustType<ShadowTrail>(), 1f * (left ? -1 : 1), -1f, 0, new Color(255, 255, 255), 3f);
             }
 
             if (casterIsLocalPlayer)
-                Projectile.NewProjectile(spawnPosition, Vector2.Zero, dotariaPlayer.mod.ProjectileType<ShadowrazeProjectile>(), (int)InternalGetAbilityDamage(dotariaPlayer, playerAbility), 0, dotariaPlayer.player.whoAmI);
+                Projectile.NewProjectile(spawnPosition, Vector2.Zero, ModContent.ProjectileType<ShadowrazeProjectile>(), (int)InternalGetAbilityDamage(dotariaPlayer, playerAbility), 0, dotariaPlayer.player.whoAmI);
 
             return true;
         }

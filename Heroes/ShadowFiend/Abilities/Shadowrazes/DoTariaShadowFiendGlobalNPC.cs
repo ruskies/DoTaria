@@ -7,7 +7,7 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
     {
         public override void OnHitByProjectile(NPC npc, Projectile projectile, int damage, float knockback, bool crit)
         {
-            if (projectile.type != mod.ProjectileType<ShadowrazeProjectile>())
+            if (projectile.type != ModContent.ProjectileType<ShadowrazeProjectile>())
                 return;
 
 

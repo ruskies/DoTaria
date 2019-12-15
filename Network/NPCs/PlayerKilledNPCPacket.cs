@@ -3,30 +3,19 @@ using DoTaria.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using WebmilioCommons.Networking.Packets;
 
 namespace DoTaria.Network.NPCs
 {
-    public sealed class PlayerKilledNPCPacket : NetworkPacket
+    public sealed class PlayerKilledNPCPacket : ModPlayerNetworkPacket<DoTariaPlayer>
     {
-        public override bool Receive(BinaryReader reader, int fromWho)
+        protected override bool PostReceive(BinaryReader reader, int fromWho)
         {
-            int whichPlayer = reader.ReadInt32();
-            int npcId = reader.ReadInt32();
+            DoTariaPlayer.Get(Main.player[Player.whoAmI]).OnKilledNPCNetwork(NPCId);
 
-            if (Main.netMode == NetmodeID.Server)
-                NetworkPacketManager.Instance.PlayerKilledNPC.SendPacketToAllClients(fromWho, whichPlayer, npcId);
-
-            DoTariaPlayer.Get(Main.player[whichPlayer]).OnKilledNPCNetwork(npcId);
-
-            return true;
+            return base.PostReceive(reader, fromWho);
         }
 
-        protected override void SendPacket(ModPacket packet, int toWho, int fromWho, params object[] args)
-        {
-            packet.Write((int)args[0]);
-            packet.Write((int)args[1]);
-
-            packet.Send(toWho, fromWho);
-        }
+        public int NPCId { get; set; }
     }
 }

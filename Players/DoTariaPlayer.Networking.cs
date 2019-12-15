@@ -1,9 +1,11 @@
 ﻿using System.Linq;
 using DoTaria.Helpers;
 using DoTaria.Network;
+using DoTaria.Network.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using WebmilioCommons.Extensions;
 
 namespace DoTaria.Players
 {
@@ -14,7 +16,7 @@ namespace DoTaria.Players
             if (Main.netMode != NetmodeID.MultiplayerClient || player.whoAmI != Main.myPlayer)
                 return;
 
-            NetworkPacketManager.Instance.PlayerJoiningSynchronization.SendPacketToAllClients(player.whoAmI, player.whoAmI, Hero.UnlocalizedName, Level, false, AbilitiesHelper.SerializeAbilities(AcquiredAbilities.Values.ToArray()));
+            this.SendIfLocal(new PlayerJoiningSynchronizationPacket(this));
         }
 
         internal void OnKilledNPCNetwork(int npcId)

@@ -27,4 +27,9 @@
     <Folder Include="Network\Heroes\" />
     <Folder Include="Skins\Terrorblade\" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="WebmilioCommons">
+      <HintPath>..\WebmilioCommons-Releases\WebmilioCommons.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

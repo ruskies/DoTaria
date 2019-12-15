@@ -157,8 +157,8 @@ namespace DoTaria.UserInterfaces.Abilities
         {
             base.Update(gameTime);
 
-            _mainPanel.BackgroundColor = Mod.GetConfig<DoTariaClientConfiguration>().AbilityPanelBackgroundColor;
-            _mainPanel.BorderColor = Mod.GetConfig<DoTariaClientConfiguration>().AbilityPanelBorderColor;
+            _mainPanel.BackgroundColor = ModContent.GetInstance<DoTariaClientConfiguration>().AbilityPanelBackgroundColor;
+            _mainPanel.BorderColor = ModContent.GetInstance<DoTariaClientConfiguration>().AbilityPanelBorderColor;
 
             DoTariaPlayer dotariaPlayer = DoTariaPlayer.Get(Main.LocalPlayer);
 

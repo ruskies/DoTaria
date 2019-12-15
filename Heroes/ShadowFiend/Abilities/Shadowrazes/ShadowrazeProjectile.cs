@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using WebmilioCommons.Extensions;
 
 namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
 {
@@ -68,7 +69,7 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
             Rectangle sourceRectangle = new Rectangle(0, startY, texture.Width, texture.Height / FRAME_COUNT);
             //Vector2 origin = sourceRectangle.Size() / 2;
 
-            Main.spriteBatch.Draw(texture, projectile.GetProjectilePosition(), sourceRectangle, Color.White);
+            Main.spriteBatch.Draw(texture, projectile.GetProjectileScreenPosition(), sourceRectangle, Color.White);
 
             return false;
         }
@@ -95,7 +96,7 @@ namespace DoTaria.Heroes.ShadowFiend.Abilities.Shadowrazes
             if (player != Main.LocalPlayer || Main.netMode == NetmodeID.Server)
                 return false;
 
-            Projectile.NewProjectile(Main.MouseWorld - new Vector2(0, typeof(ShadowrazeProjectile).GetTexture().Height / (ShadowrazeProjectile.FRAME_COUNT * 2f) - 25), Vector2.Zero, mod.ProjectileType<ShadowrazeProjectile>(), 400, 0, player.whoAmI);
+            Projectile.NewProjectile(Main.MouseWorld - new Vector2(0, typeof(ShadowrazeProjectile).GetTexture().Height / (ShadowrazeProjectile.FRAME_COUNT * 2f) - 25), Vector2.Zero, ModContent.ProjectileType<ShadowrazeProjectile>(), 400, 0, player.whoAmI);
             return true;
         }
     }
